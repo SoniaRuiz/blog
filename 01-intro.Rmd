@@ -1,21 +1,219 @@
-# Introduction {#intro}
+# Murcia's Server - Web Deployment Arquitecture {#intro}
 
-You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).
+---
+title: "Murcia's Server"
+author: "Sonia García Ruiz (s.ruiz@ucl.ac.uk)"
+date: "22/11/2020"
+output: html_document
+---
 
-Figures and tables with captions will be placed in `figure` and `table` environments, respectively.
-
-```{r nice-fig, fig.cap='Here is a nice figure!', out.width='80%', fig.asp=.75, fig.align='center'}
-par(mar = c(4, 4, .1, .1))
-plot(pressure, type = 'b', pch = 19)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). Similarly, you can reference tables generated from `knitr::kable()`, e.g., see Table \@ref(tab:nice-tab).
+This R Markdown document contains the details about the architecture of web deployment established on the Murcia's server:
 
-```{r nice-tab, tidy=FALSE}
-knitr::kable(
-  head(iris, 20), caption = 'Here is a nice table!',
-  booktabs = TRUE
-)
+* IP: 155.54.237.9.
+* Operating System: CentOS Linux release 7.5.1804 (Core)
+
+## R 
+
+R is installed on the server on the path:
+
+```bash
+> Sys.getenv('R_HOME')
+[1] "/usr/lib64/R"
 ```
 
-You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015].
+The R version installed corresponds to:
+
+* R version 3.5.1 (2018-07-02) -- "Feather Spray".
+
+There are three different folders designated as R library paths. The folder "/home_2/gsit/RLibrary" was added as an additional library path to avoid problems derived from a lack of space in the main disc:
+
+```sh
+> .libPaths()
+[1] "/home_2/gsit/RLibrary" "/usr/lib64/R/library"  "/usr/share/R/library"
+
+```
+
+To install an R package on "/home_2/gsit/RLibrary", you may want to type:
+
+```sh
+install.packages('package_name', repos='http://cran.rstudio.com/', dependencies=T, lib='/home_2/gsit/RLibrary')
+
+```
+
+
+## Shiny Server
+
+Shiny Server is an Open Source platform on which you can host multiple Shiny applications on a single server, each with their own URL or port. More info [here](https://docs.rstudio.com/shiny-server/).
+
+The Shiny Server version installed on the server corresponds to:
+```sh
+> system('shiny-server --version', intern = TRUE)
+[1] "Shiny Server v1.5.14.948" "Node.js v12.18.0"
+
+```
+
+
+### Shiny Server Management
+
+Shiny Server uses the following configuration file:
+
+* /etc/shiny-server/shiny-server.conf.
+
+Shiny Server has been initially configured to listen on port 4848. Different configurations are here allowed. However, for simplicity, it is recommended to host any Shiny App on the root directory "/srv/shiny-server". Similarly, it is also recommended to store all log files on the directory "/var/log/shiny-server".
+
+```sh
+run_as shiny;
+
+# Define a server that listens on port 4848
+server {
+  listen 4848;
+
+
+  # Define a location at the base URL
+  location / {
+
+    # Host the directory of Shiny Apps stored in this directory
+    site_dir /srv/shiny-server;
+
+    # Log all Shiny output to files in this directory
+    log_dir /var/log/shiny-server;
+
+    # When a user visits the base URL rather than a particular application,
+    # an index of the applications available in this directory will be shown.
+    directory_index on;
+  }
+  
+}
+```
+
+Once your Shiny app has been moved to "/srv/shiny-server/your-app" and the configuration file has been updated, you may want to restart the Shiny Server and check its status:
+
+```bash
+> sudo systemctl restart shiny-server
+> sudo systemctl status shiny-server
+● shiny-server.service - ShinyServer
+   Loaded: loaded (/etc/systemd/system/shiny-server.service; enabled; vendor preset: disabled)
+   Active: active (running) since dom 2020-11-22 14:07:28 CET; 12min ago
+  Process: 25079 ExecStopPost=/usr/bin/env sleep 5 (code=exited, status=0/SUCCESS)
+ Main PID: 25099 (shiny-server)
+    Tasks: 11
+   Memory: 16.5M
+   CGroup: /system.slice/shiny-server.service
+           └─25099 /home/opt/shiny-server/ext/node/bin/shiny-server /home/opt/shiny-server/lib/main.js
+```
+
+Your app should be now reachable on "127.0.0.1:4848/location". For instance, the default Shiny Server webpage can be tested by typing the following command:
+
+```bash
+> curl 127.0.0.1:4848/
+```
+
+## Apache Server
+
+The Apache Server is an open-source HTTP server available for different operating systems including UNIX and Windows (more info [here](https://httpd.apache.org/)).
+
+The Apache Server version installed on the Murcia's server corresponds to:
+
+```bash
+> httpd -v
+Server version: Apache/2.4.6 (CentOS)
+Server built:   Nov  5 2018 01:47:09
+```
+
+### Apache Server Management
+
+Whereas Apache Server uses the base configuration file "/etc/httpd/conf/httpd.conf", each Apache module is installed at "/etc/httpd/conf.d/". 
+
+There is a module designated for the RytenLab group ("/etc/httpd/conf.d/rytenlab.conf") that contains the configuration of all group's web apps (these are multiple REST APIs, ASP.NET Core web applications and one Docker Shiny App).
+
+The RytenLab module contains the configuration of two virtual hosts on the port :443 (SSL), one for the "https://rytenlab.com" domain and the other one to redirect the traffic from "https://snca.atica.um.es" to "https://rytenlab.com". That means every time a user types "https://snca.atica.um.es", it would be redirected to "https://rytenlab.com". We established this configuration when we introduced the new "https://rytenlab.com" domain. Below an extract of the "rytenlab.conf" file in which the domain redirection is configured: 
+
+```bash
+<VirtualHost *:443>
+
+  ServerName snca.atica.um.es
+  ServerAlias snca.atica.um.es
+
+  Redirect permanent / https://rytenlab.com/
+  RedirectMatch permanent ^/(.*)$ https://rytenlab.com/$1
+
+  SSLEngine on
+  SSLProtocol all -SSLv3 -TLSv1 -TLSv1.1 -SSLv2
+  SSLCipherSuite HIGH:MEDIUM:!aNULL:!MD5:!RC4
+  SSLHonorCipherOrder on
+  SSLCipherSuite EECDH+ECDSA+AESGCM EECDH+aRSA+AESGCM EECDH+ECDSA+SHA384 EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH+aRSA+R$
+
+  SSLCertificateFile /var/www/cert/certificado.pem
+  SSLCertificateKeyFile /var/www/cert/privada.pem
+  SSLCertificateChainFile /var/www/cert/certificado_conCA.pem
+
+</VirtualHost>
+```
+
+All web applications and web pages not belonging to the RytenLab group should be configured in a different configuration file within the path "/etc/httpd/conf.d/". Please, make sure that none of the ports you would like to use are already being occupied by another web app.
+
+
+### Configure a Shiny Server app to be served by Apache
+
+Multiple configurations are possible when routing a Shiny App published by the Shiny Server through the Apache server. Below, there is an example of configuration. 
+
+Let's suppose you have your Shiny App configured as follows on the "/etc/shiny-server/shiny-server.conf" file:
+
+```bash
+run_as shiny;
+
+# Define a server that listens on port 4848
+server {
+  listen 4848;
+
+
+  # Define a location at the base URL
+  location /your_shiny_app {
+
+    # Host the directory of Shiny Apps stored in this directory
+    site_dir /srv/shiny-server/your_shiny_app;
+
+    # Log all Shiny output to files in this directory
+    log_dir /var/log/shiny-server;
+
+    # When a user visits the base URL rather than a particular application,
+    # an index of the applications available in this directory will be shown.
+    directory_index on;
+  }
+  
+}
+```
+
+The config you would then need to establish on your Apache module's file may be similar to:
+
+```bash
+<Proxy *>
+  Allow from localhost
+</Proxy>
+RedirectMatch permanent ^/your_shiny_app$ /your_shiny_app/
+RewriteEngine on
+RewriteCond %{HTTP:Upgrade} =websocket
+RewriteRule /your_shiny_app/(.*) ws://0.0.0.0:4848/your_shiny_app/$1 [P,L]
+RewriteCond %{HTTP:Upgrade} !=websocket
+RewriteRule /your_shiny_app/(.*) http://0.0.0.0:4848/your_shiny_app/$1 [P,L]
+ProxyPass /your_shiny_app/ http://0.0.0.0:4848/your_shiny_app/ connectiontimeout=3000 timeout=3000
+ProxyPassReverse /your_shiny_app/ http://0.0.0.0:4848/your_shiny_app/
+Header edit Location ^/ /your_shiny_app/
+ProxyRequests Off
+```
+
+After restarting both Shiny and Apache servers, your web application called "your_shiny_app" should be reachable at:
+
+```sh
+
+> sudo systemctl restart shiny-server
+> sudo apachectl restart 
+> curl https://snca.atica.um.es/your_shiny_app/
+```
+
+
+```

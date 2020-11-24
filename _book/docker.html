@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Docker | Knowledge Book</title>
+  <meta name="description" content="This is a book of knowledge partially learned during my PhD studies." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Docker | Knowledge Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a book of knowledge partially learned during my PhD studies." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Docker | Knowledge Book" />
+  
+  <meta name="twitter:description" content="This is a book of knowledge partially learned during my PhD studies." />
+  
+
+<meta name="author" content="Sonia García-Ruiz (s.ruiz@ucl.ac.uk)" />
+
+
+<meta name="date" content="2020-11-24" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="github.html"/>
+<link rel="next" href="machine-learning-concepts.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Murcia's Server - Web Deployment Arquitecture</a><ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#r"><i class="fa fa-check"></i><b>2.1</b> R</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#shiny-server"><i class="fa fa-check"></i><b>2.2</b> Shiny Server</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="intro.html"><a href="intro.html#shiny-server-management"><i class="fa fa-check"></i><b>2.2.1</b> Shiny Server Management</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#apache-server"><i class="fa fa-check"></i><b>2.3</b> Apache Server</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="intro.html"><a href="intro.html#apache-server-management"><i class="fa fa-check"></i><b>2.3.1</b> Apache Server Management</a></li>
+<li class="chapter" data-level="2.3.2" data-path="intro.html"><a href="intro.html#configure-a-shiny-server-app-to-be-served-by-apache"><i class="fa fa-check"></i><b>2.3.2</b> Configure a Shiny Server app to be served by Apache</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="github.html"><a href="github.html"><i class="fa fa-check"></i><b>3</b> GitHub</a></li>
+<li class="chapter" data-level="4" data-path="docker.html"><a href="docker.html"><i class="fa fa-check"></i><b>4</b> Docker</a><ul>
+<li class="chapter" data-level="4.1" data-path="docker.html"><a href="docker.html#introduction"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="docker.html"><a href="docker.html#what-is-docker"><i class="fa fa-check"></i><b>4.2</b> What is docker?</a></li>
+<li class="chapter" data-level="4.3" data-path="docker.html"><a href="docker.html#images-and-containers"><i class="fa fa-check"></i><b>4.3</b> Images and containers</a></li>
+<li class="chapter" data-level="4.4" data-path="docker.html"><a href="docker.html#docker-hub"><i class="fa fa-check"></i><b>4.4</b> Docker Hub</a></li>
+<li class="chapter" data-level="4.5" data-path="docker.html"><a href="docker.html#managing-a-docker-object"><i class="fa fa-check"></i><b>4.5</b> Managing a docker object</a></li>
+<li class="chapter" data-level="4.6" data-path="docker.html"><a href="docker.html#creating-a-docker-object"><i class="fa fa-check"></i><b>4.6</b> Creating a docker object</a></li>
+<li class="chapter" data-level="4.7" data-path="docker.html"><a href="docker.html#useful-commands"><i class="fa fa-check"></i><b>4.7</b> Useful Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html"><i class="fa fa-check"></i><b>5</b> Machine Learning Concepts</a><ul>
+<li class="chapter" data-level="5.1" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#introduction-1"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#artificial-intelligence-vs.-machine-learning"><i class="fa fa-check"></i><b>5.2</b> Artificial Intelligence vs. Machine Learning</a></li>
+<li class="chapter" data-level="5.3" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#supervised-learning"><i class="fa fa-check"></i><b>5.3</b> Supervised learning</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#classification"><i class="fa fa-check"></i><b>5.3.1</b> Classification</a></li>
+<li class="chapter" data-level="5.3.2" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#regression"><i class="fa fa-check"></i><b>5.3.2</b> Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#unsupervised-learning"><i class="fa fa-check"></i><b>5.4</b> Unsupervised learning</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#clustering"><i class="fa fa-check"></i><b>5.4.1</b> Clustering</a></li>
+<li class="chapter" data-level="5.4.2" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#density-estimation"><i class="fa fa-check"></i><b>5.4.2</b> Density estimation</a></li>
+<li class="chapter" data-level="5.4.3" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#visualization"><i class="fa fa-check"></i><b>5.4.3</b> Visualization</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>6</b> Linear Models</a><ul>
+<li class="chapter" data-level="6.1" data-path="linear-models.html"><a href="linear-models.html#introduction-2"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Knowledge Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="docker" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Docker</h1>
+<div id="introduction" class="section level2">
+<h2><span class="header-section-number">4.1</span> Introduction</h2>
+<p>Nowadays, almost all companies and scientific labs which work with data are also becoming software producers. In some cases, the main reason for this software development is to publish effective scientific work. In other cases, its final aim might be just putting together a set of related functions that work for a similar final objective. However, in both cases, the final software product becomes highly shareable.</p>
+<p>This characteristic, the shareability of the software produced, might seem very straightforward but in reality, it can turn into a scaring daunting task to be solved. Why? Because of the heterogeneity of all different platforms, operating systems, dependencies, versioning and so on that our software product makes use of. Please, be aware that prior to its first release, our software product might have been tested in a limited number of PC stations with determined characteristics that can be extremely different from any other potential user's PC station around the world.</p>
+<p>All these reasons make <a href="https://www.docker.com/">Docker Platform</a> really interesting and useful for both software producers and consumers.</p>
+</div>
+<div id="what-is-docker" class="section level2">
+<h2><span class="header-section-number">4.2</span> What is docker?</h2>
+<p><a href="https://www.docker.com/">Docker</a> is a software platform created in 2013 by <a href="https://en.wikipedia.org/wiki/Docker,_Inc.">Docker, Inc.</a> which its main objective is to <em>build, share, and run any app anywhere</em>, independently of the platform and environment where it is executed.</p>
+<p>But what does this definition mean? It means that you admiringly can forget about dependencies, libraries, compatibility, etc. to make the app run correctly. To some extent, you could think Docker as a <em>black box</em>, as a <strong>snapshot</strong> of the developer's laptop where she or he developt the software you are about to make use of. A snapshot of the precise moment when the developer decided to release the software. Thus, everything you need to run the app is already there, installed and configured inside the Docker object, ready to be used, with no compatibility issues at all.</p>
+</div>
+<div id="images-and-containers" class="section level2">
+<h2><span class="header-section-number">4.3</span> Images and containers</h2>
+<p>Working with Docker, there are two main concepts you are going to hear about constantly: images and containers. An <strong>image</strong> is the virtual file or template that contains the whole set of instructions to build a container. An image is the raw Docker file you will directly download from <a href="https://hub.docker.com/">Docker Hub</a> developer's repository to your local. On the other hand, a <strong>container</strong> is the executable object directly generated from the image. A container will be the virtual object that represents the snapshot of the app developer's laptop.</p>
+<p>In summary, the image is the virtual file that contains the raw instructions to build the executable app, and the executable app is the container itself.</p>
+</div>
+<div id="docker-hub" class="section level2">
+<h2><span class="header-section-number">4.4</span> Docker Hub</h2>
+<p><a href="https://hub.docker.com/">Docker Hub</a> is an online platform that allows creating individual Docker repositories. A Docker repository is a personal account space where you can store one or more versions of the same Docker image, which are represented by tags.</p>
+<p>Let us focus on the following image obtained from the <a href="https://hub.docker.com/_/ubuntu?tab=tags">Ubuntu Docker Repository</a>:</p>
+</div>
+<div id="managing-a-docker-object" class="section level2">
+<h2><span class="header-section-number">4.5</span> Managing a docker object</h2>
+</div>
+<div id="creating-a-docker-object" class="section level2">
+<h2><span class="header-section-number">4.6</span> Creating a docker object</h2>
+</div>
+<div id="useful-commands" class="section level2">
+<h2><span class="header-section-number">4.7</span> Useful Commands</h2>
+<p>This page contains a list with some of the most common commands of Docker.</p>
+<p>To download a Docker image from Docker Hub:</p>
+<pre class="console"><code>$ sudo docker push repository/name:tag</code></pre>
+<p>To run the image <em>name:tag</em>. The flag <strong>--rm</strong> indicates to remove the container after stopping the image; whereas the flag <strong>-p</strong> indicates the port on which we want to expose the execution of the image:</p>
+<pre class="console"><code>$ sudo docker run --rm -p 8500:80 name:tag</code></pre>
+<p>To list all docker images that are available in our local:</p>
+<pre class="console"><code>$ sudo docker images</code></pre>
+<p>To remove the image <em>image_name</em>:</p>
+<pre class="console"><code>$ sudo docker image rm image_name</code></pre>
+<p>To remove all orphaned images:</p>
+<pre class="console"><code>$ sudo docker rmi $(sudo docker images -f dangling=true -q)</code></pre>
+<p>To list all current containers:</p>
+<pre class="console"><code>$ sudo docker ps</code></pre>
+<p>To list all stopped containers:</p>
+<pre class="console"><code>$ sudo docker ps -a </code></pre>
+<p>To remove all orphaned containers:</p>
+<pre class="console"><code>$ sudo docker rm $(sudo docker ps -a -q)</code></pre>
+<p>To enter inside a container in execution:</p>
+<pre class="console"><code>$ sudo docker exec -it name_container /bin/sh</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="github.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="machine-learning-concepts.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["documentation.pdf", "documentation.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -26,3 +26,6 @@ density-estimation
 visualization
 linear-models
 introduction-2
+merging-two-branches-with-conflicts
+stash
+troubleshooting-pages-of-interest

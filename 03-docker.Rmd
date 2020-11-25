@@ -8,30 +8,30 @@ This characteristic, the shareability of the software produced, might seem very 
 
 All these reasons make [Docker Platform](https://www.docker.com/) really interesting and useful for both software producers and consumers. 
 
-## What is docker?
+### What is docker?
 
 [Docker](https://www.docker.com/) is a software platform created in 2013 by [Docker, Inc.](https://en.wikipedia.org/wiki/Docker,_Inc.) which its main objective is to *build, share, and run any app anywhere*, independently of the platform and environment where it is executed.
 
 But what does this definition mean? It means that you admiringly can forget about dependencies, libraries, compatibility, etc. to make the app run correctly. To some extent, you could think Docker as a *black box*, as a **snapshot** of the developer's laptop where she or he developt the software you are about to make use of. A snapshot of the precise moment when the developer decided to release the software. Thus, everything you need to run the app is already there, installed and configured inside the Docker object, ready to be used, with no compatibility issues at all.
 
-## Images and containers
+### Images and containers
 
 Working with Docker, there are two main concepts you are going to hear about constantly: images and containers. An **image** is the virtual file or template that contains the whole set of instructions to build a container. An image is the raw Docker file you will directly download from [Docker Hub](https://hub.docker.com/) developer's repository to your local. On the other hand, a **container** is the executable object directly generated from the image. A container will be the virtual object that represents the snapshot of the app developer's laptop.
 
 In summary, the image is the virtual file that contains the raw instructions to build the executable app, and the executable app is the container itself.
 
-## Docker Hub
+### Docker Hub
 
 [Docker Hub](https://hub.docker.com/) is an online platform that allows creating individual Docker repositories. A Docker repository is a personal account space where you can store one or more versions of the same Docker image, which are represented by tags.
 
 Let us focus on the following image obtained from the [Ubuntu Docker Repository](https://hub.docker.com/_/ubuntu?tab=tags):
 
 
-## Managing a docker object
+### Managing a docker object
 
-## Creating a docker object
+### Creating a docker object
 
-## Useful Commands
+### Useful Commands
 
 This page contains a list with some of the most common commands of Docker.
   
@@ -79,6 +79,146 @@ To enter inside a container in execution:
 ```console
 $ sudo docker exec -it name_container /bin/sh
 ```
+
+## CoExp
+
+This tutorial contains the instructions to install a local version of the CoExp Webpage by making use of the Docker technology.
+All the commands shown in this document have been tested in a Ubuntu18.04 machine.
+
+### Software requirements
+
+Before downloading the CoExp Docker images, we first need to prepare the environment for the correct execution of Docker.
+
+Thus, let's download/fetch new versions of the packages that are already installed in our Linux machine (all these commands have been tested in a Ubuntu18.04 machine):
+
+```console
+$ sudo apt update
+$ sudo apt upgrade
+```
+
+*curl* is a tool used to transfer data. We will make use of it later when we download the CoExp Docker images.
+To install *curl* in the machine:
+
+```console
+$ sudo apt install curl
+$ sudo curl --version
+```
+
+Now, we are ready to install the Docker technology in the machine. So, let's download it:
+
+```console
+$ sudo apt install docker.io
+```
+
+Once the Docker installation has finished, we can enable and start it. The last instruction *sudo docker --version* will return the current Docker version installed: 
+```console
+$ sudo systemctl start docker
+$ sudo systemctl enable docker
+$ sudo docker --version
+```
+
+Finally, we need to install Docker-compose (more info [here](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04)). Docker-compose is a brach of the Docker technology, which allows communicating different Docker images between them:
+```console
+$ sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+$ sudo chmod +x /usr/local/bin/docker-compose
+$ docker-compose --version
+```
+
+### Download Docker images of CoExp
+
+If everything has gone as expected, the system should now be ready to download the two CoExp Docker images. There are two different images because one contains the user interface (UI) of the CoExp webpage, and the other one contains the backend of the CoExp WebPage (author [Juan Botia](https://github.com/juanbot/CoExpNets)).
+
+In terms of the back-end of the CoExp Webpage, there are two different docker images available:
+
+1. Complete version: this docker image contains the totality of all CoExp networks, and it is about ~4.5GB of size.
+2. Lite version: this smaller docker image contains only the ROSMAP co-expression network. This image is about ~1.3GB of size.
+
+Depending on which image you are interested in, the commands to execute are:
+
+To download the complete version:
+```console
+$ sudo docker pull soniaruiz/coexp:r
+```
+
+To download the lite version:
+```console
+$ sudo docker pull soniaruiz/coexp:r-lite
+```
+
+### Use Docker-Composer to build the images
+
+The next step is to make the comunication between the two docker images possible. For that purpose, we need to download this [**docker-compose.yml**](https://github.com/SoniaRuiz/IPDGC/blob/master/complete/docker-compose.yml) file (in case you have opted by the complete backend version), or this [**docker-compose.yml**](https://github.com/SoniaRuiz/IPDGC/blob/master/lite/docker-compose.yml) file (if you have opted by the lite version). In any case, this file will make possible the correct communication between the two Docker images we downloaded in the previous step.
+
+Additionally, the location of the downloaded **docker-compose.yml** file is not really important, but we recommend to place it in your **Home** folder (in case you are using a Linux machine).
+
+Once the download has finished, use the following command to execute the **docker-compose** file and, therefore, to run your own Docker CoExp webpage:
+```console
+$ sudo docker-compose up
+```
+
+Finally, to test whether the execution has been correct, please type the following URL into the address bar:
+```console
+http://localhost:8088/
+```
+
+If everything has gone as expected, you should now be able to visualize your dockerized version of the CoExp webpage in your browser. Congratulations!
+
+### Juan's tutorial
+
+Suppose we want to generate local TOM (Topology Overlap Measure) modules from a specific network so we may, independently from the CoExpNets Web application or within the application, plot or use networks in graph mode. We can do it by creating their module TOMs and get the corresponding graph in terms of a connectivity matrix we can plot.
+
+We will exemplify this by using the frontal cortex network from GTEx V6 package as follows.
+
+We launch all package stuff so we can start working with those networks.
+
+```{r eval = FALSE, echo = T}
+library(CoExpNets)
+library(CoExpGTEx)
+CoExpGTEx::initDb()
+
+netf = getNetworkFromTissue(tissue="FCortex",
+                            which.on="gtexv6",
+                            only.file=T)
+
+
+```
+
+And now (we assume it is not generated yet) create the module-TOMs for the Frontal Cortex Network as follows. As we see,
+
+```{r eval = FALSE, echo = T}
+netf
+```
+
+the beta value for that network is 9, it is in the name between the tissue and the `.it.50.rds` token in the file name.
+
+
+```{r eval = FALSE, echo = T}
+getModuleTOMs(tissue="FCortex",
+              beta=9,
+              out.path="~/tmp/mytoms/",
+              which.one="gtexv6")
+```
+
+And we can see all module-TOMs created now at the `~/tmp/mytoms/` folder
+
+```{r eval = FALSE, echo = T}
+list.files("~/tmp/mytoms/",full.names = F,recursive = F)
+```
+
+And now we can get any module's connectivity matrix so we can represent a graph for the TOM
+
+```{r eval = FALSE, echo = T}
+getModuleTOMGraph(tissue="FCortex",
+                  which.one="gtexv6",
+                  module="black",
+                  topgenes=10,
+                  out.path="~/tmp/mytoms/")
+```
+
+And there you have it.
+
+
+
 
 
 

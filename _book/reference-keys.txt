@@ -29,3 +29,10 @@ introduction-2
 merging-two-branches-with-conflicts
 stash
 troubleshooting-pages-of-interest
+docker-coexp-tutorial
+software-requirements
+download-docker-images-of-coexp
+use-docker-composer-to-build-the-images
+coexp
+juans-tutorial
+merge

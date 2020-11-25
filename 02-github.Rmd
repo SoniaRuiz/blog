@@ -1,8 +1,8 @@
 # GitHub
 
-## Merging two branches with conflicts
+## Merge
 
-To force merging two branches that present conflicts, it is possible to indicate which changes are preferred by using a --ours/--theirs flag:
+To merge two branches presenting conflicts, it is possible to indicate which changes are preferred by using a --ours/--theirs flag:
 
 First, we checkout to the branch that we want to apply/commit the merge:
 
@@ -151,7 +151,13 @@ Once the merge is done, we can apply the commit to the 'testing' repository and 
  ...
 ```
 
-## STASH
+### Troubleshooting pages of interest
+
+* [This](https://stackoverflow.com/questions/13885390/in-git-merge-conflicts-how-do-i-keep-the-version-that-is-being-merged-in)
+* [Merge a branch in Git](https://www.toolsqa.com/git/merge-branch-in-git/)
+* [Meaning of 'ours' and 'their' in Git](https://stackoverflow.com/questions/25576415/what-is-the-precise-meaning-of-ours-and-theirs-in-git#:~:text=The%20'ours'%20in%20Git%20is,replayed%20onto%20the%20current%20branch).)
+
+## Stash
 
 When we are working on our GitHub project, we may want to backup some of our changes. However, it is possible that those changes are not stable yet, or we think they are not ready to be committed into our repository. The stash command creates a backup copy of our changes, and keeps it ready to be committed into the repo once we feel it is ready.
 
@@ -160,8 +166,4 @@ It might happen that, once we think the stash is ready to be committed, GitHub d
 The only way I have found to deal with this issue, is to upload my stash into a brand new repo, and finally merge the new repo with the one I was intending to commit the changes to originally.
 
 
-## Troubleshooting pages of interest
 
-* [This](https://stackoverflow.com/questions/13885390/in-git-merge-conflicts-how-do-i-keep-the-version-that-is-being-merged-in)
-* [Merge a branch in Git](https://www.toolsqa.com/git/merge-branch-in-git/)
-* [Meaning of 'ours' and 'their' in Git](https://stackoverflow.com/questions/25576415/what-is-the-precise-meaning-of-ours-and-theirs-in-git#:~:text=The%20'ours'%20in%20Git%20is,replayed%20onto%20the%20current%20branch).)

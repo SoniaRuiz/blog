@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Machine Learning Concepts | Knowledge Book</title>
+  <meta name="description" content="This is a book of knowledge partially learned during my PhD studies." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Machine Learning Concepts | Knowledge Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a book of knowledge partially learned during my PhD studies." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Machine Learning Concepts | Knowledge Book" />
+  
+  <meta name="twitter:description" content="This is a book of knowledge partially learned during my PhD studies." />
+  
+
+<meta name="author" content="Sonia García-Ruiz (s.ruiz@ucl.ac.uk)" />
+
+
+<meta name="date" content="2020-11-30" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="docker.html"/>
+<link rel="next" href="linear-models.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Murcia's Server - Web Deployment Arquitecture</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#r"><i class="fa fa-check"></i><b>1.1</b> R</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#shiny-server"><i class="fa fa-check"></i><b>1.2</b> Shiny Server</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="intro.html"><a href="intro.html#shiny-server-management"><i class="fa fa-check"></i><b>1.2.1</b> Shiny Server Management</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#apache-server"><i class="fa fa-check"></i><b>1.3</b> Apache Server</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#apache-server-management"><i class="fa fa-check"></i><b>1.3.1</b> Apache Server Management</a></li>
+<li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#configure-a-shiny-server-app-to-be-served-by-apache"><i class="fa fa-check"></i><b>1.3.2</b> Configure a Shiny Server app to be served by Apache</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="github.html"><a href="github.html"><i class="fa fa-check"></i><b>2</b> GitHub</a><ul>
+<li class="chapter" data-level="2.1" data-path="github.html"><a href="github.html#merge"><i class="fa fa-check"></i><b>2.1</b> Merge</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="github.html"><a href="github.html#troubleshooting-pages-of-interest"><i class="fa fa-check"></i><b>2.1.1</b> Troubleshooting pages of interest</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="github.html"><a href="github.html#stash"><i class="fa fa-check"></i><b>2.2</b> Stash</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="docker.html"><a href="docker.html"><i class="fa fa-check"></i><b>3</b> Docker</a><ul>
+<li class="chapter" data-level="3.1" data-path="docker.html"><a href="docker.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="docker.html"><a href="docker.html#what-is-docker"><i class="fa fa-check"></i><b>3.1.1</b> What is docker?</a></li>
+<li class="chapter" data-level="3.1.2" data-path="docker.html"><a href="docker.html#images-and-containers"><i class="fa fa-check"></i><b>3.1.2</b> Images and containers</a></li>
+<li class="chapter" data-level="3.1.3" data-path="docker.html"><a href="docker.html#docker-hub"><i class="fa fa-check"></i><b>3.1.3</b> Docker Hub</a></li>
+<li class="chapter" data-level="3.1.4" data-path="docker.html"><a href="docker.html#useful-commands"><i class="fa fa-check"></i><b>3.1.4</b> Useful Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="docker.html"><a href="docker.html#coexp"><i class="fa fa-check"></i><b>3.2</b> CoExp</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="docker.html"><a href="docker.html#software-requirements"><i class="fa fa-check"></i><b>3.2.1</b> Software requirements</a></li>
+<li class="chapter" data-level="3.2.2" data-path="docker.html"><a href="docker.html#download-docker-images-of-coexp"><i class="fa fa-check"></i><b>3.2.2</b> Download Docker images of CoExp</a></li>
+<li class="chapter" data-level="3.2.3" data-path="docker.html"><a href="docker.html#use-docker-composer-to-build-the-images"><i class="fa fa-check"></i><b>3.2.3</b> Use Docker-Composer to build the images</a></li>
+<li class="chapter" data-level="3.2.4" data-path="docker.html"><a href="docker.html#juans-tutorial"><i class="fa fa-check"></i><b>3.2.4</b> Juan's tutorial</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html"><i class="fa fa-check"></i><b>4</b> Machine Learning Concepts</a><ul>
+<li class="chapter" data-level="4.1" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#artificial-intelligence-vs.-machine-learning"><i class="fa fa-check"></i><b>4.2</b> Artificial Intelligence vs. Machine Learning</a></li>
+<li class="chapter" data-level="4.3" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#supervised-learning"><i class="fa fa-check"></i><b>4.3</b> Supervised learning</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#classification"><i class="fa fa-check"></i><b>4.3.1</b> Classification</a></li>
+<li class="chapter" data-level="4.3.2" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#regression"><i class="fa fa-check"></i><b>4.3.2</b> Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#unsupervised-learning"><i class="fa fa-check"></i><b>4.4</b> Unsupervised learning</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#clustering"><i class="fa fa-check"></i><b>4.4.1</b> Clustering</a></li>
+<li class="chapter" data-level="4.4.2" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#density-estimation"><i class="fa fa-check"></i><b>4.4.2</b> Density estimation</a></li>
+<li class="chapter" data-level="4.4.3" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#visualization"><i class="fa fa-check"></i><b>4.4.3</b> Visualization</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>5</b> Linear Models</a><ul>
+<li class="chapter" data-level="5.1" data-path="linear-models.html"><a href="linear-models.html#introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="aws.html"><a href="aws.html"><i class="fa fa-check"></i><b>6</b> AWS</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Knowledge Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="machine-learning-concepts" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Machine Learning Concepts</h1>
+<div id="introduction-1" class="section level2">
+<h2><span class="header-section-number">4.1</span> Introduction</h2>
+<p>Have you ever asked yourself what is the difference between <strong>Artificial Intelligence</strong> and <strong>Machine Learning</strong>? What about between <strong>supervised</strong> and <strong>unsupervised learning</strong>? Well, that's not surprising at all because trying to find out the right answer within the huge ocean of information that is the Internet, can become a really daunting task.</p>
+<p>In this post, we will try first to define the most widely used Machine Learning concepts and finally trying to give clarifying examples of each one of them to try to help in the understanding of their meanings.</p>
+</div>
+<div id="artificial-intelligence-vs.-machine-learning" class="section level2">
+<h2><span class="header-section-number">4.2</span> Artificial Intelligence vs. Machine Learning</h2>
+<p>What is the difference between Artificial Intelligence and Machine Learning? <strong>Artificial Intelligence</strong> is the concept of machines being able to perform tasks in a way that we would consider &quot;smart&quot;. <strong>Machine Learning</strong> however is the current application of AI, where we just give machines access to data and let them learn for themselves (source <a href="https://www.forbes.com/sites/bernardmarr/2016/12/06/what-is-the-difference-between-artificial-intelligence-and-machine-learning/">Forbes</a>).</p>
+<p>The Machine Learning concept comprises different techniques whereby it is possible to make machines learning from diverse sets of data. Among the most important ones, we can highlight <strong>supervised learning</strong> and <strong>unsupervised learning</strong>.</p>
+</div>
+<div id="supervised-learning" class="section level2">
+<h2><span class="header-section-number">4.3</span> Supervised learning</h2>
+<p>When the training data - the data we want machines learning about - comprises not only the input vectors but also their corresponding target vectors.</p>
+<div id="classification" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> Classification</h3>
+<p>Classification is a supervised learning method used when the target vectors consist of a finite number of discrete categories.</p>
+<p>The <em>iris</em> dataset available in R, for instance, can be used in classification problems because it provides different input vectors (<em>&quot;Sepal.Length&quot;, &quot;Sepal.Width&quot;, &quot;Petal.Length&quot; and &quot;Petal.With&quot;</em>) and a target vector (<em>&quot;Species&quot;</em>) with a finite number of categories (<em>&quot;setosa&quot;, &quot;versicolor&quot; and &quot;virginica&quot;</em>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span><span class="kw">summary</span>(iris)
+  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width          Species  
+ Min.   <span class="op">:</span><span class="fl">4.300</span>   Min.   <span class="op">:</span><span class="fl">2.000</span>   Min.   <span class="op">:</span><span class="fl">1.000</span>   Min.   <span class="op">:</span><span class="fl">0.100</span>   setosa    <span class="op">:</span><span class="dv">50</span>  
+ 1st Qu.<span class="op">:</span><span class="fl">5.100</span>   1st Qu.<span class="op">:</span><span class="fl">2.800</span>   1st Qu.<span class="op">:</span><span class="fl">1.600</span>   1st Qu.<span class="op">:</span><span class="fl">0.300</span>   versicolor<span class="op">:</span><span class="dv">50</span>  
+ Median <span class="op">:</span><span class="fl">5.800</span>   Median <span class="op">:</span><span class="fl">3.000</span>   Median <span class="op">:</span><span class="fl">4.350</span>   Median <span class="op">:</span><span class="fl">1.300</span>   virginica <span class="op">:</span><span class="dv">50</span>  
+ Mean   <span class="op">:</span><span class="fl">5.843</span>   Mean   <span class="op">:</span><span class="fl">3.057</span>   Mean   <span class="op">:</span><span class="fl">3.758</span>   Mean   <span class="op">:</span><span class="fl">1.199</span>                  
+ 3rd Qu.<span class="op">:</span><span class="fl">6.400</span>   3rd Qu.<span class="op">:</span><span class="fl">3.300</span>   3rd Qu.<span class="op">:</span><span class="fl">5.100</span>   3rd Qu.<span class="op">:</span><span class="fl">1.800</span>                  
+ Max.   <span class="op">:</span><span class="fl">7.900</span>   Max.   <span class="op">:</span><span class="fl">4.400</span>   Max.   <span class="op">:</span><span class="fl">6.900</span>   Max.   <span class="op">:</span><span class="fl">2.500</span>  </code></pre></div>
+</div>
+<div id="regression" class="section level3">
+<h3><span class="header-section-number">4.3.2</span> Regression</h3>
+<p>Regression is also a supervised learning method but only used when the target vectors consist of one or more continuous variables.</p>
+<p>The <em>longley</em> R dataset is an example of this type of data. It presents a collection of inputs vectors (<em>&quot;GNP.deflator&quot;, &quot;GNP&quot;, &quot;Unemployed&quot;, &quot;Armed.Forces&quot;, &quot;Population&quot;, &quot;Year&quot;</em>) and a numeric vector output (<em>&quot;Employed&quot;</em>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span><span class="kw">summary</span>(longley)
+  GNP.deflator         GNP          Unemployed     Armed.Forces     Population         Year         Employed    
+ Min.   <span class="op">:</span><span class="st"> </span><span class="fl">83.00</span>   Min.   <span class="op">:</span><span class="fl">234.3</span>   Min.   <span class="op">:</span><span class="fl">187.0</span>   Min.   <span class="op">:</span><span class="fl">145.6</span>   Min.   <span class="op">:</span><span class="fl">107.6</span>   Min.   <span class="op">:</span><span class="dv">1947</span>   Min.   <span class="op">:</span><span class="fl">60.17</span>  
+ 1st Qu.<span class="op">:</span><span class="st"> </span><span class="fl">94.53</span>   1st Qu.<span class="op">:</span><span class="fl">317.9</span>   1st Qu.<span class="op">:</span><span class="fl">234.8</span>   1st Qu.<span class="op">:</span><span class="fl">229.8</span>   1st Qu.<span class="op">:</span><span class="fl">111.8</span>   1st Qu.<span class="op">:</span><span class="dv">1951</span>   1st Qu.<span class="op">:</span><span class="fl">62.71</span>  
+ Median <span class="op">:</span><span class="fl">100.60</span>   Median <span class="op">:</span><span class="fl">381.4</span>   Median <span class="op">:</span><span class="fl">314.4</span>   Median <span class="op">:</span><span class="fl">271.8</span>   Median <span class="op">:</span><span class="fl">116.8</span>   Median <span class="op">:</span><span class="dv">1954</span>   Median <span class="op">:</span><span class="fl">65.50</span>  
+ Mean   <span class="op">:</span><span class="fl">101.68</span>   Mean   <span class="op">:</span><span class="fl">387.7</span>   Mean   <span class="op">:</span><span class="fl">319.3</span>   Mean   <span class="op">:</span><span class="fl">260.7</span>   Mean   <span class="op">:</span><span class="fl">117.4</span>   Mean   <span class="op">:</span><span class="dv">1954</span>   Mean   <span class="op">:</span><span class="fl">65.32</span>  
+ 3rd Qu.<span class="op">:</span><span class="fl">111.25</span>   3rd Qu.<span class="op">:</span><span class="fl">454.1</span>   3rd Qu.<span class="op">:</span><span class="fl">384.2</span>   3rd Qu.<span class="op">:</span><span class="fl">306.1</span>   3rd Qu.<span class="op">:</span><span class="fl">122.3</span>   3rd Qu.<span class="op">:</span><span class="dv">1958</span>   3rd Qu.<span class="op">:</span><span class="fl">68.29</span>  
+ Max.   <span class="op">:</span><span class="fl">116.90</span>   Max.   <span class="op">:</span><span class="fl">554.9</span>   Max.   <span class="op">:</span><span class="fl">480.6</span>   Max.   <span class="op">:</span><span class="fl">359.4</span>   Max.   <span class="op">:</span><span class="fl">130.1</span>   Max.   <span class="op">:</span><span class="dv">1962</span>   Max.   <span class="op">:</span><span class="fl">70.55</span>  </code></pre></div>
+</div>
+</div>
+<div id="unsupervised-learning" class="section level2">
+<h2><span class="header-section-number">4.4</span> Unsupervised learning</h2>
+<p>When the training data consists of a set of input vectors x without any corresponding target values. The main aim of unsupervised learning problems can be summarised in the following ideas.</p>
+<div id="clustering" class="section level3">
+<h3><span class="header-section-number">4.4.1</span> Clustering</h3>
+<p>Grouping the input data that share different similarities into clusters - called <strong>clustering</strong> (a widely known clustering algorithm is <a href="https://stanford.edu/~cpiech/cs221/handouts/kmeans.html">K-Means</a>). Below, an example dataset which can be used in a clustering problem:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span><span class="kw">library</span>(cluster.datasets)
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">data</span>(acidosis.patients)
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">summary</span>(acidosis.patients)
+ ph.cerebrospinal.fluid    ph.blood     hco3.cerebrospinal.fluid   hco3.blood    co2.cerebrospinal.fluid   co2.blood    
+ Min.   <span class="op">:</span><span class="fl">38.50</span>          Min.   <span class="op">:</span><span class="fl">32.80</span>   Min.   <span class="op">:</span><span class="st"> </span><span class="fl">9.80</span>            Min.   <span class="op">:</span><span class="st"> </span><span class="fl">4.20</span>   Min.   <span class="op">:</span><span class="fl">17.80</span>           Min.   <span class="op">:</span><span class="fl">12.90</span>  
+ 1st Qu.<span class="op">:</span><span class="fl">45.67</span>          1st Qu.<span class="op">:</span><span class="fl">37.20</span>   1st Qu.<span class="op">:</span><span class="fl">19.43</span>            1st Qu.<span class="op">:</span><span class="fl">19.00</span>   1st Qu.<span class="op">:</span><span class="fl">40.38</span>           1st Qu.<span class="op">:</span><span class="fl">30.25</span>  
+ Median <span class="op">:</span><span class="fl">48.05</span>          Median <span class="op">:</span><span class="fl">39.55</span>   Median <span class="op">:</span><span class="fl">22.65</span>            Median <span class="op">:</span><span class="fl">23.30</span>   Median <span class="op">:</span><span class="fl">45.25</span>           Median <span class="op">:</span><span class="fl">35.70</span>  
+ Mean   <span class="op">:</span><span class="fl">47.52</span>          Mean   <span class="op">:</span><span class="fl">41.55</span>   Mean   <span class="op">:</span><span class="fl">21.91</span>            Mean   <span class="op">:</span><span class="fl">22.72</span>   Mean   <span class="op">:</span><span class="fl">45.57</span>           Mean   <span class="op">:</span><span class="fl">36.44</span>  
+ 3rd Qu.<span class="op">:</span><span class="fl">49.45</span>          3rd Qu.<span class="op">:</span><span class="fl">41.98</span>   3rd Qu.<span class="op">:</span><span class="fl">24.52</span>            3rd Qu.<span class="op">:</span><span class="fl">26.93</span>   3rd Qu.<span class="op">:</span><span class="fl">52.58</span>           3rd Qu.<span class="op">:</span><span class="fl">42.30</span>  
+ Max.   <span class="op">:</span><span class="fl">54.90</span>          Max.   <span class="op">:</span><span class="fl">81.30</span>   Max.   <span class="op">:</span><span class="fl">30.40</span>            Max.   <span class="op">:</span><span class="fl">34.80</span>   Max.   <span class="op">:</span><span class="fl">69.00</span>           Max.   <span class="op">:</span><span class="fl">61.40</span>  </code></pre></div>
+<p><img src="https://datawookie.netlify.com/img/2015/09/xclara-clusters-colour.png" alt="Clusting Example. Source: https://www.google.com/url?sa=i&amp;source=images&amp;cd=&amp;cad=rja&amp;uact=8&amp;ved=2ahUKEwjuzr7WlbflAhWz8uAKHVa7A_oQjhx6BAgBEAI&amp;url=https%3A%2F%2Fdatawookie.netlify.com%2Fblog%2F2015%2F10%2Fmonthofjulia-day-30-clustering%2F&amp;psig=AOvVaw0LXwnHec-xxDOj8ghrjRgN&amp;ust=1572084388370759" /> <sub><sup>Image source: <a href="https://datawookie.netlify.com/blog/2015/10/monthofjulia-day-30-clustering/">MonthOfJulia Day 30: Clustering</a></sup></sub></p>
+</div>
+<div id="density-estimation" class="section level3">
+<h3><span class="header-section-number">4.4.2</span> Density estimation</h3>
+<p>Determine the distribution of data within the input space, known as <strong>density estimation</strong>. In other words, the aim of density estimation is to use statistical models to find an underlying probability distribution that is the main reason of the observed variables. A widely known density estimation algorithm is Kernel Density Estimation (KDE). Although KDE algorithm has a very intimidating name, it can be used to visualize the continuous &quot;shape&quot; of some data instead of using its discrete version through a histogram.</p>
+<p><img src="https://blogs.sas.com/content/iml/files/2016/07/kdecomponents2.png" alt="KDE image - Source: https://blogs.sas.com/content/iml/2016/07/27/visualize-kernel-density-estimate.html#prettyPhoto/1/" /> <sub><sup>Image source: <a href="https://blogs.sas.com/content/iml/2016/07/27/visualize-kernel-density-estimate.html">How to visualize a kernel density estimate</a></sup></sub></p>
+</div>
+<div id="visualization" class="section level3">
+<h3><span class="header-section-number">4.4.3</span> Visualization</h3>
+<p>This unsupervised method consist of projecting the data from a high-dimensional space down to two or three dimensions for the purpose of <strong>visualization</strong>.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="docker.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="linear-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["documentation.pdf", "documentation.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

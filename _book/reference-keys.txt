@@ -1,4 +1,4 @@
-tab:unnamed-chunk-42
+tab:unnamed-chunk-59
 analysis-of-genetic-association-studies
 useful-linux-commands
 useful-r-commands
@@ -12,6 +12,18 @@ checking-the-input-datasets
 binary-ped-files
 sample-qc
 checks-for-missing-data
+gender-checks
+duplicaterelated-samples
+heterozygosity
+removing-individuals-who-fail-sample-qc
+removing-due-to-missingness
+removing-due-to-gender-discordance
+remove-duplicates-and-related-samples
+heterozygosity-1
+snp-qc
+checks-for-missing-data-1
+checks-for-minor-allele-frequency-maf
+checks-for-adherence-to-hardy-weinberg-equilibrium
 aws
 aws-s3
 accessing-aws-using-the-aws-command-line-interface

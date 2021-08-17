@@ -121,7 +121,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.4.1" data-path="analysis-of-genetic-association-studies.html"><a href="analysis-of-genetic-association-studies.html#software-and-datasets"><i class="fa fa-check"></i><b>1.4.1</b> Software and datasets</a></li>
 <li class="chapter" data-level="1.4.2" data-path="analysis-of-genetic-association-studies.html"><a href="analysis-of-genetic-association-studies.html#checking-the-input-datasets"><i class="fa fa-check"></i><b>1.4.2</b> Checking the input datasets</a></li>
 <li class="chapter" data-level="1.4.3" data-path="analysis-of-genetic-association-studies.html"><a href="analysis-of-genetic-association-studies.html#binary-ped-files"><i class="fa fa-check"></i><b>1.4.3</b> Binary PED files</a></li>
-<li class="chapter" data-level="1.4.4" data-path="analysis-of-genetic-association-studies.html"><a href="analysis-of-genetic-association-studies.html#sample-qc"><i class="fa fa-check"></i><b>1.4.4</b> Sample QC:</a></li>
+<li class="chapter" data-level="1.4.4" data-path="analysis-of-genetic-association-studies.html"><a href="analysis-of-genetic-association-studies.html#sample-qc"><i class="fa fa-check"></i><b>1.4.4</b> Sample QC</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="aws.html"><a href="aws.html"><i class="fa fa-check"></i><b>2</b> AWS</a><ul>
@@ -192,6 +192,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="analysis-of-genetic-association-studies" class="section level1">
 <h1><span class="header-section-number">Chapter 1</span> Analysis of Genetic Association Studies</h1>
+<p><em>All information shown in this chapter has been extracted from the course &quot;Analysis of Genetic Association Studies&quot;, taught at University of Liverpool, Department of Health Data Science.</em></p>
 <p>The purpose of this section is to provide guidance on performing a GWAS analysis step-by step, as well as introducing to useful software for undertaking a GWAS.</p>
 <div id="useful-linux-commands" class="section level2">
 <h2><span class="header-section-number">1.1</span> Useful Linux commands</h2>
@@ -367,22 +368,112 @@ awk &#39;$2!~/rs/&amp;&amp;$2!~/.../{print $2}&#39; ./file.map</code></pre>
 <h3><span class="header-section-number">1.4.2</span> Checking the input datasets</h3>
 <p>Before starting a genotype QC or GWAS association analysis, it is important to check that the input files are in good order, and contain the individuals and SNPs that we think they should. Do this by focussing on the SNPs on chromosome 10:</p>
 <pre class="shell"><code>plink --file genstudy --chr 10 --noweb</code></pre>
+<p>The output will also be saved in a log file called 'plink.log'.</p>
 <p>Note: the '-noweb' option is included to make PLINK run faster – otherwise it connects to the web to check for updates before running the analysis.</p>
 </div>
 <div id="binary-ped-files" class="section level3">
 <h3><span class="header-section-number">1.4.3</span> Binary PED files</h3>
-<p>To save space and time, .map and .ped files can be converted to binary format.</p>
+<p>To save space and time, .map and .ped files can be converted to binary format. In doing this, we create three new files as follows: * '.bed': file This includes all the genotype data from the previous '.ped' file, but in binary format. * '.fam': file This includes the first six columns from the previous '.ped' file. * '.bim' file This is the same as the previous '.map' file, but also includes an additional two columns with the alleles names (which are otherwise lost when'converting the genotype data from .ped file to .bed file.)</p>
 <p>To create a set of binary format files for the 'genstudy' dataset:</p>
 <pre class="shell"><code>plink --file genstudy --make-bed --out genstudy --noweb</code></pre>
 <p>To use the binary format files instead of the .ped and .map files, we just substitute the option --file with --bfile in the PLINK command line:</p>
-<pre class="shell"><code>plink --file genstudy --chr 10 --noweb</code></pre>
+<pre class="shell"><code>plink --bfile genstudy --chr 10 --noweb</code></pre>
 </div>
 <div id="sample-qc" class="section level3">
-<h3><span class="header-section-number">1.4.4</span> Sample QC:</h3>
+<h3><span class="header-section-number">1.4.4</span> Sample QC</h3>
 <p>In this section, we will start undertaking genotype QC on the 'genstudy' dataset – starting first of all with sample QC, one step at a time.</p>
 <div id="checks-for-missing-data" class="section level4">
 <h4><span class="header-section-number">1.4.4.1</span> Checks for missing data</h4>
+<p>To obtain a summary of the amount of missing genotype data per sample and per SNP, use the option '- -missing' in the PLINK command line.</p>
+<pre class="shell"><code>plink --bfile genstudy --missing --out genstudy.CRstats --noweb</code></pre>
+<p>Adding the '--out genstudy.CRstats' option ensures that the two output files are called 'genstudy.CRstats.imiss' and 'genstudy.CRstats.lmiss' respectively.</p>
+<p>This command creates two output files: * a '.imiss' file: summarises the proportion of missing genotype data per individual (one row per individual and six columns). The most important column for sample QC purposes is column 6, which contains the proportion of missing genotypes for the individual. * a '.lmiss' file: summarises the proportion of missing genotype data per SNP (one row per SNP and five columns). The most important column for SNP QC purposes is column 5, which contains the proportion of missing genotypes for the SNP.</p>
+</div>
+<div id="gender-checks" class="section level4">
+<h4><span class="header-section-number">1.4.4.2</span> Gender Checks</h4>
+<p>PLINK allows to use genotype data from the X chromosome to determine gender (i.e. based on heterozygosity rates), and compares this to reported gender as per the .ped/.fam file. PLINK then flags any discrepancies i.e. individuals for whom reported gender does not match the gender estimated based on genotype data. To undertake this comparison, we can use the option '- - check-sex' in PLINK.</p>
+<p>To undertake the gender comparison and save results in an output file called 'genstudy.sexcheck':</p>
+<pre class="shell"><code>plink --bfile genstudy --check-sex --out genstudy --noweb</code></pre>
+<p>The output file has six columns, being the most important one (for the purpose of sample QC) column 5, which indicates whether there is a gender discordance or not.</p>
+</div>
+<div id="duplicaterelated-samples" class="section level4">
+<h4><span class="header-section-number">1.4.4.3</span> Duplicate/related samples</h4>
+<p>PLINK will also calculated identity-by-state (IBS) and identity-by-descent (IBD) statistics for our individuals to help us identify duplicated and/or related samples. Before we ask PLINK to do this, however, we need to generate a pruned subset of SNPs using the option '--indep-pairwise' in PLINK, which is based on pairwise genotypic correlation. An example of a command line for generating a pruned subset of SNPs is as follows:</p>
+<pre class="shell"><code>plink --bfile genstudy --indep-pairwise 1500 150 0.2 --noweb</code></pre>
+<p>The options 1500, 150 and 0.2 in the command above relate to the following steps, and of course these options can be changed depending on your requirements: * consider a window of 1500 SNPs, * calculate LD between each pair of SNPs in the window, remove one of a pair of SNPs if the LD is greater than 0.2, * shift the window 150 SNPs forward and repeat the procedure</p>
+<p>Running this command line will create two output files, 'plink.prune.in' and 'plink.prune.out': * plink.prune.in: lists all SNPs remaining after pruning * plink.prune.out: lists all SNPs removed during pruning</p>
+<p>Both these files can subsequently be specified as the argument for PLINK’s '--extract' or '--exclude' command respectively to provide a pruned set of SNPs.</p>
+<p>To create a pruned version of the 'genstudy' dataset and call it 'p.genstudy':</p>
+<pre class="shell"><code>plink --bfile genstudy --extract plink.prune.in --make-bed --out p.genstudy --noweb</code></pre>
+<p>To generate IBS and IBD estimates for all pairs of individuals, use the PLINK option '—genome':</p>
+<pre class="shell"><code>plink --bfile p.genstudy --genome --out genstudy --noweb</code></pre>
+<p>Running this command creates an output file called &quot;genstudy.genome&quot;. This includes a row per each unique pair of individuals, and fourteen columns, being the most important for the purpose of sample QC column 10, as it includes an estimate of the IBD proportion between individuals.</p>
+</div>
+<div id="heterozygosity" class="section level4">
+<h4><span class="header-section-number">1.4.4.4</span> Heterozygosity</h4>
+<p>To run heterozygosity checks in PLINK, we can use the option '- -het':</p>
+<pre class="shell"><code>plink --bfile genstudy --het --out genstudy</code></pre>
+<p>This command produces the output file &quot;genstudy.het&quot;, which contains one row per individual and six columns. Column 6 includes the estimate of the inbreeding coefficient, F.</p>
+</div>
+<div id="removing-individuals-who-fail-sample-qc" class="section level4">
+<h4><span class="header-section-number">1.4.4.5</span> Removing individuals who fail sample QC</h4>
+<p>To remove individuals who fail any of the QC steps above.</p>
+<div id="removing-due-to-missingness" class="section level5">
+<h5><span class="header-section-number">1.4.4.5.1</span> Removing due to missingness</h5>
+<p>To investigate how many individuals are excluded at difference threshold levels (e.g. 1%, 5%, and 10%):</p>
+<pre class="shell"><code>awk &#39;NR&gt;1 &amp;&amp; $6 &gt;= 0.01 {print}&#39; genstudy.CRstats.imiss | wc -l
+awk &#39;NR&gt;1 &amp;&amp; $6 &gt;= 0.05 {print}&#39; genstudy.CRstats.imiss | wc -l
+awk &#39;NR&gt;1 &amp;&amp; $6 &gt;= 0.1 {print}&#39; genstudy.CRstats.imiss | wc -l</code></pre>
+<p>To exclude all individuals with more than 5% missing data:</p>
+<pre class="shell"><code>awk &#39;$6 &gt;= 0.05 {print}&#39; genstudy.CRstats.imiss &gt; genstudy.CRremove
+plink --bfile genstudy --noweb --remove genstudy.CRremove --make-bed --out genstudy.CR</code></pre>
+</div>
+<div id="removing-due-to-gender-discordance" class="section level5">
+<h5><span class="header-section-number">1.4.4.5.2</span> Removing due to gender discordance</h5>
+<p>To select only those individuals with an entry of 'PROBLEM' in column 5:</p>
+<pre class="shell"><code>awk &#39;$5==&quot;PROBLEM&quot;{print}&#39; genstudy.sexcheck&gt;genstudy.sexremove</code></pre>
+<p>To remove these individuals from the 'genstudy.CR' dataset, and create a new dataset named 'genstudy.sex':</p>
+<pre class="shell"><code>plink --bfile genstudy.CR --noweb --remove genstudy.sexremove --make-bed --out genstudy.sex</code></pre>
+</div>
+<div id="remove-duplicates-and-related-samples" class="section level5">
+<h5><span class="header-section-number">1.4.4.5.3</span> Remove duplicates and related samples</h5>
+<p>We use an IBD threshold of 0.1875 to filter out either duplicated or closely related samples (column 10).</p>
+<pre class="shell"><code>awk &#39;$10 &gt;= 0.1875 {print}&#39; genstudy.genome &gt; genstudy.PIremove</code></pre>
+<p>To remove this list of individuals from the 'genstudy.sex' dataset and create a new dataset 'genstudy_sampleqc':</p>
+<pre class="shell"><code>plink --bfile genstudy.sex --noweb --remove genstudy.PIremove.list --make-bed --out genstudy_sampleqc</code></pre>
+</div>
+<div id="heterozygosity-1" class="section level5">
+<h5><span class="header-section-number">1.4.4.5.4</span> Heterozygosity</h5>
+<p>Look at the &quot;genstudy.Het_vs_imiss.pdf&quot; and see if outliers exist. If not, there are no samples to remove.</p>
+</div>
+</div>
+<div id="snp-qc" class="section level4">
+<h4><span class="header-section-number">1.4.4.6</span> SNP QC</h4>
+<div id="checks-for-missing-data-1" class="section level5">
+<h5><span class="header-section-number">1.4.4.6.1</span> Checks for missing data</h5>
+<p>Similar to what we did for sample QC, we can investigate how many SNPs fail different missingness thresholds by filtering column 5 in 'genstudy_sampleqc.CRstats.lmiss' using different threshold values. We can do this using the following command (e.g. for threshold of 1%):</p>
+<pre class="shell"><code>plink --bfile genstudy_sampleqc --missing --out genstudy_sampleqc.CRstats --noweb
+awk &#39;NR&gt;1 &amp;&amp; $5 &gt;= 0.01 {print}&#39; genstudy_sampleqc.CRstats.lmiss | wc -l</code></pre>
+</div>
+<div id="checks-for-minor-allele-frequency-maf" class="section level5">
+<h5><span class="header-section-number">1.4.4.6.2</span> Checks for minor allele frequency (MAF)</h5>
+<p>To investigate how many SNPs have MAF&lt;1% by first of all running the '--freq' option in PLINK:</p>
+<pre class="shell"><code>plink --bfile genstudy_sampleqc --noweb --freq --out genstudy_sampleqc
+awk &#39;$5&lt;0.01&#39; genstudy_sampleqc.frq | wc -l</code></pre>
+<p>NOTE: Data quality tends to decrease with decreasing MAF. A low MAF implies rare genotypes which will be seen only a few times in your GWAS dataset. This in turn implies that there is less information that a genotype calling algorithm can use to call this genotype, and so calls are less certain. And the power to detect an association signal decreases with decreasing MAF. However, if a large MAF threshold is selected, this implies more SNPs are removed from study which possibly includes the true causal SNPs. A moderate MAF such as 0.05 is suggested.</p>
+</div>
+<div id="checks-for-adherence-to-hardy-weinberg-equilibrium" class="section level5">
+<h5><span class="header-section-number">1.4.4.6.3</span> Checks for adherence to Hardy-Weinberg Equilibrium</h5>
+<p>To generate a list of genotype counts and Hardy-Weinberg test statistics for each SNP:</p>
+<pre class="shell"><code>plink --bfile genstudy_sampleqc --noweb --hardy --out genstudy_sampleqc</code></pre>
+<p>This provides and output file 'genstudy.hwe' and the p-value for the test for Hardy-Weindberg Equilibrium is in column 9 of this file.</p>
+<p>To see how many SNPs have HWE p-value&lt;0.0001 (in controls &quot;UNAFF&quot;) and pvalue&lt;0.00001:</p>
+<pre class="shell"><code>awk &#39;$3==&quot;UNAFF&quot; &amp;&amp; $9&lt;0.0001&#39; genstudy_sampleqc.hwe | wc -l
+awk &#39;$3==&quot;UNAFF&quot; &amp;&amp; $9&lt;0.00001&#39; genstudy_sampleqc.hwe | wc -l</code></pre>
+<p>To apply some extra SNP QC filters to our already sample-QC'd dataset: * Minor allele frequency (MAF) &gt;0.05 – option '--maf 0.05' * SNP genotyping rate &gt;95% (i.e. &lt;5% missing genotypes for the SNP, across all individuals) – option '-- geno 0.05' * Hardy-Weinberg p-value &gt;0.0001 in controls – option '-- hwe 0.0001'</p>
+<pre class="shell"><code>plink --bfile genstudy_sampleqc --noweb --maf 0.05 --geno 0.05 --hwe 0.0001 --make-bed --out genstudy_qc</code></pre>
 
+</div>
 </div>
 </div>
 </div>

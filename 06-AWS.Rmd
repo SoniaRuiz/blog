@@ -1,2 +1,252 @@
 # AWS
 
+
+
+## AWS S3
+
+### Accessing AWS using the AWS Command Line Interface
+
+The AWS Command Line Interface (or AWS CLI) is an open source tool that enables you to interact with the AWS services from your command-line Shell. AWS CLI tool is already installed in our server, and it is very simple to use. Below are described the most commonly used interactions with AWS.
+
+#### Configure the AWS CLI service
+
+1. To configure the service, please type "aws configure" on the console. This command is interactive, so the service will prompt you four times to enter some config information. Below an example (all RytenLab members have to ask me to send them their secret AWS credentials): 
+
+```console
+$ aws configure 
+
+AWS Access Key ID [None]: your_access_key 
+AWS Secret Access Key [None]: your_secret_key 
+Default region name [None]: eu-west-2 
+Default output format [None]: json 
+```
+
+2. To check whether the connection with AWS has been correctly stablished, we can type the following command to list all our current buckets. 
+
+```console
+$ aws s3 ls 
+```
+
+#### Upload a single file to AWS
+
+Let's suppose we have a bucket on AWS called 'my-bucket'. Let's also suppose you have a file called 'myfile.txt' stored in your local that you would like to upload to AWS. To upload the file 'myfile.txt' to the bucket 'my-bucket':
+
+```console
+$ aws s3 cp myfile.txt s3://my-bucket/ 
+```
+
+#### Download a single file from AWS
+
+To download the file 'myfile.txt' from the 's3://my-bucket/' AWS bucket into your local folder:
+
+```console
+$ aws s3 cp s3://my-bucket/myfile.txt ./my_local_folder 
+```
+
+#### Upload multiple files to AWS
+
+To upload multiple files, we can use the sync command. The **sync** command syncs objects under a specified local folder to files in a AWS bucket by uploading them to AWS.
+
+```console
+$ aws s3 sync my_local_folder/ s3://my-bucket/ 
+```
+
+#### Download multiple files from AWS
+
+To download multiple files from an AWS bucket to your local folder, we can also use the **sync** command by changing the order of the parameters.
+
+***Please, be aware the costs associated with downloading files correspond to $0.090 per GB - first 10 TB / month data transfer out beyond the global free tier.***
+
+```console
+$ aws s3 sync s3://my-bucket/my_remote_folder/ ./my_local_folder 
+```
+
+### Checking AWS file integrity
+
+Considering the example used in the previous section, let's check the integrity of the local folder './my_local_folder' matches with the integrity of the remote AWS folder 's3://my-bucket/my_local_folder/'.
+
+1. First, clone the 'aws-s3-integrity-check' repo.
+
+```console
+$ git clone https://github.com/SoniaRuiz/aws-s3-integrity-check.git
+```
+2. Clone the 's3md5' repo.
+
+```console
+$ git clone https://github.com/antespi/s3md5.git
+```
+3. Move the s3md5 folder within the aws-s3-integrity-check folder:
+
+```console
+$ mv ./s3md5 ./aws-s3-integrity-check
+```
+
+4. Next, grant execution access permission to he s3md5 script file.
+
+```console
+$ chmod 755 ./aws-s3-integrity-check/s3md5/s3md5
+```
+
+5. The aws-s3-integrity-check folder should look similar to the following:
+
+```console
+total 16
+-rw-r--r-- 1 your_user your_group 3573 date README.md
+-rwxr-xr-x 1 your_user your_group 3301 date aws_check_integrity.sh
+drwxr-xr-x 2 your_user your_group 4096 date s3md5
+```
+
+6. Execute the script 'aws_check_integrity.sh' following the this structure: **aws_check_integrity.sh 'local_path' 'bucket_name' 'bucket_folder'**
+
+```console
+$ aws_check_integrity.sh ./my_local_folder my-bucket my_local_folder/
+```
+
+### Creating a new AWS bucket
+
+To create a new AWS bucket, we recommend using the following configuration:
+
+
+1. Region: EU London
+2. Block all public access: enabled 
+3. Bucket Versioning: enable
+4. Tags: 
+    1. Key = "data-owner" / Value = "your name"
+    2. Key = "data-origin" / Value = "the origin of the data in one word (i.e. the name of a project, the name of a server)"
+5. Default encryption: enable - Amazon S3 key (SSE-S3)
+6. Advanced settings
+    1. Object Lock: enable/disable, depending on your type of data (more info [here](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html))
+ 
+
+
+
+
+## AWS cloud services
+
+```{r echo=F}
+services <- c("Amazon API Gateway",
+"Amazon Athena",
+"Amazon Aurora",
+"Amazon Aurora",
+"Amazon Bracket",
+"Amazon Carrier",
+"Amazon Chime",
+"Amazon CoudWatch",
+"Amazon Code Guru Reviewer",
+"Amazon Cognito",
+"Amazon Comprehend",
+"Amazon Comprehend Medical",
+"Amazon DocumentDB",
+"Amazon DynamoDB",
+"Amazon EC2",
+"Amazon EC2 Dedicated Hosts",
+"Amazon EKS",
+"Amazon Elastic Block Store (EBS)",
+"Amazon Elastic Container Registry (ECR)",
+"Amazon Elastic File System (EFS)",
+"Amazon Elastic Graphics",
+"Amazon Elastic IP	Static",
+"Amazon Elastic Transcoder",
+"Amazon ElastiCache",
+"Amazon Elasticsearch Service",
+"Amazon EMR",
+"Amazon FSx for Lustre",
+"Amazon FSx for Windows File Server",
+"Amazon GuardDuty",
+"Amazon Kinesis Data Analytics",
+"Amazon Kinesis Data Firehose",
+"Amazon Kinesis Data streams",
+"Amazon Lookout for Vision",
+"Amazon Managed Streaming for Apache Kafka (MSK)",
+"Amazon MQ",
+"Amazon Neptune",
+"Amazon Polly",
+"Amazon QuickSight",
+"Amazon RDS for MariaDB",
+"Amazon RDS for MySQL",
+"Amazon RDS for Oracle",
+"Amazon RDS for PostgreSQL",
+"Amazon RDS for SQL server",	
+"Amazon Redshift",
+"Amazon Rekognition",
+"Amazon Route 53",
+"Amazon S3 Glacier",	
+"Amazon SageMaker",
+"Amazon SageMaker Ground Truth",
+"Amazon Simple Email Service",
+"Amazon Simple Notification Service",	
+"Amazon Simple Queue Service (SQS)",	
+"Amazon S3",
+"Amazon Simple Workflow Service (SWF)")	
+
+
+description <- c(
+"Service to develop APIs. These APIs will act as the front door for applications to access the data from the backend services behind the API.",
+"SQL to analyse data stored in S3.",
+"MySQL-Compatible	Relational database for the cloud. ",
+"PostgreSQL-Compatible	Relational database for the cloud.",
+"Quantum computing service.",
+"A Carrier IP address is the address that I will assign to a network interface (for example an EC2 instance).",
+"To let users meet and chat online.",
+"Monitoring and management service providing insights for AWS.",
+"Reviewer	Service that uses program analysis and machine learning to detect potential defects that are difficult for developers to detect.",
+"To add user sign-up, sign-in and access control to my web and mobile apps.",
+"For text processing and analysis.",
+"HIPAA-eligible natural language processing (NLP)",
+"Document database service",
+"Is a key-value and document database that delivers single-digit millisecond performance at any scale.",
+"Compute platform",
+"Allows you to use your eligible software licences on Amazon EC2.",
+"Amazon Elastic Kubernetes Service",
+"Allows you to create persistent block storage volumes and attach them to Amazon EC2 instances.",
+"To store, manage, and deploy Docker container images.",
+"Provides a file system for use with AWS Cloud services.",
+"Allows you to attach low-cost graphics acceleration to EC2 instances.",
+"IPv4 for dynamic cloud computing.",
+"Is media transcoding in the cloud. Designed to convert (or “transcode”) media files from their source format into versions that will playback on devices like smartphones.",
+"Build data-intensive apps or improve the performance of your existing apps by retrieving data from high throughput and low latency in-memory data stores.",
+"To operate Elasticsearch at scale with zero downtime.",
+"Industry-leading cloud big data platform for processing vast amounts of data using open-source tools. EMR makes easy to set up, operate, and scale your big-data environments by automating time-consuming tasks like provisioning capacity and tuning clusters. To run petabyte-scale analysis at less than half of the cost of traditional on-premises solutions.",
+"Integrated with S3, is designed for fast processing of workloads.",
+"To move your Windows based applications that require file storage to AWS.",
+"Is a threat detection service that monitors for malicious activity to protect your AWS accounts and data stored in Amazon S3.",
+"To analyse streaming data (for responding to your business and customer needs in real time)",
+"To only pay for the volume of data ingested into the service.",
+"Data streaming service.",
+"Machine learning (ML) service that spots defects and anomalies in visual representations using computer vision (CV).",
+"To easily run applications that use Apache Kafka",
+"To set up and operate message brokers in the cloud.",
+"Graph database service to build and run applications that work with highly connected datasets.",
+"Service that turns text into lifelike speech.",
+"Business intelligence service to deliver insights to everyone in your organization.",
+"To set up, operate and scale MariaDB database deployments in the cloud.",
+"''",
+"",
+"",
+"",
+"Petabyte-scale data warehouse",
+"Images and video analysis recognition; to identify objects, people, text, scenes, etc. Also, to detect inappropriate content.",
+"DNS web service",
+"",
+"To manage costs associated to ML instances",
+"To build training datasets for machine learning.",
+"Cloud-based email sending service.",
+"Amazon Simple Notification Service	",
+"Amazon Simple Queue Service (SQS)	",
+"Amazon Simple Storage Service (S3).",
+"Amazon Simple Workflow Service (SWF)"	
+)
+
+
+AWS_services <- data.frame(name = services,
+                           description = description)
+
+knitr::kable(
+  AWS_services, booktabs = TRUE,
+  caption = 'list of AWS cloud services.'
+)
+
+```
+
+
+

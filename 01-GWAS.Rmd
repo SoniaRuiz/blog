@@ -1,0 +1,330 @@
+# Analysis of Genetic Association Studies
+
+The purpose of this section is to provide guidance on performing a GWAS analysis step-by step, as well as introducing to useful software for undertaking a GWAS.
+
+## Useful Linux commands
+
+First, I'll show you some useful Linux commands for working with GWASs files.
+Linux is an operating system very well suited to dealing with large datasets.
+
+Create a shell script:
+```{shell}
+touch script.sh
+```
+
+Run the script:
+```{shell}
+sh script.sh
+```
+
+Return the number of lines of a file:
+```{shell}
+wc -l ./file.map
+```
+
+Print only the first 15 lines of "./file.map" file:
+```{shell}
+head -15 ./file.map
+```
+
+Print the bottom of the file:
+```{shell}
+tail -15 ./file.map
+```
+
+Find the SNP "rs1234":
+```{shell}
+grep "rs1234" ./file.map
+```
+
+Find the SNP "rs1234" and print the line number of the match:
+```{shell}
+grep -n "rs1234" ./file.map
+```
+
+Search the file ./file.map, for "1234" in the SNP name (column 2, specified by $2) and print the whole line:
+```{shell}
+awk '$2~/1234/{print}' ./file.map
+```
+
+Search the file ./file.map, for "1234" in the SNP position (column 4, specified by $4) and print only the SNP name (column 2):
+```{shell}
+awk '$4~/1234/{print $2}' ./file.map
+```
+
+Search for an exact match of "rs1234676" in the SNP name (column 2) and print the whole line:
+```{shell}
+awk '$2=="rs1234676"/{print}' ./file.map
+```
+
+Search for all SNPs with a position between 90680000 up to and including 90690000 in the SNP position column (column 4) and count the lines in that output:
+```{shell}
+awk '$4>90680000&&$4<=90690000{print}' ./file.map | wc -l
+```
+
+Remove the chromosome 10 from the output above:
+```{shell}
+awk '$4>90680000&&$4<=90690000{print}' ./file.map | awk '$1!=10{print}'
+```
+
+Count the SNPs from chromosome 10 and chromosome 23:
+```{shell}
+awk '$1==10{print}' ./file.map| wc -l
+awk '$1==23{print}' ./file.map| wc -l
+```
+
+Print the SNP position of the first SNP on chromosome 23:
+```{shell}
+awk '$1==23{print $4}' ./file.map | head -1
+```
+
+There are SNPs starting with other characters than "rs", identify what other starting characters there are.
+```{shell}
+awk '$2!~/rs/{print $2}' ./file.map
+awk '$2!~/rs/&&$2!~/.../{print $2}' ./file.map
+```
+
+
+## Useful R commands
+
+NOTE: R has a system of libraries on the Comprehensive R Archive Network (CRAN) where R users deposit code to be verified and then distributed for wider use (https://cran.r-project.org/).
+
+Load the file "./file.map" into R.
+```{r, eval=FALSE}
+gd <- read.table("./file.map",header=F)
+names(gd)<-c("CHR","SNP","cM","BP")
+head(gd)
+tail(gd)
+```
+
+Search for only rs1234568 in the SNP name (column 2):
+```{r, eval=FALSE}
+gd[gd$SNP=="rs1234568",]
+```
+
+Search for all SNPs with a position between 90680000 up to and including 90690000 in the SNP position column:
+```{r, eval=FALSE}
+gd[gd$BP>90680000&gd$BP<=90690000,]
+```
+
+Do you have any genome-wide significant (p=5x10-8) SNPs?
+```{r, eval=FALSE}
+gd[gd$P<0.00000005,]
+```
+
+Report results using a Manhattan plot:
+```{r, eval=FALSE}
+plot(gd$BP,-log(gd$P,base=10))
+```
+
+There were SNPs from both chromosome 10 and 23 in the .map file. Separate chromosomes by colour:
+```{r, eval=FALSE}
+plot(gd$BP,-log(gd$P,base=10), col=gd$CHR)
+```
+
+Add a reference line to know which SNPs have a p-value below 1x10-5:
+```{r, eval=FALSE}
+plot(gd$BP,-log(gd$P,base=10), col=gd$CHR)
+abline(h=-log(1e-5,base=10),col="blue")
+```
+
+Use the package "qqman" to generate a Manhattan plot:
+```{r, eval=FALSE}
+manhattan(gd)
+manhattan(gd[gd$chromosome==10,], chr="chromosome",bp="position",snp="rsid",p="pvalue")
+manhattan(gd[gd$chromosome==23,], chr="chromosome",bp="position",snp="rsid",p="pvalue")
+```
+
+## Variant Calling from sequencing data
+
+### Generate genotype calls for a single sample
+
+In this section we will generate genotype calls from aligned sequencing data, explore the calls and perform some initial quality checks.
+
+A commonly used variant caller comes from the Genome Analysis Toolkit (GATK).
+
+* GATK takes files containing aligned sequencing reads. These are called .bam files.
+* GATK produces .vcf files containing details of the variants, to explore and manipulate these files, we'll be using vcftools. This is also freely available and can be found: http://vcftools.sourceforge.net/
+* To visualise the variant calls we'll be using Integrated Genome Viewer (IGV); this is available from: http://software.broadinstitute.org/software/igv/
+
+Usually, each .bam file has an accompanying .bai file. These are index files, which are programs used to navigate the data faster – they must be present for software programs to run. 
+
+Generate genotype calls for the sample NA12878 using GATK:
+```{shell}
+gatk -T HaplotypeCaller \
+-R human_g1k_b37_20.fasta \
+-I NA12878_wgs_20.bam \
+-o yourfilename.vcf \
+-L 20:10,000,000-10,200,000
+```
+
+Variant calling on a whole genome can take a long time, we're only looking at a very small region: Chromosome 20, positions 10,000,000 – 10,200,000, specified by the –L option.
+
+(*) Details of the different options used: https://software.broadinstitute.org/gatk/documentation/tooldocs/current/org_broadinstitute_gatk_tools_walkers_haplotypecaller_HaplotypeCaller.php
+
+To have a look at the first 5 variant calls using:
+```{shell}
+head -34 yourfilename.vcf | tail -6
+```
+
+Filter the vcf file and see only the variants called in the region 20:10,002,371-10,002,546:
+```{shell}
+vcftools --vcf yourfilename.vcf \
+--chr 20 \
+--from-bp 10002371 \
+--to-bp 10002546 \
+--out yournewfilename \
+--recode
+```
+
+The code above will generate the files: yournewfilename.recode.vcf and yournewfilename.log.
+
+To know how many variants were identified in this region:
+```{shell}
+cat yournewfilename.log
+```
+
+What are those variants?
+```{shell}
+cat yournewfilename.recode.vcf
+```
+
+### Generating genotypes from multiple .bam files
+
+To generate genotypes for multiple samples, one option is to run the same command than above but give multiple -I options:
+```{shell}
+gatk -T HaplotypeCaller \
+-R human_g1k_b37_20.fasta \
+-I NA12878_wgs_20.bam \
+-I NA12882_wgs_20.bam \
+-I NA12877_wgs_20.bam \
+-o differentfilename.vcf \
+-L 20:10,000,000-10,200,000
+```
+
+Another option is to run each sample independently, but generate a .g.vcf file and then merge the .g.vcf files to get a single call set.
+
+Generate a .g.vcf file for sample NA12878 (then run the same command on the bam files for samples NA12877 and NA12882):
+```{shell}
+gatk -T HaplotypeCaller \
+-R human_g1k_b37_20.fasta \
+-I NA12878_wgs_20.bam \
+-o yourchoice_NA12878.g.vcf \
+-ERC GVCF \
+-L 20:10,000,000-10,200,000
+```
+
+The main difference between the .g.vcf and the .vcf file is that the gvcf file contains a line per base or region if the region contains no variants. The gvcf also includes <NON_REF> as a symbolic allele, this allows for complex variants at the site and to makes it possible to give a confidence measure in the reference allele (more info: http://gatkforums.broadinstitute.org/gatk/discussion/4017/what-is-a-gvcf-and-how-is-it-differentfrom-a-regular-vcf)
+
+
+Merge the individual .g.vcf files and get a .vcf file containing the calls for all samples:
+```{shell}
+gatk -T GenotypeGVCFs \
+-R human_g1k_b37_20.fasta \
+-V yourchoice_NA12878.g.vcf \
+-V yourchoice_NA12882.g.vcf \
+-V yourchoice_NA12877.g.vcf \
+-o yourchoice_gvcf_jointcalls.vcf \
+-L 20:10,000,000-10,200,000
+```
+
+### Performing initial QC
+
+GWAS studies often focus only on SNPS, whereas variant callers identify more variants, such as indels. To create a file containing just SNPs (no indels or other variants) the --remove-indels option from vcftools can be used:
+```{shell}
+vcftools --vcf yourchoice_gvcf_jointcalls.vcf \
+--remove-indels \
+--out yourchoice_snps \
+--recode
+```
+
+Calculate the Ts/Tv ratio:
+```{shell}
+vcftools --vcf yourchoice_gvcf_jointcalls.vcf \
+--TsTv-summary \
+--out yourchoice_tstv
+```
+
+The QualByDepth (QD) score is the variant quality (QUAL field) divided by the unfiltered depth of nonreference samples. Variants with a low QD may be unreliable and have a high false positive rate. To add a filter to the .vcf file which flags variants which have a quality-by-depth less than 2.0:
+```{shell}
+gatk -T VariantFiltration \
+-R human_g1k_b37_20.fasta \
+-V yourchoice_gvcf_jointcalls.vcf \
+--filterExpression 'QD<2.0' \
+--filterName 'QualityDepth' \
+-o yourchoice_flagged.vcf
+```
+
+
+NOTE: SNPs and Indels may need to be treated differently – to do this, the file can be first splitted into 2 vcfs, one containing SNPs and one containing indels, then add the flags should be added.
+
+The new .vcf is now different from the original as the FILTER column is now filled in, usually with PASS.
+
+Remove all SNPs with a filter flag other than PASS:
+```{shell}
+vcftools --vcf yourchoice_flagged.vcf \
+--remove-filtered-all \
+--recode \
+--out yourchoice_filtered
+```
+
+To convert the SNP filtered .vcf file to PLINK .ped and .map files:
+```{shell}
+vcftools --vcf yourchoice_gvcf_jointcalls.vcf \
+--remove-indels \
+--out yourchoice_plink
+```
+
+## Quality Control for GWAS
+
+### Software and datasets
+
+A commonly used program for GWAS analysis is called 'PLINK', which is freely available for download. The webpage for PLINK is available at: http://pngu.mgh.harvard.edu/~purcell/plink/
+For undertaking a GWAS, two input files are required: one '.ped' file and one '.map' file.
+
+* The PED file is a white-space (space or tab) delimited file. It includes one row for each participant within the study, and at least seven columns. Each of the SNPs genotyped is represented by two columns (column 7 onwards) –one for each of the two alleles held by the individual at the SNP. Typical coding would be A, C, G or T to represent the four possible alleles, or similarly 1, 2, 3 or 4. Coding for missing genotype is '0 0'.
+* The .map file includes information on the SNPs genotyped, and each row represents a SNP. It includes 4 columns.
+
+
+In this example, we will be working on analysing the GWAS dataset 'genstudy' (a .map and .ped file for 'genstudy'). The study is a case-control study with 252 diseased (cases) and 252 non-diseased (controls) individuals.
+All individuals have been genotyped for 198,684 SNPs on chromosome 10 and 22,379 SNPs on chromosome X. The purpose of the study is to try and identify SNPs on chromosome 10 associated
+with disease.
+
+
+
+To view the first row and first eight columns of the 'genstudy.ped' file:
+```{shell}
+awk 'FNR == 1 { print $1,$2,$3,$4,$5,$6,$7,$8} ' genstudy.ped
+```
+
+The eight columns correspond to the first six mandatory columns plus two columns representing the first SNP genotyped.
+
+
+### Checking the input datasets
+
+Before starting a genotype QC or GWAS association analysis, it is important to check that the input files are in good order, and contain the individuals and SNPs that we think they should. Do this by focussing on the SNPs on chromosome 10:
+```{shell}
+plink --file genstudy --chr 10 --noweb
+```
+
+Note: the '-noweb' option is included to make PLINK run faster – otherwise it connects to the web to check for updates before running the analysis.
+
+### Binary PED files
+
+To save space and time, .map and .ped files can be converted to binary format.
+
+To create a set of binary format files for the 'genstudy' dataset:
+```{shell}
+plink --file genstudy --make-bed --out genstudy --noweb
+```
+
+To use the binary format files instead of the .ped and .map files, we just substitute the option --file with --bfile in the PLINK command line:
+```{shell}
+plink --file genstudy --chr 10 --noweb
+```
+
+
+### Sample QC:
+In this section, we will start undertaking genotype QC on the 'genstudy' dataset – starting first of all with sample QC, one step at a time.
+
+#### Checks for missing data

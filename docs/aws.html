@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 AWS | Knowledge Book</title>
+  <meta name="description" content="This book contains some knowledge I have adquired during my PhD studies." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 AWS | Knowledge Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book contains some knowledge I have adquired during my PhD studies." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 AWS | Knowledge Book" />
+  
+  <meta name="twitter:description" content="This book contains some knowledge I have adquired during my PhD studies." />
+  
+
+<meta name="author" content="Sonia García-Ruiz (s.ruiz@ucl.ac.uk)" />
+
+
+<meta name="date" content="2021-08-17" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="machine-learning-concepts.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="analysis-of-genetic-association-studies.html"><a href="analysis-of-genetic-association-studies.html"><i class="fa fa-check"></i><b>1</b> Analysis of Genetic Association Studies</a><ul>
+<li class="chapter" data-level="1.1" data-path="analysis-of-genetic-association-studies.html"><a href="analysis-of-genetic-association-studies.html#useful-linux-commands"><i class="fa fa-check"></i><b>1.1</b> Useful Linux commands</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="github.html"><a href="github.html"><i class="fa fa-check"></i><b>2</b> GitHub</a><ul>
+<li class="chapter" data-level="2.1" data-path="github.html"><a href="github.html#merge"><i class="fa fa-check"></i><b>2.1</b> Merge</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="github.html"><a href="github.html#troubleshooting-pages-of-interest"><i class="fa fa-check"></i><b>2.1.1</b> Troubleshooting pages of interest</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="github.html"><a href="github.html#stash"><i class="fa fa-check"></i><b>2.2</b> Stash</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="docker.html"><a href="docker.html"><i class="fa fa-check"></i><b>3</b> Docker</a><ul>
+<li class="chapter" data-level="3.1" data-path="docker.html"><a href="docker.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="docker.html"><a href="docker.html#what-is-docker"><i class="fa fa-check"></i><b>3.1.1</b> What is docker?</a></li>
+<li class="chapter" data-level="3.1.2" data-path="docker.html"><a href="docker.html#images-and-containers"><i class="fa fa-check"></i><b>3.1.2</b> Images and containers</a></li>
+<li class="chapter" data-level="3.1.3" data-path="docker.html"><a href="docker.html#docker-hub"><i class="fa fa-check"></i><b>3.1.3</b> Docker Hub</a></li>
+<li class="chapter" data-level="3.1.4" data-path="docker.html"><a href="docker.html#useful-commands"><i class="fa fa-check"></i><b>3.1.4</b> Useful Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="docker.html"><a href="docker.html#coexp"><i class="fa fa-check"></i><b>3.2</b> CoExp</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="docker.html"><a href="docker.html#software-requirements"><i class="fa fa-check"></i><b>3.2.1</b> Software requirements</a></li>
+<li class="chapter" data-level="3.2.2" data-path="docker.html"><a href="docker.html#download-docker-images-of-coexp"><i class="fa fa-check"></i><b>3.2.2</b> Download Docker images of CoExp</a></li>
+<li class="chapter" data-level="3.2.3" data-path="docker.html"><a href="docker.html#use-docker-composer-to-build-the-images"><i class="fa fa-check"></i><b>3.2.3</b> Use Docker-Composer to build the images</a></li>
+<li class="chapter" data-level="3.2.4" data-path="docker.html"><a href="docker.html#juans-tutorial"><i class="fa fa-check"></i><b>3.2.4</b> Juan's tutorial</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html"><i class="fa fa-check"></i><b>4</b> Machine Learning Concepts</a><ul>
+<li class="chapter" data-level="4.1" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#artificial-intelligence-vs.-machine-learning"><i class="fa fa-check"></i><b>4.2</b> Artificial Intelligence vs. Machine Learning</a></li>
+<li class="chapter" data-level="4.3" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#supervised-learning"><i class="fa fa-check"></i><b>4.3</b> Supervised learning</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#classification"><i class="fa fa-check"></i><b>4.3.1</b> Classification</a></li>
+<li class="chapter" data-level="4.3.2" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#regression"><i class="fa fa-check"></i><b>4.3.2</b> Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#unsupervised-learning"><i class="fa fa-check"></i><b>4.4</b> Unsupervised learning</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#clustering"><i class="fa fa-check"></i><b>4.4.1</b> Clustering</a></li>
+<li class="chapter" data-level="4.4.2" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#density-estimation"><i class="fa fa-check"></i><b>4.4.2</b> Density estimation</a></li>
+<li class="chapter" data-level="4.4.3" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#visualization"><i class="fa fa-check"></i><b>4.4.3</b> Visualization</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="aws.html"><a href="aws.html"><i class="fa fa-check"></i><b>5</b> AWS</a><ul>
+<li class="chapter" data-level="5.1" data-path="aws.html"><a href="aws.html#aws-s3"><i class="fa fa-check"></i><b>5.1</b> AWS S3</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="aws.html"><a href="aws.html#accessing-aws-using-the-aws-command-line-interface"><i class="fa fa-check"></i><b>5.1.1</b> Accessing AWS using the AWS Command Line Interface</a></li>
+<li class="chapter" data-level="5.1.2" data-path="aws.html"><a href="aws.html#checking-aws-file-integrity"><i class="fa fa-check"></i><b>5.1.2</b> Checking AWS file integrity</a></li>
+<li class="chapter" data-level="5.1.3" data-path="aws.html"><a href="aws.html#creating-a-new-aws-bucket"><i class="fa fa-check"></i><b>5.1.3</b> Creating a new AWS bucket</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="aws.html"><a href="aws.html#aws-cloud-services"><i class="fa fa-check"></i><b>5.2</b> AWS cloud services</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Knowledge Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="aws" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> AWS</h1>
+<div id="aws-s3" class="section level2">
+<h2><span class="header-section-number">5.1</span> AWS S3</h2>
+<div id="accessing-aws-using-the-aws-command-line-interface" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Accessing AWS using the AWS Command Line Interface</h3>
+<p>The AWS Command Line Interface (or AWS CLI) is an open source tool that enables you to interact with the AWS services from your command-line Shell. AWS CLI tool is already installed in our server, and it is very simple to use. Below are described the most commonly used interactions with AWS.</p>
+<div id="configure-the-aws-cli-service" class="section level4">
+<h4><span class="header-section-number">5.1.1.1</span> Configure the AWS CLI service</h4>
+<ol style="list-style-type: decimal">
+<li>To configure the service, please type &quot;aws configure&quot; on the console. This command is interactive, so the service will prompt you four times to enter some config information. Below an example (all RytenLab members have to ask me to send them their secret AWS credentials):</li>
+</ol>
+<pre class="console"><code>$ aws configure 
+
+AWS Access Key ID [None]: your_access_key 
+AWS Secret Access Key [None]: your_secret_key 
+Default region name [None]: eu-west-2 
+Default output format [None]: json </code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>To check whether the connection with AWS has been correctly stablished, we can type the following command to list all our current buckets.</li>
+</ol>
+<pre class="console"><code>$ aws s3 ls </code></pre>
+</div>
+<div id="upload-a-single-file-to-aws" class="section level4">
+<h4><span class="header-section-number">5.1.1.2</span> Upload a single file to AWS</h4>
+<p>Let's suppose we have a bucket on AWS called 'my-bucket'. Let's also suppose you have a file called 'myfile.txt' stored in your local that you would like to upload to AWS. To upload the file 'myfile.txt' to the bucket 'my-bucket':</p>
+<pre class="console"><code>$ aws s3 cp myfile.txt s3://my-bucket/ </code></pre>
+</div>
+<div id="download-a-single-file-from-aws" class="section level4">
+<h4><span class="header-section-number">5.1.1.3</span> Download a single file from AWS</h4>
+<p>To download the file 'myfile.txt' from the 's3://my-bucket/' AWS bucket into your local folder:</p>
+<pre class="console"><code>$ aws s3 cp s3://my-bucket/myfile.txt ./my_local_folder </code></pre>
+</div>
+<div id="upload-multiple-files-to-aws" class="section level4">
+<h4><span class="header-section-number">5.1.1.4</span> Upload multiple files to AWS</h4>
+<p>To upload multiple files, we can use the sync command. The <strong>sync</strong> command syncs objects under a specified local folder to files in a AWS bucket by uploading them to AWS.</p>
+<pre class="console"><code>$ aws s3 sync my_local_folder/ s3://my-bucket/ </code></pre>
+</div>
+<div id="download-multiple-files-from-aws" class="section level4">
+<h4><span class="header-section-number">5.1.1.5</span> Download multiple files from AWS</h4>
+<p>To download multiple files from an AWS bucket to your local folder, we can also use the <strong>sync</strong> command by changing the order of the parameters.</p>
+<p><strong><em>Please, be aware the costs associated with downloading files correspond to $0.090 per GB - first 10 TB / month data transfer out beyond the global free tier.</em></strong></p>
+<pre class="console"><code>$ aws s3 sync s3://my-bucket/my_remote_folder/ ./my_local_folder </code></pre>
+</div>
+</div>
+<div id="checking-aws-file-integrity" class="section level3">
+<h3><span class="header-section-number">5.1.2</span> Checking AWS file integrity</h3>
+<p>Considering the example used in the previous section, let's check the integrity of the local folder './my_local_folder' matches with the integrity of the remote AWS folder 's3://my-bucket/my_local_folder/'.</p>
+<ol style="list-style-type: decimal">
+<li>First, clone the 'aws-s3-integrity-check' repo.</li>
+</ol>
+<pre class="console"><code>$ git clone https://github.com/SoniaRuiz/aws-s3-integrity-check.git</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Clone the 's3md5' repo.</li>
+</ol>
+<pre class="console"><code>$ git clone https://github.com/antespi/s3md5.git</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Move the s3md5 folder within the aws-s3-integrity-check folder:</li>
+</ol>
+<pre class="console"><code>$ mv ./s3md5 ./aws-s3-integrity-check</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Next, grant execution access permission to he s3md5 script file.</li>
+</ol>
+<pre class="console"><code>$ chmod 755 ./aws-s3-integrity-check/s3md5/s3md5</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>The aws-s3-integrity-check folder should look similar to the following:</li>
+</ol>
+<pre class="console"><code>total 16
+-rw-r--r-- 1 your_user your_group 3573 date README.md
+-rwxr-xr-x 1 your_user your_group 3301 date aws_check_integrity.sh
+drwxr-xr-x 2 your_user your_group 4096 date s3md5</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>Execute the script 'aws_check_integrity.sh' following the this structure: <strong>aws_check_integrity.sh 'local_path' 'bucket_name' 'bucket_folder'</strong></li>
+</ol>
+<pre class="console"><code>$ aws_check_integrity.sh ./my_local_folder my-bucket my_local_folder/</code></pre>
+</div>
+<div id="creating-a-new-aws-bucket" class="section level3">
+<h3><span class="header-section-number">5.1.3</span> Creating a new AWS bucket</h3>
+<p>To create a new AWS bucket, we recommend using the following configuration:</p>
+<ol style="list-style-type: decimal">
+<li>Region: EU London</li>
+<li>Block all public access: enabled</li>
+<li>Bucket Versioning: enable</li>
+<li>Tags:
+<ol style="list-style-type: decimal">
+<li>Key = &quot;data-owner&quot; / Value = &quot;your name&quot;</li>
+<li>Key = &quot;data-origin&quot; / Value = &quot;the origin of the data in one word (i.e. the name of a project, the name of a server)&quot;</li>
+</ol></li>
+<li>Default encryption: enable - Amazon S3 key (SSE-S3)</li>
+<li>Advanced settings
+<ol style="list-style-type: decimal">
+<li>Object Lock: enable/disable, depending on your type of data (more info <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html">here</a>)</li>
+</ol></li>
+</ol>
+</div>
+</div>
+<div id="aws-cloud-services" class="section level2">
+<h2><span class="header-section-number">5.2</span> AWS cloud services</h2>
+<table>
+<caption><span id="tab:unnamed-chunk-7">Table 5.1: </span>list of AWS cloud services.</caption>
+<colgroup>
+<col width="12%" />
+<col width="87%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">name</th>
+<th align="left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Amazon API Gateway</td>
+<td align="left">Service to develop APIs. These APIs will act as the front door for applications to access the data from the backend services behind the API.</td>
+</tr>
+<tr class="even">
+<td align="left">Amazon Athena</td>
+<td align="left">SQL to analyse data stored in S3.</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon Aurora</td>
+<td align="left">MySQL-Compatible Relational database for the cloud.</td>
+</tr>
+<tr class="even">
+<td align="left">Amazon Aurora</td>
+<td align="left">PostgreSQL-Compatible Relational database for the cloud.</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon Bracket</td>
+<td align="left">Quantum computing service.</td>
+</tr>
+<tr class="even">
+<td align="left">Amazon Carrier</td>
+<td align="left">A Carrier IP address is the address that I will assign to a network interface (for example an EC2 instance).</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon Chime</td>
+<td align="left">To let users meet and chat online.</td>
+</tr>
+<tr class="even">
+<td align="left">Amazon CoudWatch</td>
+<td align="left">Monitoring and management service providing insights for AWS.</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon Code Guru Reviewer</td>
+<td align="left">Reviewer Service that uses program analysis and machine learning to detect potential defects that are difficult for developers to detect.</td>
+</tr>
+<tr class="even">
+<td align="left">Amazon Cognito</td>
+<td align="left">To add user sign-up, sign-in and access control to my web and mobile apps.</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon Comprehend</td>
+<td align="left">For text processing and analysis.</td>
+</tr>
+<tr class="even">
+<td align="left">Amazon Comprehend Medical</td>
+<td align="left">HIPAA-eligible natural language processing (NLP)</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon DocumentDB</td>
+<td align="left">Document database service</td>
+</tr>
+<tr class="even">
+<td align="left">Amazon DynamoDB</td>
+<td align="left">Is a key-value and document database that delivers single-digit millisecond performance at any scale.</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon EC2</td>
+<td align="left">Compute platform</td>
+</tr>
+<tr class="even">
+<td align="left">Amazon EC2 Dedicated Hosts</td>
+<td align="left">Allows you to use your eligible software licences on Amazon EC2.</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon EKS</td>
+<td align="left">Amazon Elastic Kubernetes Service</td>
+</tr>
+<tr class="even">
+<td align="left">Amazon Elastic Block Store (EBS)</td>
+<td align="left">Allows you to create persistent block storage volumes and attach them to Amazon EC2 instances.</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon Elastic Container Registry (ECR)</td>
+<td align="left">To store, manage, and deploy Docker container images.</td>
+</tr>
+<tr class="even">
+<td align="left">Amazon Elastic File System (EFS)</td>
+<td align="left">Provides a file system for use with AWS Cloud services.</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon Elastic Graphics</td>
+<td align="left">Allows you to attach low-cost graphics acceleration to EC2 instances.</td>
+</tr>
+<tr class="even">
+<td align="left">Amazon Elastic IP Static</td>
+<td align="left">IPv4 for dynamic cloud computing.</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon Elastic Transcoder</td>
+<td align="left">Is media transcoding in the cloud. Designed to convert (or “transcode”) media files from their source format into versions that will playback on devices like smartphones.</td>
+</tr>
+<tr class="even">
+<td align="left">Amazon ElastiCache</td>
+<td align="left">Build data-intensive apps or improve the performance of your existing apps by retrieving data from high throughput and low latency in-memory data stores.</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon Elasticsearch Service</td>
+<td align="left">To operate Elasticsearch at scale with zero downtime.</td>
+</tr>
+<tr class="even">
+<td align="left">Amazon EMR</td>
+<td align="left">Industry-leading cloud big data platform for processing vast amounts of data using open-source tools. EMR makes easy to set up, operate, and scale your big-data environments by automating time-consuming tasks like provisioning capacity and tuning clusters. To run petabyte-scale analysis at less than half of the cost of traditional on-premises solutions.</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon FSx for Lustre</td>
+<td align="left">Integrated with S3, is designed for fast processing of workloads.</td>
+</tr>
+<tr class="even">
+<td align="left">Amazon FSx for Windows File Server</td>
+<td align="left">To move your Windows based applications that require file storage to AWS.</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon GuardDuty</td>
+<td align="left">Is a threat detection service that monitors for malicious activity to protect your AWS accounts and data stored in Amazon S3.</td>
+</tr>
+<tr class="even">
+<td align="left">Amazon Kinesis Data Analytics</td>
+<td align="left">To analyse streaming data (for responding to your business and customer needs in real time)</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon Kinesis Data Firehose</td>
+<td align="left">To only pay for the volume of data ingested into the service.</td>
+</tr>
+<tr class="even">
+<td align="left">Amazon Kinesis Data streams</td>
+<td align="left">Data streaming service.</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon Lookout for Vision</td>
+<td align="left">Machine learning (ML) service that spots defects and anomalies in visual representations using computer vision (CV).</td>
+</tr>
+<tr class="even">
+<td align="left">Amazon Managed Streaming for Apache Kafka (MSK)</td>
+<td align="left">To easily run applications that use Apache Kafka</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon MQ</td>
+<td align="left">To set up and operate message brokers in the cloud.</td>
+</tr>
+<tr class="even">
+<td align="left">Amazon Neptune</td>
+<td align="left">Graph database service to build and run applications that work with highly connected datasets.</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon Polly</td>
+<td align="left">Service that turns text into lifelike speech.</td>
+</tr>
+<tr class="even">
+<td align="left">Amazon QuickSight</td>
+<td align="left">Business intelligence service to deliver insights to everyone in your organization.</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon RDS for MariaDB</td>
+<td align="left">To set up, operate and scale MariaDB database deployments in the cloud.</td>
+</tr>
+<tr class="even">
+<td align="left">Amazon RDS for MySQL</td>
+<td align="left">''</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon RDS for Oracle</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Amazon RDS for PostgreSQL</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon RDS for SQL server</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Amazon Redshift</td>
+<td align="left">Petabyte-scale data warehouse</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon Rekognition</td>
+<td align="left">Images and video analysis recognition; to identify objects, people, text, scenes, etc. Also, to detect inappropriate content.</td>
+</tr>
+<tr class="even">
+<td align="left">Amazon Route 53</td>
+<td align="left">DNS web service</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon S3 Glacier</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Amazon SageMaker</td>
+<td align="left">To manage costs associated to ML instances</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon SageMaker Ground Truth</td>
+<td align="left">To build training datasets for machine learning.</td>
+</tr>
+<tr class="even">
+<td align="left">Amazon Simple Email Service</td>
+<td align="left">Cloud-based email sending service.</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon Simple Notification Service</td>
+<td align="left">Amazon Simple Notification Service</td>
+</tr>
+<tr class="even">
+<td align="left">Amazon Simple Queue Service (SQS)</td>
+<td align="left">Amazon Simple Queue Service (SQS)</td>
+</tr>
+<tr class="odd">
+<td align="left">Amazon S3</td>
+<td align="left">Amazon Simple Storage Service (S3).</td>
+</tr>
+<tr class="even">
+<td align="left">Amazon Simple Workflow Service (SWF)</td>
+<td align="left">Amazon Simple Workflow Service (SWF)</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="machine-learning-concepts.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["knowledge-book.pdf", "knowledge-book.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

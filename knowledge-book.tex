@@ -1,0 +1,1109 @@
+\documentclass[]{book}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
+\usepackage[unicode=true]{hyperref}
+\hypersetup{
+            pdftitle={Knowledge Book},
+            pdfauthor={Sonia García-Ruiz (s.ruiz@ucl.ac.uk)},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{apalike}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{longtable,booktabs}
+% Fix footnotes in tables (requires footnote package)
+\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{long table}}{}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{booktabs}
+
+\title{Knowledge Book}
+\author{Sonia García-Ruiz
+(\href{mailto:s.ruiz@ucl.ac.uk}{\nolinkurl{s.ruiz@ucl.ac.uk}})}
+\date{2021-08-17}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\chapter{Analysis of Genetic Association
+Studies}\label{analysis-of-genetic-association-studies}
+
+The purpose of this section is to provide guidance on performing a GWAS
+analysis step-by step, as well as introducing to useful software for
+undertaking a GWAS.
+
+\section{Useful Linux commands}\label{useful-linux-commands}
+
+First, I'll show you useful Linux commands. Linux is an operating system
+very well suited to dealing with large datasets.
+
+\begin{itemize}
+\tightlist
+\item
+  Create a shell script: touch script.sh
+\end{itemize}
+
+\chapter{GitHub}\label{github}
+
+\section{Merge}\label{merge}
+
+To merge two branches presenting conflicts, it is possible to indicate
+which changes are preferred by using a --ours/--theirs flag:
+
+First, we checkout to the branch that we want to apply/commit the merge:
+
+\begin{verbatim}
+> git checkout testing
+> git log --oneline
+\end{verbatim}
+
+Merging would generate the following error:
+
+\begin{verbatim}
+> git merge testchanges2
+warning: Cannot merge binary files: obj/Debug/netcoreapp2.1/CoExp_Web.csprojAssemblyReference.cache (HEAD vs. testchanges2)
+warning: Cannot merge binary files: obj/Debug/netcoreapp2.1/CoExp_Web.Views.pdb (HEAD vs. testchanges2)
+warning: Cannot merge binary files: obj/Debug/netcoreapp2.1/CoExp_Web.Views.dll (HEAD vs. testchanges2)
+warning: Cannot merge binary files: .vs/CoExp_Web/v16/.suo (HEAD vs. testchanges2)
+Auto-merging obj/Debug/netcoreapp2.1/CoExp_Web.csprojAssemblyReference.cache
+CONFLICT (content): Merge conflict in obj/Debug/netcoreapp2.1/CoExp_Web.csprojAssemblyReference.cache
+Auto-merging obj/Debug/netcoreapp2.1/CoExp_Web.Views.pdb
+CONFLICT (content): Merge conflict in obj/Debug/netcoreapp2.1/CoExp_Web.Views.pdb
+Auto-merging obj/Debug/netcoreapp2.1/CoExp_Web.Views.dll
+CONFLICT (content): Merge conflict in obj/Debug/netcoreapp2.1/CoExp_Web.Views.dll
+Auto-merging libman.json
+CONFLICT (content): Merge conflict in libman.json
+Auto-merging Views/Shared/_Layout.cshtml
+CONFLICT (content): Merge conflict in Views/Shared/_Layout.cshtml
+Auto-merging Views/Run/Help_Introduction.cshtml
+Auto-merging Views/Run/Help_Catalogue.cshtml
+Auto-merging Views/Run/Help_Annotation.cshtml
+Auto-merging Views/Run/Help.cshtml
+Auto-merging Views/Run/About.cshtml
+Auto-merging .vs/CoExp_Web/v16/.suo
+CONFLICT (content): Merge conflict in .vs/CoExp_Web/v16/.suo
+Automatic merge failed; fix conflicts and then commit the result.
+\end{verbatim}
+
+To obtain the detail of the files that present a conflict:
+
+\begin{verbatim}
+> git log --merge
+> git log --merge
+commit 29cd34cc267a858fe696e86981e83bd3af1abb85 (testchanges2)
+Author: Sonia Garcia <43370296+SoniaRuiz@users.noreply.github.com>
+Date:   Tue Nov 24 09:03:14 2020 +0000
+
+    commiting .suo file in testchanges2
+
+commit 7319379b1038dc5415cf035f915d91096c70af2f (origin/testchanges2)
+Author: Sonia Garcia <43370296+SoniaRuiz@users.noreply.github.com>
+Date:   Tue Nov 24 00:47:04 2020 +0000
+
+    remove unnecessary libraries
+
+commit 5bf600b6f5f1b41b42faaca9173f33efac4958f4
+Author: Sonia Garcia <43370296+SoniaRuiz@users.noreply.github.com>
+Date:   Mon Nov 23 23:49:54 2020 +0000
+
+    new built
+
+commit 1f60b3ffb5b558849fa061efd7af1796380de30c
+Author: Sonia Garcia <43370296+SoniaRuiz@users.noreply.github.com>
+Date:   Mon Nov 23 23:20:51 2020 +0000
+
+    Update .suo
+
+    commit suo
+
+commit d1834c7ed4a83a95e08a148c7945525e3521981c
+Author: Sonia Garcia <43370296+SoniaRuiz@users.noreply.github.com>
+Date:   Mon Nov 23 23:10:18 2020 +0000
+
+> git merge --no-ff testchanges2
+error: Merging is not possible because you have unmerged files.
+hint: Fix them up in the work tree, and then use 'git add/rm <file>'
+hint: as appropriate to mark resolution and make a commit.
+fatal: Exiting because of an unresolved conflict.
+\end{verbatim}
+
+As we want to apply the comming changes, we use the flag ``--theirs'',
+and the paths of the 7 conflictive files are updated:
+
+\begin{verbatim}
+> git checkout --theirs ./*
+Updated 7 paths from the index
+\end{verbatim}
+
+Then, we commit the changes of those 7 files and push them to the
+current repository (the `testing' repository):
+
+\begin{verbatim}
+> git branch
+  master
+  testchanges
+  testchanges2
+* testing
+> git add ./*
+> git commit -m "checkout --theirs testing"
+[testing bcc3b5c] checkout --theirs testing
+> git push
+...
+> git status
+On branch testing
+Your branch is up to date with 'origin/testing'.
+
+nothing to commit, working tree clean
+\end{verbatim}
+
+Now, it's time to checkout to the repository we want to merge from and
+apply the merge:
+
+\begin{verbatim}
+> git checkout testchanges2
+Switched to branch 'testchanges2'
+Your branch is ahead of 'origin/testchanges2' by 1 commit.
+  (use "git push" to publish your local commits)
+
+> git merge testing
+Updating 29cd34c..bcc3b5c
+Fast-forward
+ Program.cs                         |  2 +-
+ Properties/launchSettings.json     |  4 ++--
+ Views/Run/About.cshtml             | 18 +++++++++---------
+ Views/Run/Help.cshtml              |  4 ++--
+ Views/Run/Help_Annotation.cshtml   |  4 ++--
+ Views/Run/Help_Catalogue.cshtml    |  4 ++--
+ Views/Run/Help_Introduction.cshtml |  4 ++--
+ 7 files changed, 20 insertions(+), 20 deletions(-)
+
+> git checkout testing
+Switched to branch 'testing'
+Your branch is up to date with 'origin/testing'.
+
+> git merge testchanges2
+Already up to date.
+\end{verbatim}
+
+Once the merge is done, we can apply the commit to the `testing'
+repository and push the changes. After that, both repositories
+(`testchanges2' and `testing') could be considered as merged, being the
+final result of their merge stored within the `testing' repository:
+
+\begin{verbatim}
+> git add ./*
+
+> git commit -m "testing version with the plot"
+[testing 7c2f7dd] testing version with the plot
+ 18 files changed, 90 deletions(-)
+ ...
+
+> git push origin testing
+ ...
+\end{verbatim}
+
+\subsection{Troubleshooting pages of
+interest}\label{troubleshooting-pages-of-interest}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://stackoverflow.com/questions/13885390/in-git-merge-conflicts-how-do-i-keep-the-version-that-is-being-merged-in}{This}
+\item
+  \href{https://www.toolsqa.com/git/merge-branch-in-git/}{Merge a branch
+  in Git}
+\item
+  \href{https://stackoverflow.com/questions/25576415/what-is-the-precise-meaning-of-ours-and-theirs-in-git\#:~:text=The\%20'ours'\%20in\%20Git\%20is,replayed\%20onto\%20the\%20current\%20branch}{Meaning
+  of `ours' and `their' in Git}.)
+\end{itemize}
+
+\section{Stash}\label{stash}
+
+When we are working on our GitHub project, we may want to backup some of
+our changes. However, it is possible that those changes are not stable
+yet, or we think they are not ready to be committed into our repository.
+The stash command creates a backup copy of our changes, and keeps it
+ready to be committed into the repo once we feel it is ready.
+
+It might happen that, once we think the stash is ready to be committed,
+GitHub doesn't allow us to do so because there are some `untracked'
+files on it.
+
+The only way I have found to deal with this issue, is to upload my stash
+into a brand new repo, and finally merge the new repo with the one I was
+intending to commit the changes to originally.
+
+\chapter{Docker}\label{docker}
+
+\section{Introduction}\label{introduction}
+
+Nowadays, almost all companies and scientific labs which work with data
+are also becoming software producers. In some cases, the main reason for
+this software development is to publish effective scientific work. In
+other cases, its final aim might be just putting together a set of
+related functions that work for a similar final objective. However, in
+both cases, the final software product becomes highly shareable.
+
+This characteristic, the shareability of the software produced, might
+seem very straightforward but in reality, it can turn into a scaring
+daunting task to be solved. Why? Because of the heterogeneity of all
+different platforms, operating systems, dependencies, versioning and so
+on that our software product makes use of. Please, be aware that prior
+to its first release, our software product might have been tested in a
+limited number of PC stations with determined characteristics that can
+be extremely different from any other potential user's PC station around
+the world.
+
+All these reasons make \href{https://www.docker.com/}{Docker Platform}
+really interesting and useful for both software producers and consumers.
+
+\subsection{What is docker?}\label{what-is-docker}
+
+\href{https://www.docker.com/}{Docker} is a software platform created in
+2013 by \href{https://en.wikipedia.org/wiki/Docker,_Inc.}{Docker, Inc.}
+which its main objective is to \emph{build, share, and run any app
+anywhere}, independently of the platform and environment where it is
+executed.
+
+But what does this definition mean? It means that you admiringly can
+forget about dependencies, libraries, compatibility, etc. to make the
+app run correctly. To some extent, you could think Docker as a
+\emph{black box}, as a \textbf{snapshot} of the developer's laptop where
+she or he developt the software you are about to make use of. A snapshot
+of the precise moment when the developer decided to release the
+software. Thus, everything you need to run the app is already there,
+installed and configured inside the Docker object, ready to be used,
+with no compatibility issues at all.
+
+\subsection{Images and containers}\label{images-and-containers}
+
+Working with Docker, there are two main concepts you are going to hear
+about constantly: images and containers. An \textbf{image} is the
+virtual file or template that contains the whole set of instructions to
+build a container. An image is the raw Docker file you will directly
+download from \href{https://hub.docker.com/}{Docker Hub} developer's
+repository to your local. On the other hand, a \textbf{container} is the
+executable object directly generated from the image. A container will be
+the virtual object that represents the snapshot of the app developer's
+laptop.
+
+In summary, the image is the virtual file that contains the raw
+instructions to build the executable app, and the executable app is the
+container itself.
+
+\subsection{Docker Hub}\label{docker-hub}
+
+\href{https://hub.docker.com/}{Docker Hub} is an online platform that
+allows creating individual Docker repositories. A Docker repository is a
+personal account space where you can store one or more versions of the
+same Docker image, which are represented by tags.
+
+Let us focus on the following image obtained from the
+\href{https://hub.docker.com/_/ubuntu?tab=tags}{Ubuntu Docker
+Repository}:
+
+\subsection{Useful Commands}\label{useful-commands}
+
+This page contains a list with some of the most common commands of
+Docker.
+
+To download a Docker image from Docker Hub:
+
+\begin{verbatim}
+$ sudo docker push repository/name:tag
+\end{verbatim}
+
+To run the image \emph{name:tag}. The flag \textbf{--rm} indicates to
+remove the container after stopping the image; whereas the flag
+\textbf{-p} indicates the port on which we want to expose the execution
+of the image:
+
+\begin{verbatim}
+$ sudo docker run --rm -p 8500:80 name:tag
+\end{verbatim}
+
+To list all docker images that are available in our local:
+
+\begin{verbatim}
+$ sudo docker images
+\end{verbatim}
+
+To remove the image \emph{image\_name}:
+
+\begin{verbatim}
+$ sudo docker image rm image_name
+\end{verbatim}
+
+To remove all orphaned images:
+
+\begin{verbatim}
+$ sudo docker rmi $(sudo docker images -f dangling=true -q)
+\end{verbatim}
+
+To list all current containers:
+
+\begin{verbatim}
+$ sudo docker ps
+\end{verbatim}
+
+To list all stopped containers:
+
+\begin{verbatim}
+$ sudo docker ps -a 
+\end{verbatim}
+
+To remove all orphaned containers:
+
+\begin{verbatim}
+$ sudo docker rm $(sudo docker ps -a -q)
+\end{verbatim}
+
+To enter inside a container in execution:
+
+\begin{verbatim}
+$ sudo docker exec -it name_container /bin/sh
+\end{verbatim}
+
+\section{CoExp}\label{coexp}
+
+This tutorial contains the instructions to install a local version of
+the CoExp Webpage by making use of the Docker technology. All the
+commands shown in this document have been tested in a Ubuntu18.04
+machine.
+
+\subsection{Software requirements}\label{software-requirements}
+
+Before downloading the CoExp Docker images, we first need to prepare the
+environment for the correct execution of Docker.
+
+Thus, let's download/fetch new versions of the packages that are already
+installed in our Linux machine (all these commands have been tested in a
+Ubuntu18.04 machine):
+
+\begin{verbatim}
+$ sudo apt update
+$ sudo apt upgrade
+\end{verbatim}
+
+\emph{curl} is a tool used to transfer data. We will make use of it
+later when we download the CoExp Docker images. To install \emph{curl}
+in the machine:
+
+\begin{verbatim}
+$ sudo apt install curl
+$ sudo curl --version
+\end{verbatim}
+
+Now, we are ready to install the Docker technology in the machine. So,
+let's download it:
+
+\begin{verbatim}
+$ sudo apt install docker.io
+\end{verbatim}
+
+Once the Docker installation has finished, we can enable and start it.
+The last instruction \emph{sudo docker --version} will return the
+current Docker version installed:
+
+\begin{verbatim}
+$ sudo systemctl start docker
+$ sudo systemctl enable docker
+$ sudo docker --version
+\end{verbatim}
+
+Finally, we need to install Docker-compose (more info
+\href{https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04}{here}).
+Docker-compose is a brach of the Docker technology, which allows
+communicating different Docker images between them:
+
+\begin{verbatim}
+$ sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+$ sudo chmod +x /usr/local/bin/docker-compose
+$ docker-compose --version
+\end{verbatim}
+
+\subsection{Download Docker images of
+CoExp}\label{download-docker-images-of-coexp}
+
+If everything has gone as expected, the system should now be ready to
+download the two CoExp Docker images. There are two different images
+because one contains the user interface (UI) of the CoExp webpage, and
+the other one contains the backend of the CoExp WebPage (author
+\href{https://github.com/juanbot/CoExpNets}{Juan Botia}).
+
+In terms of the back-end of the CoExp Webpage, there are two different
+docker images available:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Complete version: this docker image contains the totality of all CoExp
+  networks, and it is about \textasciitilde{}4.5GB of size.
+\item
+  Lite version: this smaller docker image contains only the ROSMAP
+  co-expression network. This image is about \textasciitilde{}1.3GB of
+  size.
+\end{enumerate}
+
+Depending on which image you are interested in, the commands to execute
+are:
+
+To download the complete version:
+
+\begin{verbatim}
+$ sudo docker pull soniaruiz/coexp:r
+\end{verbatim}
+
+To download the lite version:
+
+\begin{verbatim}
+$ sudo docker pull soniaruiz/coexp:r-lite
+\end{verbatim}
+
+\subsection{Use Docker-Composer to build the
+images}\label{use-docker-composer-to-build-the-images}
+
+The next step is to make the comunication between the two docker images
+possible. For that purpose, we need to download this
+\href{https://github.com/SoniaRuiz/IPDGC/blob/master/complete/docker-compose.yml}{\textbf{docker-compose.yml}}
+file (in case you have opted by the complete backend version), or this
+\href{https://github.com/SoniaRuiz/IPDGC/blob/master/lite/docker-compose.yml}{\textbf{docker-compose.yml}}
+file (if you have opted by the lite version). In any case, this file
+will make possible the correct communication between the two Docker
+images we downloaded in the previous step.
+
+Additionally, the location of the downloaded \textbf{docker-compose.yml}
+file is not really important, but we recommend to place it in your
+\textbf{Home} folder (in case you are using a Linux machine).
+
+Once the download has finished, use the following command to execute the
+\textbf{docker-compose} file and, therefore, to run your own Docker
+CoExp webpage:
+
+\begin{verbatim}
+$ sudo docker-compose up
+\end{verbatim}
+
+Finally, to test whether the execution has been correct, please type the
+following URL into the address bar:
+
+\begin{verbatim}
+http://localhost:8088/
+\end{verbatim}
+
+If everything has gone as expected, you should now be able to visualize
+your dockerized version of the CoExp webpage in your browser.
+Congratulations!
+
+\subsection{Juan's tutorial}\label{juans-tutorial}
+
+Suppose we want to generate local TOM (Topology Overlap Measure) modules
+from a specific network so we may, independently from the CoExpNets Web
+application or within the application, plot or use networks in graph
+mode. We can do it by creating their module TOMs and get the
+corresponding graph in terms of a connectivity matrix we can plot.
+
+We will exemplify this by using the frontal cortex network from GTEx V6
+package as follows.
+
+We launch all package stuff so we can start working with those networks.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(CoExpNets)}
+\KeywordTok{library}\NormalTok{(CoExpGTEx)}
+\NormalTok{CoExpGTEx}\OperatorTok{::}\KeywordTok{initDb}\NormalTok{()}
+
+\NormalTok{netf =}\StringTok{ }\KeywordTok{getNetworkFromTissue}\NormalTok{(}\DataTypeTok{tissue=}\StringTok{"FCortex"}\NormalTok{,}
+                            \DataTypeTok{which.on=}\StringTok{"gtexv6"}\NormalTok{,}
+                            \DataTypeTok{only.file=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+
+And now (we assume it is not generated yet) create the module-TOMs for
+the Frontal Cortex Network as follows. As we see,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{netf}
+\end{Highlighting}
+\end{Shaded}
+
+the beta value for that network is 9, it is in the name between the
+tissue and the \texttt{.it.50.rds} token in the file name.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{getModuleTOMs}\NormalTok{(}\DataTypeTok{tissue=}\StringTok{"FCortex"}\NormalTok{,}
+              \DataTypeTok{beta=}\DecValTok{9}\NormalTok{,}
+              \DataTypeTok{out.path=}\StringTok{"~/tmp/mytoms/"}\NormalTok{,}
+              \DataTypeTok{which.one=}\StringTok{"gtexv6"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+And we can see all module-TOMs created now at the
+\texttt{\textasciitilde{}/tmp/mytoms/} folder
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{list.files}\NormalTok{(}\StringTok{"~/tmp/mytoms/"}\NormalTok{,}\DataTypeTok{full.names =}\NormalTok{ F,}\DataTypeTok{recursive =}\NormalTok{ F)}
+\end{Highlighting}
+\end{Shaded}
+
+And now we can get any module's connectivity matrix so we can represent
+a graph for the TOM
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{getModuleTOMGraph}\NormalTok{(}\DataTypeTok{tissue=}\StringTok{"FCortex"}\NormalTok{,}
+                  \DataTypeTok{which.one=}\StringTok{"gtexv6"}\NormalTok{,}
+                  \DataTypeTok{module=}\StringTok{"black"}\NormalTok{,}
+                  \DataTypeTok{topgenes=}\DecValTok{10}\NormalTok{,}
+                  \DataTypeTok{out.path=}\StringTok{"~/tmp/mytoms/"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+And there you have it.
+
+\chapter{Machine Learning Concepts}\label{machine-learning-concepts}
+
+\section{Introduction}\label{introduction-1}
+
+Have you ever asked yourself what is the difference between
+\textbf{Artificial Intelligence} and \textbf{Machine Learning}? What
+about between \textbf{supervised} and \textbf{unsupervised learning}?
+Well, that's not surprising at all because trying to find out the right
+answer within the huge ocean of information that is the Internet, can
+become a really daunting task.
+
+In this post, we will try first to define the most widely used Machine
+Learning concepts and finally trying to give clarifying examples of each
+one of them to try to help in the understanding of their meanings.
+
+\section{Artificial Intelligence vs.~Machine
+Learning}\label{artificial-intelligence-vs.machine-learning}
+
+What is the difference between Artificial Intelligence and Machine
+Learning? \textbf{Artificial Intelligence} is the concept of machines
+being able to perform tasks in a way that we would consider ``smart''.
+\textbf{Machine Learning} however is the current application of AI,
+where we just give machines access to data and let them learn for
+themselves (source
+\href{https://www.forbes.com/sites/bernardmarr/2016/12/06/what-is-the-difference-between-artificial-intelligence-and-machine-learning/}{Forbes}).
+
+The Machine Learning concept comprises different techniques whereby it
+is possible to make machines learning from diverse sets of data. Among
+the most important ones, we can highlight \textbf{supervised learning}
+and \textbf{unsupervised learning}.
+
+\section{Supervised learning}\label{supervised-learning}
+
+When the training data - the data we want machines learning about -
+comprises not only the input vectors but also their corresponding target
+vectors.
+
+\subsection{Classification}\label{classification}
+
+Classification is a supervised learning method used when the target
+vectors consist of a finite number of discrete categories.
+
+The \emph{iris} dataset available in R, for instance, can be used in
+classification problems because it provides different input vectors
+(\emph{``Sepal.Length'', ``Sepal.Width'', ``Petal.Length'' and
+``Petal.With''}) and a target vector (\emph{``Species''}) with a finite
+number of categories (\emph{``setosa'', ``versicolor'' and
+``virginica''}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OperatorTok{>}\StringTok{ }\KeywordTok{summary}\NormalTok{(iris)}
+\NormalTok{  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width          Species  }
+\NormalTok{ Min.   }\OperatorTok{:}\FloatTok{4.300}\NormalTok{   Min.   }\OperatorTok{:}\FloatTok{2.000}\NormalTok{   Min.   }\OperatorTok{:}\FloatTok{1.000}\NormalTok{   Min.   }\OperatorTok{:}\FloatTok{0.100}\NormalTok{   setosa    }\OperatorTok{:}\DecValTok{50}  
+\NormalTok{ 1st Qu.}\OperatorTok{:}\FloatTok{5.100}\NormalTok{   1st Qu.}\OperatorTok{:}\FloatTok{2.800}\NormalTok{   1st Qu.}\OperatorTok{:}\FloatTok{1.600}\NormalTok{   1st Qu.}\OperatorTok{:}\FloatTok{0.300}\NormalTok{   versicolor}\OperatorTok{:}\DecValTok{50}  
+\NormalTok{ Median }\OperatorTok{:}\FloatTok{5.800}\NormalTok{   Median }\OperatorTok{:}\FloatTok{3.000}\NormalTok{   Median }\OperatorTok{:}\FloatTok{4.350}\NormalTok{   Median }\OperatorTok{:}\FloatTok{1.300}\NormalTok{   virginica }\OperatorTok{:}\DecValTok{50}  
+\NormalTok{ Mean   }\OperatorTok{:}\FloatTok{5.843}\NormalTok{   Mean   }\OperatorTok{:}\FloatTok{3.057}\NormalTok{   Mean   }\OperatorTok{:}\FloatTok{3.758}\NormalTok{   Mean   }\OperatorTok{:}\FloatTok{1.199}                  
+\NormalTok{ 3rd Qu.}\OperatorTok{:}\FloatTok{6.400}\NormalTok{   3rd Qu.}\OperatorTok{:}\FloatTok{3.300}\NormalTok{   3rd Qu.}\OperatorTok{:}\FloatTok{5.100}\NormalTok{   3rd Qu.}\OperatorTok{:}\FloatTok{1.800}                  
+\NormalTok{ Max.   }\OperatorTok{:}\FloatTok{7.900}\NormalTok{   Max.   }\OperatorTok{:}\FloatTok{4.400}\NormalTok{   Max.   }\OperatorTok{:}\FloatTok{6.900}\NormalTok{   Max.   }\OperatorTok{:}\FloatTok{2.500}  
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Regression}\label{regression}
+
+Regression is also a supervised learning method but only used when the
+target vectors consist of one or more continuous variables.
+
+The \emph{longley} R dataset is an example of this type of data. It
+presents a collection of inputs vectors (\emph{``GNP.deflator'',
+``GNP'', ``Unemployed'', ``Armed.Forces'', ``Population'', ``Year''})
+and a numeric vector output (\emph{``Employed''}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OperatorTok{>}\StringTok{ }\KeywordTok{summary}\NormalTok{(longley)}
+\NormalTok{  GNP.deflator         GNP          Unemployed     Armed.Forces     Population         Year         Employed    }
+\NormalTok{ Min.   }\OperatorTok{:}\StringTok{ }\FloatTok{83.00}\NormalTok{   Min.   }\OperatorTok{:}\FloatTok{234.3}\NormalTok{   Min.   }\OperatorTok{:}\FloatTok{187.0}\NormalTok{   Min.   }\OperatorTok{:}\FloatTok{145.6}\NormalTok{   Min.   }\OperatorTok{:}\FloatTok{107.6}\NormalTok{   Min.   }\OperatorTok{:}\DecValTok{1947}\NormalTok{   Min.   }\OperatorTok{:}\FloatTok{60.17}  
+\NormalTok{ 1st Qu.}\OperatorTok{:}\StringTok{ }\FloatTok{94.53}\NormalTok{   1st Qu.}\OperatorTok{:}\FloatTok{317.9}\NormalTok{   1st Qu.}\OperatorTok{:}\FloatTok{234.8}\NormalTok{   1st Qu.}\OperatorTok{:}\FloatTok{229.8}\NormalTok{   1st Qu.}\OperatorTok{:}\FloatTok{111.8}\NormalTok{   1st Qu.}\OperatorTok{:}\DecValTok{1951}\NormalTok{   1st Qu.}\OperatorTok{:}\FloatTok{62.71}  
+\NormalTok{ Median }\OperatorTok{:}\FloatTok{100.60}\NormalTok{   Median }\OperatorTok{:}\FloatTok{381.4}\NormalTok{   Median }\OperatorTok{:}\FloatTok{314.4}\NormalTok{   Median }\OperatorTok{:}\FloatTok{271.8}\NormalTok{   Median }\OperatorTok{:}\FloatTok{116.8}\NormalTok{   Median }\OperatorTok{:}\DecValTok{1954}\NormalTok{   Median }\OperatorTok{:}\FloatTok{65.50}  
+\NormalTok{ Mean   }\OperatorTok{:}\FloatTok{101.68}\NormalTok{   Mean   }\OperatorTok{:}\FloatTok{387.7}\NormalTok{   Mean   }\OperatorTok{:}\FloatTok{319.3}\NormalTok{   Mean   }\OperatorTok{:}\FloatTok{260.7}\NormalTok{   Mean   }\OperatorTok{:}\FloatTok{117.4}\NormalTok{   Mean   }\OperatorTok{:}\DecValTok{1954}\NormalTok{   Mean   }\OperatorTok{:}\FloatTok{65.32}  
+\NormalTok{ 3rd Qu.}\OperatorTok{:}\FloatTok{111.25}\NormalTok{   3rd Qu.}\OperatorTok{:}\FloatTok{454.1}\NormalTok{   3rd Qu.}\OperatorTok{:}\FloatTok{384.2}\NormalTok{   3rd Qu.}\OperatorTok{:}\FloatTok{306.1}\NormalTok{   3rd Qu.}\OperatorTok{:}\FloatTok{122.3}\NormalTok{   3rd Qu.}\OperatorTok{:}\DecValTok{1958}\NormalTok{   3rd Qu.}\OperatorTok{:}\FloatTok{68.29}  
+\NormalTok{ Max.   }\OperatorTok{:}\FloatTok{116.90}\NormalTok{   Max.   }\OperatorTok{:}\FloatTok{554.9}\NormalTok{   Max.   }\OperatorTok{:}\FloatTok{480.6}\NormalTok{   Max.   }\OperatorTok{:}\FloatTok{359.4}\NormalTok{   Max.   }\OperatorTok{:}\FloatTok{130.1}\NormalTok{   Max.   }\OperatorTok{:}\DecValTok{1962}\NormalTok{   Max.   }\OperatorTok{:}\FloatTok{70.55}  
+\end{Highlighting}
+\end{Shaded}
+
+\section{Unsupervised learning}\label{unsupervised-learning}
+
+When the training data consists of a set of input vectors x without any
+corresponding target values. The main aim of unsupervised learning
+problems can be summarised in the following ideas.
+
+\subsection{Clustering}\label{clustering}
+
+Grouping the input data that share different similarities into clusters
+- called \textbf{clustering} (a widely known clustering algorithm is
+\href{https://stanford.edu/~cpiech/cs221/handouts/kmeans.html}{K-Means}).
+Below, an example dataset which can be used in a clustering problem:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OperatorTok{>}\StringTok{ }\KeywordTok{library}\NormalTok{(cluster.datasets)}
+\OperatorTok{>}\StringTok{ }\KeywordTok{data}\NormalTok{(acidosis.patients)}
+\OperatorTok{>}\StringTok{ }\KeywordTok{summary}\NormalTok{(acidosis.patients)}
+\NormalTok{ ph.cerebrospinal.fluid    ph.blood     hco3.cerebrospinal.fluid   hco3.blood    co2.cerebrospinal.fluid   co2.blood    }
+\NormalTok{ Min.   }\OperatorTok{:}\FloatTok{38.50}\NormalTok{          Min.   }\OperatorTok{:}\FloatTok{32.80}\NormalTok{   Min.   }\OperatorTok{:}\StringTok{ }\FloatTok{9.80}\NormalTok{            Min.   }\OperatorTok{:}\StringTok{ }\FloatTok{4.20}\NormalTok{   Min.   }\OperatorTok{:}\FloatTok{17.80}\NormalTok{           Min.   }\OperatorTok{:}\FloatTok{12.90}  
+\NormalTok{ 1st Qu.}\OperatorTok{:}\FloatTok{45.67}\NormalTok{          1st Qu.}\OperatorTok{:}\FloatTok{37.20}\NormalTok{   1st Qu.}\OperatorTok{:}\FloatTok{19.43}\NormalTok{            1st Qu.}\OperatorTok{:}\FloatTok{19.00}\NormalTok{   1st Qu.}\OperatorTok{:}\FloatTok{40.38}\NormalTok{           1st Qu.}\OperatorTok{:}\FloatTok{30.25}  
+\NormalTok{ Median }\OperatorTok{:}\FloatTok{48.05}\NormalTok{          Median }\OperatorTok{:}\FloatTok{39.55}\NormalTok{   Median }\OperatorTok{:}\FloatTok{22.65}\NormalTok{            Median }\OperatorTok{:}\FloatTok{23.30}\NormalTok{   Median }\OperatorTok{:}\FloatTok{45.25}\NormalTok{           Median }\OperatorTok{:}\FloatTok{35.70}  
+\NormalTok{ Mean   }\OperatorTok{:}\FloatTok{47.52}\NormalTok{          Mean   }\OperatorTok{:}\FloatTok{41.55}\NormalTok{   Mean   }\OperatorTok{:}\FloatTok{21.91}\NormalTok{            Mean   }\OperatorTok{:}\FloatTok{22.72}\NormalTok{   Mean   }\OperatorTok{:}\FloatTok{45.57}\NormalTok{           Mean   }\OperatorTok{:}\FloatTok{36.44}  
+\NormalTok{ 3rd Qu.}\OperatorTok{:}\FloatTok{49.45}\NormalTok{          3rd Qu.}\OperatorTok{:}\FloatTok{41.98}\NormalTok{   3rd Qu.}\OperatorTok{:}\FloatTok{24.52}\NormalTok{            3rd Qu.}\OperatorTok{:}\FloatTok{26.93}\NormalTok{   3rd Qu.}\OperatorTok{:}\FloatTok{52.58}\NormalTok{           3rd Qu.}\OperatorTok{:}\FloatTok{42.30}  
+\NormalTok{ Max.   }\OperatorTok{:}\FloatTok{54.90}\NormalTok{          Max.   }\OperatorTok{:}\FloatTok{81.30}\NormalTok{   Max.   }\OperatorTok{:}\FloatTok{30.40}\NormalTok{            Max.   }\OperatorTok{:}\FloatTok{34.80}\NormalTok{   Max.   }\OperatorTok{:}\FloatTok{69.00}\NormalTok{           Max.   }\OperatorTok{:}\FloatTok{61.40}  
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{https://datawookie.netlify.com/img/2015/09/xclara-clusters-colour.png}
+Image source:
+\href{https://datawookie.netlify.com/blog/2015/10/monthofjulia-day-30-clustering/}{MonthOfJulia
+Day 30: Clustering}
+
+\subsection{Density estimation}\label{density-estimation}
+
+Determine the distribution of data within the input space, known as
+\textbf{density estimation}. In other words, the aim of density
+estimation is to use statistical models to find an underlying
+probability distribution that is the main reason of the observed
+variables. A widely known density estimation algorithm is Kernel Density
+Estimation (KDE). Although KDE algorithm has a very intimidating name,
+it can be used to visualize the continuous ``shape'' of some data
+instead of using its discrete version through a histogram.
+
+\includegraphics{https://blogs.sas.com/content/iml/files/2016/07/kdecomponents2.png}
+Image source:
+\href{https://blogs.sas.com/content/iml/2016/07/27/visualize-kernel-density-estimate.html}{How
+to visualize a kernel density estimate}
+
+\subsection{Visualization}\label{visualization}
+
+This unsupervised method consist of projecting the data from a
+high-dimensional space down to two or three dimensions for the purpose
+of \textbf{visualization}.
+
+\chapter{AWS}\label{aws}
+
+\section{AWS S3}\label{aws-s3}
+
+\subsection{Accessing AWS using the AWS Command Line
+Interface}\label{accessing-aws-using-the-aws-command-line-interface}
+
+The AWS Command Line Interface (or AWS CLI) is an open source tool that
+enables you to interact with the AWS services from your command-line
+Shell. AWS CLI tool is already installed in our server, and it is very
+simple to use. Below are described the most commonly used interactions
+with AWS.
+
+\subsubsection{Configure the AWS CLI
+service}\label{configure-the-aws-cli-service}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  To configure the service, please type ``aws configure'' on the
+  console. This command is interactive, so the service will prompt you
+  four times to enter some config information. Below an example (all
+  RytenLab members have to ask me to send them their secret AWS
+  credentials):
+\end{enumerate}
+
+\begin{verbatim}
+$ aws configure 
+
+AWS Access Key ID [None]: your_access_key 
+AWS Secret Access Key [None]: your_secret_key 
+Default region name [None]: eu-west-2 
+Default output format [None]: json 
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  To check whether the connection with AWS has been correctly
+  stablished, we can type the following command to list all our current
+  buckets.
+\end{enumerate}
+
+\begin{verbatim}
+$ aws s3 ls 
+\end{verbatim}
+
+\subsubsection{Upload a single file to
+AWS}\label{upload-a-single-file-to-aws}
+
+Let's suppose we have a bucket on AWS called `my-bucket'. Let's also
+suppose you have a file called `myfile.txt' stored in your local that
+you would like to upload to AWS. To upload the file `myfile.txt' to the
+bucket `my-bucket':
+
+\begin{verbatim}
+$ aws s3 cp myfile.txt s3://my-bucket/ 
+\end{verbatim}
+
+\subsubsection{Download a single file from
+AWS}\label{download-a-single-file-from-aws}
+
+To download the file `myfile.txt' from the `s3://my-bucket/' AWS bucket
+into your local folder:
+
+\begin{verbatim}
+$ aws s3 cp s3://my-bucket/myfile.txt ./my_local_folder 
+\end{verbatim}
+
+\subsubsection{Upload multiple files to
+AWS}\label{upload-multiple-files-to-aws}
+
+To upload multiple files, we can use the sync command. The \textbf{sync}
+command syncs objects under a specified local folder to files in a AWS
+bucket by uploading them to AWS.
+
+\begin{verbatim}
+$ aws s3 sync my_local_folder/ s3://my-bucket/ 
+\end{verbatim}
+
+\subsubsection{Download multiple files from
+AWS}\label{download-multiple-files-from-aws}
+
+To download multiple files from an AWS bucket to your local folder, we
+can also use the \textbf{sync} command by changing the order of the
+parameters.
+
+\textbf{\emph{Please, be aware the costs associated with downloading
+files correspond to \$0.090 per GB - first 10 TB / month data transfer
+out beyond the global free tier.}}
+
+\begin{verbatim}
+$ aws s3 sync s3://my-bucket/my_remote_folder/ ./my_local_folder 
+\end{verbatim}
+
+\subsection{Checking AWS file
+integrity}\label{checking-aws-file-integrity}
+
+Considering the example used in the previous section, let's check the
+integrity of the local folder `./my\_local\_folder' matches with the
+integrity of the remote AWS folder `s3://my-bucket/my\_local\_folder/'.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  First, clone the `aws-s3-integrity-check' repo.
+\end{enumerate}
+
+\begin{verbatim}
+$ git clone https://github.com/SoniaRuiz/aws-s3-integrity-check.git
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Clone the `s3md5' repo.
+\end{enumerate}
+
+\begin{verbatim}
+$ git clone https://github.com/antespi/s3md5.git
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Move the s3md5 folder within the aws-s3-integrity-check folder:
+\end{enumerate}
+
+\begin{verbatim}
+$ mv ./s3md5 ./aws-s3-integrity-check
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Next, grant execution access permission to he s3md5 script file.
+\end{enumerate}
+
+\begin{verbatim}
+$ chmod 755 ./aws-s3-integrity-check/s3md5/s3md5
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  The aws-s3-integrity-check folder should look similar to the
+  following:
+\end{enumerate}
+
+\begin{verbatim}
+total 16
+-rw-r--r-- 1 your_user your_group 3573 date README.md
+-rwxr-xr-x 1 your_user your_group 3301 date aws_check_integrity.sh
+drwxr-xr-x 2 your_user your_group 4096 date s3md5
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Execute the script `aws\_check\_integrity.sh' following the this
+  structure: \textbf{aws\_check\_integrity.sh `local\_path'
+  `bucket\_name' `bucket\_folder'}
+\end{enumerate}
+
+\begin{verbatim}
+$ aws_check_integrity.sh ./my_local_folder my-bucket my_local_folder/
+\end{verbatim}
+
+\subsection{Creating a new AWS bucket}\label{creating-a-new-aws-bucket}
+
+To create a new AWS bucket, we recommend using the following
+configuration:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Region: EU London
+\item
+  Block all public access: enabled
+\item
+  Bucket Versioning: enable
+\item
+  Tags:
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Key = ``data-owner'' / Value = ``your name''
+  \item
+    Key = ``data-origin'' / Value = ``the origin of the data in one word
+    (i.e.~the name of a project, the name of a server)''
+  \end{enumerate}
+\item
+  Default encryption: enable - Amazon S3 key (SSE-S3)
+\item
+  Advanced settings
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Object Lock: enable/disable, depending on your type of data (more
+    info
+    \href{https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html}{here})
+  \end{enumerate}
+\end{enumerate}
+
+\section{AWS cloud services}\label{aws-cloud-services}
+
+\begin{table}
+
+\caption{\label{tab:unnamed-chunk-7}list of AWS cloud services.}
+\centering
+\begin{tabular}[t]{ll}
+\toprule
+name & description\\
+\midrule
+Amazon API Gateway & Service to develop APIs. These APIs will act as the front door for applications to access the data from the backend services behind the API.\\
+Amazon Athena & SQL to analyse data stored in S3.\\
+Amazon Aurora & MySQL-Compatible    Relational database for the cloud.\\
+Amazon Aurora & PostgreSQL-Compatible   Relational database for the cloud.\\
+Amazon Bracket & Quantum computing service.\\
+\addlinespace
+Amazon Carrier & A Carrier IP address is the address that I will assign to a network interface (for example an EC2 instance).\\
+Amazon Chime & To let users meet and chat online.\\
+Amazon CoudWatch & Monitoring and management service providing insights for AWS.\\
+Amazon Code Guru Reviewer & Reviewer    Service that uses program analysis and machine learning to detect potential defects that are difficult for developers to detect.\\
+Amazon Cognito & To add user sign-up, sign-in and access control to my web and mobile apps.\\
+\addlinespace
+Amazon Comprehend & For text processing and analysis.\\
+Amazon Comprehend Medical & HIPAA-eligible natural language processing (NLP)\\
+Amazon DocumentDB & Document database service\\
+Amazon DynamoDB & Is a key-value and document database that delivers single-digit millisecond performance at any scale.\\
+Amazon EC2 & Compute platform\\
+\addlinespace
+Amazon EC2 Dedicated Hosts & Allows you to use your eligible software licences on Amazon EC2.\\
+Amazon EKS & Amazon Elastic Kubernetes Service\\
+Amazon Elastic Block Store (EBS) & Allows you to create persistent block storage volumes and attach them to Amazon EC2 instances.\\
+Amazon Elastic Container Registry (ECR) & To store, manage, and deploy Docker container images.\\
+Amazon Elastic File System (EFS) & Provides a file system for use with AWS Cloud services.\\
+\addlinespace
+Amazon Elastic Graphics & Allows you to attach low-cost graphics acceleration to EC2 instances.\\
+Amazon Elastic IP   Static & IPv4 for dynamic cloud computing.\\
+Amazon Elastic Transcoder & Is media transcoding in the cloud. Designed to convert (or “transcode”) media files from their source format into versions that will playback on devices like smartphones.\\
+Amazon ElastiCache & Build data-intensive apps or improve the performance of your existing apps by retrieving data from high throughput and low latency in-memory data stores.\\
+Amazon Elasticsearch Service & To operate Elasticsearch at scale with zero downtime.\\
+\addlinespace
+Amazon EMR & Industry-leading cloud big data platform for processing vast amounts of data using open-source tools. EMR makes easy to set up, operate, and scale your big-data environments by automating time-consuming tasks like provisioning capacity and tuning clusters. To run petabyte-scale analysis at less than half of the cost of traditional on-premises solutions.\\
+Amazon FSx for Lustre & Integrated with S3, is designed for fast processing of workloads.\\
+Amazon FSx for Windows File Server & To move your Windows based applications that require file storage to AWS.\\
+Amazon GuardDuty & Is a threat detection service that monitors for malicious activity to protect your AWS accounts and data stored in Amazon S3.\\
+Amazon Kinesis Data Analytics & To analyse streaming data (for responding to your business and customer needs in real time)\\
+\addlinespace
+Amazon Kinesis Data Firehose & To only pay for the volume of data ingested into the service.\\
+Amazon Kinesis Data streams & Data streaming service.\\
+Amazon Lookout for Vision & Machine learning (ML) service that spots defects and anomalies in visual representations using computer vision (CV).\\
+Amazon Managed Streaming for Apache Kafka (MSK) & To easily run applications that use Apache Kafka\\
+Amazon MQ & To set up and operate message brokers in the cloud.\\
+\addlinespace
+Amazon Neptune & Graph database service to build and run applications that work with highly connected datasets.\\
+Amazon Polly & Service that turns text into lifelike speech.\\
+Amazon QuickSight & Business intelligence service to deliver insights to everyone in your organization.\\
+Amazon RDS for MariaDB & To set up, operate and scale MariaDB database deployments in the cloud.\\
+Amazon RDS for MySQL & ''\\
+\addlinespace
+Amazon RDS for Oracle & \\
+Amazon RDS for PostgreSQL & \\
+Amazon RDS for SQL server & \\
+Amazon Redshift & Petabyte-scale data warehouse\\
+Amazon Rekognition & Images and video analysis recognition; to identify objects, people, text, scenes, etc. Also, to detect inappropriate content.\\
+\addlinespace
+Amazon Route 53 & DNS web service\\
+Amazon S3 Glacier & \\
+Amazon SageMaker & To manage costs associated to ML instances\\
+Amazon SageMaker Ground Truth & To build training datasets for machine learning.\\
+Amazon Simple Email Service & Cloud-based email sending service.\\
+\addlinespace
+Amazon Simple Notification Service & Amazon Simple Notification Service\\
+Amazon Simple Queue Service (SQS) & Amazon Simple Queue Service (SQS)\\
+Amazon S3 & Amazon Simple Storage Service (S3).\\
+Amazon Simple Workflow Service (SWF) & Amazon Simple Workflow Service (SWF)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\bibliography{book.bib,packages.bib}
+
+\end{document}

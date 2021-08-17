@@ -8,19 +8,19 @@ This characteristic, the shareability of the software produced, might seem very 
 
 All these reasons make [Docker Platform](https://www.docker.com/) really interesting and useful for both software producers and consumers. 
 
-### What is docker?
+## What is docker?
 
 [Docker](https://www.docker.com/) is a software platform created in 2013 by [Docker, Inc.](https://en.wikipedia.org/wiki/Docker,_Inc.) which its main objective is to *build, share, and run any app anywhere*, independently of the platform and environment where it is executed.
 
 But what does this definition mean? It means that you admiringly can forget about dependencies, libraries, compatibility, etc. to make the app run correctly. To some extent, you could think Docker as a *black box*, as a **snapshot** of the developer's laptop where she or he developt the software you are about to make use of. A snapshot of the precise moment when the developer decided to release the software. Thus, everything you need to run the app is already there, installed and configured inside the Docker object, ready to be used, with no compatibility issues at all.
 
-### Images and containers
+## Images and containers
 
 Working with Docker, there are two main concepts you are going to hear about constantly: images and containers. An **image** is the virtual file or template that contains the whole set of instructions to build a container. An image is the raw Docker file you will directly download from [Docker Hub](https://hub.docker.com/) developer's repository to your local. On the other hand, a **container** is the executable object directly generated from the image. A container will be the virtual object that represents the snapshot of the app developer's laptop.
 
 In summary, the image is the virtual file that contains the raw instructions to build the executable app, and the executable app is the container itself.
 
-### Docker Hub
+## Docker Hub
 
 [Docker Hub](https://hub.docker.com/) is an online platform that allows creating individual Docker repositories. A Docker repository is a personal account space where you can store one or more versions of the same Docker image, which are represented by tags.
 
@@ -31,7 +31,7 @@ Let us focus on the following image obtained from the [Ubuntu Docker Repository]
 
 <!-- ### Creating a docker object -->
 
-### Useful Commands
+## Useful Commands
 
 This page contains a list with some of the most common commands of Docker.
   
@@ -80,7 +80,7 @@ To enter inside a container in execution:
 $ sudo docker exec -it name_container /bin/sh
 ```
 
-## CoExp
+## Docker & CoExp Web Application
 
 This tutorial contains the instructions to install a local version of the CoExp Webpage by making use of the Docker technology.
 All the commands shown in this document have been tested in a Ubuntu18.04 machine.

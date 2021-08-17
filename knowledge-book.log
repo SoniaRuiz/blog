@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/Debian) (preloaded format=xelatex 2019.9.21)  17 AUG 2021 12:19
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/Debian) (preloaded format=xelatex 2019.9.21)  17 AUG 2021 15:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -866,110 +866,137 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 
 ]
 Chapter 1.
-[5] [6
-
-]
-Chapter 2.
-LaTeX Font Info:    Try loading font information for EU1+lmtt on input line 152
+LaTeX Font Info:    Try loading font information for EU1+lmtt on input line 140
 .
 (/usr/share/texlive/texmf-dist/tex/latex/euenc/eu1lmtt.fd
 File: eu1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-Overfull \hbox (286.75pt too wide) in paragraph at lines 183--183
+) [5]
+Overfull \hbox (19.0pt too wide) in paragraph at lines 213--213
+[]\EU1/lmtt/m/n/10 awk '$4>90680000&&$4<=90690000{print}' ./file.map | awk '$1!
+=10{print}'[] 
+ []
+
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 240.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 240.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 240.
+[6]
+LaTeX Font Info:    Font shape `EU1/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `EU1/lmtt/b/n' tried instead on input line 246.
+[7]
+Underfull \hbox (badness 1024) in paragraph at lines 360--362
+[]\EU1/lmr/m/n/10 (*) Details of the different options used: []$[][][][][] [] [
+] [] [][][][][][][][] [] [][][][][][][][][][][][][][] []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 360--362
+[][][] [] [][][][] [] [][][][][][][][][][][][][] [] [][][][][][][][] [] [][][][
+][][][] [] [][][] [] [][][][][][][][][][][][][][] [] [][][][] [] [][][][][] []
+ []
+
+[8] [9]
+Underfull \vbox (badness 6332) has occurred while \output is active []
+
+[10] [11] [12]
+Chapter 2.
+
+Overfull \hbox (286.75pt too wide) in paragraph at lines 632--632
 []\EU1/lmtt/m/n/10 warning: Cannot merge binary files: obj/Debug/netcoreapp2.1/
 CoExp_Web.csprojAssemblyReference.cache (HEAD vs. testchanges2)[] 
  []
 
 
-Overfull \hbox (181.75pt too wide) in paragraph at lines 183--183
+Overfull \hbox (181.75pt too wide) in paragraph at lines 632--632
 []\EU1/lmtt/m/n/10 warning: Cannot merge binary files: obj/Debug/netcoreapp2.1/
 CoExp_Web.Views.pdb (HEAD vs. testchanges2)[] 
  []
 
 
-Overfull \hbox (181.75pt too wide) in paragraph at lines 183--183
+Overfull \hbox (181.75pt too wide) in paragraph at lines 632--632
 []\EU1/lmtt/m/n/10 warning: Cannot merge binary files: obj/Debug/netcoreapp2.1/
 CoExp_Web.Views.dll (HEAD vs. testchanges2)[] 
  []
 
 
-Overfull \hbox (71.5pt too wide) in paragraph at lines 183--183
+Overfull \hbox (71.5pt too wide) in paragraph at lines 632--632
 []\EU1/lmtt/m/n/10 warning: Cannot merge binary files: .vs/CoExp_Web/v16/.suo (
 HEAD vs. testchanges2)[] 
  []
 
 
-Overfull \hbox (52.25pt too wide) in paragraph at lines 183--183
+Overfull \hbox (52.25pt too wide) in paragraph at lines 632--632
 []\EU1/lmtt/m/n/10 Auto-merging obj/Debug/netcoreapp2.1/CoExp_Web.csprojAssembl
 yReference.cache[] 
  []
 
 
-Overfull \hbox (176.5pt too wide) in paragraph at lines 183--183
+Overfull \hbox (176.5pt too wide) in paragraph at lines 632--632
 []\EU1/lmtt/m/n/10 CONFLICT (content): Merge conflict in obj/Debug/netcoreapp2.
 1/CoExp_Web.csprojAssemblyReference.cache[] 
  []
 
 
-Overfull \hbox (71.5pt too wide) in paragraph at lines 183--183
+Overfull \hbox (71.5pt too wide) in paragraph at lines 632--632
 []\EU1/lmtt/m/n/10 CONFLICT (content): Merge conflict in obj/Debug/netcoreapp2.
 1/CoExp_Web.Views.pdb[] 
  []
 
 
-Overfull \hbox (71.5pt too wide) in paragraph at lines 183--183
+Overfull \hbox (71.5pt too wide) in paragraph at lines 632--632
 []\EU1/lmtt/m/n/10 CONFLICT (content): Merge conflict in obj/Debug/netcoreapp2.
 1/CoExp_Web.Views.dll[] 
  []
 
-[7]
-Overfull \hbox (13.75pt too wide) in paragraph at lines 225--225
+[13
+
+]
+Overfull \hbox (13.75pt too wide) in paragraph at lines 674--674
 []\EU1/lmtt/m/n/10 commit 7319379b1038dc5415cf035f915d91096c70af2f (origin/test
 changes2)[] 
  []
 
-[8] [9] [10]
+[14] [15] [16]
 Chapter 3.
-[11
+[17
 
-] [12] [13]
-Overfull \hbox (391.75pt too wide) in paragraph at lines 520--520
+] [18] [19]
+Overfull \hbox (391.75pt too wide) in paragraph at lines 969--969
 []\EU1/lmtt/m/n/10 $ sudo curl -L https://github.com/docker/compose/releases/do
 wnload/1.21.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-com
 pose[] 
  []
 
-[14]
-LaTeX Font Info:    Font shape `EU1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `EU1/lmtt/b/n' tried instead on input line 611.
-[15] [16]
+[20] [21] [22]
 Chapter 4.
 
 Underfull \vbox (badness 1320) has occurred while \output is active []
 
-[17
+[23
 
 ]
 Underfull \vbox (badness 1152) has occurred while \output is active []
 
-[18]
+[24]
 
 LaTeX Warning: File `https://datawookie.netlify.com/img/2015/09/xclara-clusters
--colour.png' not found on input line 779.
+-colour.png' not found on input line 1228.
 
 ! Unable to load picture or PDF file 'https://datawookie.netlify.com/img/2015/0
 9/xclara-clusters-colour.png'.
 <to be read again> 
                    }
-l.779 ...m/img/2015/09/xclara-clusters-colour.png}
+l.1228 .../img/2015/09/xclara-clusters-colour.png}
                                                    
 Here is how much of TeX's memory you used:
- 24663 strings out of 493638
- 434550 string characters out of 6146796
+ 24709 strings out of 493638
+ 435244 string characters out of 6146796
  484327 words of memory out of 5000000
- 27796 multiletter control sequences out of 15000+600000
- 16388 words of font info for 47 fonts, out of 8000000 for 9000
+ 27832 multiletter control sequences out of 15000+600000
+ 28419 words of font info for 62 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
  54i,7n,51p,10412b,450s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on knowledge-book.pdf (18 pages).
+Output written on knowledge-book.pdf (24 pages).

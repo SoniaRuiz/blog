@@ -1,4 +1,4 @@
-tab:unnamed-chunk-59
+tab:unnamed-chunk-78
 analysis-of-genetic-association-studies
 useful-linux-commands
 useful-r-commands
@@ -24,6 +24,15 @@ snp-qc
 checks-for-missing-data-1
 checks-for-minor-allele-frequency-maf
 checks-for-adherence-to-hardy-weinberg-equilibrium
+testing-for-associations
+software-and-datasets-1
+univariate-analyses-of-association
+multiple-regression-analyses
+population-structure-in-gwas
+testing-for-association-under-an-additive-model
+performing-multi-dimensional-scaling
+testing-for-association-under-an-additive-model-with-adjustment-for-confounding
+phasing-and-imputation
 aws
 aws-s3
 accessing-aws-using-the-aws-command-line-interface

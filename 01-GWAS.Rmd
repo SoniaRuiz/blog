@@ -317,6 +317,7 @@ Note: the '-noweb' option is included to make PLINK run faster – otherwise it 
 ### Binary PED files
 
 To save space and time, .map and .ped files can be converted to binary format. In doing this, we create three new files as follows:
+
 * '.bed': file This includes all the genotype data from the previous '.ped' file, but in binary format.
 * '.fam': file This includes the first six columns from the previous '.ped' file.
 * '.bim' file This is the same as the previous '.map' file, but also includes an additional two columns with the alleles names (which are otherwise lost when'converting the genotype data from .ped file to .bed file.)
@@ -346,6 +347,7 @@ plink --bfile genstudy --missing --out genstudy.CRstats --noweb
 Adding the '--out genstudy.CRstats' option ensures that the two output files are called 'genstudy.CRstats.imiss' and 'genstudy.CRstats.lmiss' respectively.
 
 This command creates two output files:
+
 * a '.imiss' file: summarises the proportion of missing genotype data per individual (one row per individual and six columns). The most important column for sample QC purposes is column 6, which contains the proportion of missing genotypes for the individual.
 * a '.lmiss' file: summarises the proportion of missing genotype data per SNP (one row per SNP and five columns). The most important column for SNP QC purposes is column 5, which contains the proportion of missing genotypes for the SNP.
 
@@ -369,11 +371,13 @@ plink --bfile genstudy --indep-pairwise 1500 150 0.2 --noweb
 ```
 
 The options 1500, 150 and 0.2 in the command above relate to the following steps, and of course these options can be changed depending on your requirements:
+
 * consider a window of 1500 SNPs,
 * calculate LD between each pair of SNPs in the window, remove one of a pair of SNPs if the LD is greater than 0.2,
 * shift the window 150 SNPs forward and repeat the procedure
 
 Running this command line will create two output files, 'plink.prune.in' and 'plink.prune.out':
+
 * plink.prune.in: lists all SNPs remaining after pruning
 * plink.prune.out: lists all SNPs removed during pruning
 
@@ -487,6 +491,7 @@ awk '$3=="UNAFF" && $9<0.00001' genstudy_sampleqc.hwe | wc -l
 ```
 
 To apply some extra SNP QC filters to our already sample-QC'd dataset:
+
 * Minor allele frequency (MAF) >0.05 – option '--maf 0.05'
 * SNP genotyping rate >95% (i.e. <5% missing genotypes for the SNP, across all individuals) – option '-- geno 0.05'
 * Hardy-Weinberg p-value >0.0001 in controls – option '-- hwe 0.0001'
@@ -495,3 +500,215 @@ To apply some extra SNP QC filters to our already sample-QC'd dataset:
 plink --bfile genstudy_sampleqc --noweb --maf 0.05 --geno 0.05 --hwe 0.0001 --make-bed --out genstudy_qc
 ```
 
+## Testing for Associations
+
+In this section, we will undertake an analysis of association:
+
+* first, with no adjustment made for non-genetic variables (univariate analysis of association)
+* then, with adjustment made for relevant non-genetic variables (multiple regression analysis)
+
+### Software and datasets
+
+We will use the QC'd PLINK files (generated in the previous section) ready to run the analyses of association.
+
+To run the analyses of association, we use a software package called 'SNPTEST (Version 2)' – it's free and available for the analysis of genome-wide association studies.
+
+To use SNPTEST, input files need to be in a specific format:
+
+* one '.gen' file including genotype data, which includes one row per SNP.
+* one '.sample' file including phenotypic data. It has three parts (a) a header line detailing the names of the columns in the file, (b) a line detailing the types of variables stored in each column, and (c) a line for each individual including the information for that individual.
+
+A '.gen' file includes one row per SNP. The first five entries on each line should be as follows:
+
+* SNP ID: This entry is usually used to denote the chromosome number.
+* rs number: This entry is a number which uniquely identifies the genotyped SNP. An rs number is an accession number used by researchers and databases to refer to specific SNPs. It stands for 'Reference SNP cluster ID'.
+* Base pair position of the SNP: A value that described the SNP’s position on the chromosome.
+* Allele coded A (see below for further explanation of this): The entry here will be A, C, T or G i.e. corresponding to the four possible nucleotides.
+* Allele coded B (see below for further explanation of this): The entry here will be A, C, T or G i.e. corresponding to the four possible nucleotides.
+
+The remaining entries on each row represent the genotype of each individual at the SNP. Each individual will have three entries, representing their probability of having the 'AA', 'AB' and 'BB' genotypes respectively. As we do not have any imputed SNPs in the current dataset, the probability for each genotype will be either 0 or 1. So, an individual with genotype AA will be coded '1 0 0', with genotype AB will be coded '0 1 0', and with genotype BB will be coded '0 0 1'. If genotype is missing for an individual, all three entries are set to '0 0 0'.
+
+It is possible to convert QC'd PLINK files to '.gen' and '.sample' format using a program called 'GTOOL'. 
+We have also removed all chromosome X SNPs from these files, since in terms of association we are only interested in SNPs on chromosome 10.
+
+
+### Univariate analyses of association
+
+To run univariate analyses of association between all SNPs in our 'genstudy_qc' file and our phenotype 'diseased', assuming an additive mode of inheritance, we would use the following SNPtest command:
+
+```{bash, eval=FALSE}
+snptest \
+-data genstudy_qc.gen genstudy_qc.sample \
+-o genstudy_qc_univariate_add.out \
+-pheno diseased \
+-frequentist 1 \
+-method threshold
+```
+
+Due to the large number of output columns in 'genstudy_qc_univariate_dom.out' and the large number of SNPs investigated, it is useful to look at our results in summary format. A useful way of doing this is by preparing a Manhattan plot to give a graphical representation of our results. Essentially, this is a plot of pvalue versus base pair position for each SNP and is a useful way of identifying significantly associated SNPs.
+
+First of all, it is necessary to re-format our output file into a format which is appropriate for the shell script.
+
+1. Add chromosome number to each row (also need to delete final row in datafile since includes an additional line of text which is not needed)
+```{bash, eval=FALSE}
+awk 'NR>11{$1=10; print}' genstudy_qc_univariate_add.out >genstudy_qc_new.out
+sed '$d' genstudy_qc_new.out>genstudy_qc_new2.out
+```
+
+2. Select only columns of interest, and label them:
+```{bash, eval=FALSE}
+echo "CHR SNP BP P" > genstudy_qc_Manhattan.txt;
+awk '{print $1,$2,$4,$42}' genstudy_qc_new2.out >>genstudy_qc_Manhattan.txt
+```
+
+3. Create a new file (“genstudy_qc.unimp.snp”) which lists all actually genotyped SNPs.
+```{bash, eval=FALSE}
+awk ' $9==1{print $2}' genstudy_qc_univariate_add.out > genstudy_qc.unimp.snp
+```
+
+4. Now, the data is prepared for generating the Manhattan plot.
+
+
+To prepare a Q-Q plot of your results to ensure that there is no apparent genomic inflation in your results, which would suggest population substructure:
+
+```{r, eval=FALSE}
+pvals <- read.table("genstudy_qc_Manhattan.txt", header=T)
+observed <- sort(pvals$P)
+lobs <- -(log10(observed))
+expected <- c(1:length(observed))
+lexp <- -(log10(expected / (length(expected)+1)))
+pdf("qqplot.pdf", width=6, height=6)
+plot(c(0,7), c(0,7), col="red", lwd=3, type="l", xlab="Expected (-logP)", ylab="Observed (-logP)",
+xlim=c(0,7), ylim=c(0,7), las=1, xaxs="i", yaxs="i", bty="l")
+points(lexp, lobs, pch=23, cex=.4, bg="black")
+dev.off()
+```
+
+To extract a list of the SNPs giving the lowest p-values:
+```{bash, eval=FALSE}
+awk ' $4 <0.0001' genstudy_qc_Manhattan.txt > lowest_ps_univariate
+awk ' $4>0' lowest_ps_univariate > lowest_ps_univariate_new #to filter out SNPs were it was not possible to undertake an analysis of association
+```
+
+### Multiple regression analyses
+
+In the 'genstudy.sample' file you will notice four columns to the right of the phenotype column 'diseased'. These are labelled 'age', 'bmi', 'family' and 'sex', and represent four variables believed to be of potential interest in terms of being associated with our disease.
+
+To decide whether to adjust for each of these variables, we first of all need to test whether they are univariately associated with our phenotype ‘diseased’. As our phenotype is binary, we can use Student’s t-test to test for association with age and bmi, and the chi-square test to test for association with family history and sex.
+
+```{r, eval=FALSE}
+data=read.table("genstudy_qc.sample",header=T)
+data=data[-1,]
+attach(data)
+res_age=t.test(as.numeric(age)~diseased)
+res_bmi=t.test(as.numeric(bmi)~diseased)
+res_family=chisq.test(family,diseased)
+res_sex=chisq.test(sex,diseased)
+res_age$p.value
+res_bmi$p.value
+res_family$p.value
+res_sex$p.value
+```
+
+To now run our SNP association analyses using a multiple regression approach, we can add the element '-cov_names' followed by the clinical variable
+names to your command (assuming that we have decided to adjust for all clinical variables giving p<0.05 in our univariate analysis, we only have to adjust for age and family history):
+
+```{bash, eval=FALSE}
+snptest \
+-data genstudy_qc.gen genstudy_qc.sample \
+-o genstudy_qc_adjusted_add.out \
+-pheno diseased \
+-frequentist 1 \
+-method threshold \
+-cov_names age family
+```
+
+To prepare a Manhattan plot and QQ-plot of the results from your multiple regression analysis by adjusting the code used for plotting the univariate results:
+
+```{bash, eval=FALSE}
+awk 'NR>11{$1=10; print}' genstudy_qc_adjusted_add.out > genstudy_qc_new.out
+sed '$d' genstudy_qc_new.out > genstudy_qc_new2.out
+tail -n +2 genstudy_qc_new2.out > genstudy_qc_new3.out
+echo "CHR SNP BP P" > genstudy_qc_adj_Manhattan.txt
+awk '{print $1,$2,$4,$42}' genstudy_qc_new3.out >> genstudy_qc_adj_Manhattan.txt
+awk '$9==1{print $2}' genstudy_qc_adjusted_add.out > genstudy_qc.adj.snp
+sh QuickManhattan.sh
+```
+
+To obtain a list of the lowest p-values from this analysis, and compare them with your lowest pvalues from the univariate analysis:
+
+```{bash, eval=FALSE}
+awk ' $4 <0.0001' genstudy_qc_adj_Manhattan.txt > lowest_ps_adjusted
+awk '$4>0' lowest_ps_adjusted > lowest_ps_adjusted_new
+cat lowest_ps_adjusted_new
+```
+
+## Population structure in GWAS
+
+### Testing for association under an additive model
+
+To test for association under an additive model using the PLINK command, but without adjustment for any covariates: 
+
+```{bash, eval=FALSE}
+plink --noweb --bfile EGCUT.clean --logistic --ci 0.95 --out plink.additive
+```
+
+To investigate the impact of population structure by generating a QQ plot of observed p-values against those that would be expected under the null hypothesis of no association. In the absence of population structure, we would expect most points to lie on the y=x line:
+
+```{bash, eval=FALSE}
+R --vanilla --slave --args plink.additive.assoc.logistic ADD qq_1.pdf < qqPlot.R
+```
+
+### Performing multi-dimensional scaling
+
+Multi-dimensional scaling in PLINK is performed in three steps: 
+
+1. Identifying a subset of "independent" common SNPs (minor allele frequency of at least 5%) that are not in linkage disequilibrium with each other. 
+```{bash, eval=FALSE}
+plink --noweb --bfile EGCUT.clean --maf 0.05 --indep-pairwise 50 5 0.05
+```
+
+2. Calculating the relatedness between each pair of individuals using the set of independent SNPs which is a measure of genetic similarity. 
+```{bash, eval=FALSE}
+plink --noweb --bfile EGCUT.clean --extract plink.prune.in --Z-genome
+```
+
+3. Perform multi-dimensional scaling using the relatedness matrix.
+```{bash, eval=FALSE}
+plink --noweb --bfile EGCUT.clean --read-genome plink.genome.gz --cluster --mds-plot 2
+```
+
+Note that the option --Z-genome produces a compressed genome file and saves on storage. The option --mds-plot specifies how many eigenvectors from the multi-dimensional scaling to summarise in the output file. The eigenvectors are output to the file plink.mds.
+
+
+The output file has one row per individual, and provides the identifier used in the PLINK family file, together with the first two eigenvectors (columns C1 and C2). You can plot the first two eigenvectors against each other using the command:
+
+```{bash, eval=FALSE}
+R --vanilla --slave --args plink.mds EGCUT.clean.fam mds.pdf < mds.R
+```
+
+In the output plot, each point corresponds to an individual.
+
+
+### Testing for association under an additive model with adjustment for confounding
+
+To account for population structure in our analysis, we can repeat our test of association under and additive model, but this type adjusting for eigenvectors from the multi-dimensional scaling as covariates:
+
+```{bash, eval=FALSE}
+plink --noweb --bfile EGCUT.clean --logistic --covar plink.mds --covar-name C1,C2 --ci 0.95 --out plink.additive.mds
+```
+
+To investigate the impact of population structure that is not accounted for by the first two eigenvectors from multi-dimensional scaling by generating a QQ plot with the command:
+
+```{bash, eval=FALSE}
+R --vanilla --slave --args plink.additive.mds.assoc.logistic ADD qq_2.pdf < qqPlot.R
+```
+
+To obtain association summary statistics for the SNP:
+
+```{bash, eval=FALSE}
+grep SNPID plink.additive.mds.assoc.logistic
+```
+
+
+## Phasing and Imputation

@@ -1,4 +1,4 @@
-tab:unnamed-chunk-78
+tab:unnamed-chunk-83
 analysis-of-genetic-association-studies
 useful-linux-commands
 useful-r-commands
@@ -33,6 +33,8 @@ testing-for-association-under-an-additive-model
 performing-multi-dimensional-scaling
 testing-for-association-under-an-additive-model-with-adjustment-for-confounding
 phasing-and-imputation
+pre-phasing-and-imputation
+re-running-our-univariate-analyses-of-association
 aws
 aws-s3
 accessing-aws-using-the-aws-command-line-interface

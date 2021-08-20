@@ -712,3 +712,66 @@ grep SNPID plink.additive.mds.assoc.logistic
 
 
 ## Phasing and Imputation
+
+By utilising genotype imputation methods, we can investigate whether there are neighbouring SNPs to a particular SNP that generated a significant p-value, also sharing evidence of association with the phenotype. 
+The focus in this section will be on imputing genotypes within close proximity of a significant SNP, and then to re-run the association analyses on the imputed dataset.
+
+### Pre-phasing and imputation
+
+Prior to undertaking genotype imputation, it is necessary to "pre-phase" the genotype data to convert it into haplotype form.
+
+Doing this affords more efficient imputation as the reference panels on which we base our imputation are all in haplotype form as well. Haplotypes span across many locus so it is important that when focusing in on a certain region of the genome, (for example the region surrounding a significant SNP as we are in this practical), that we allow a sufficient buffer zone around the region. If we didn’t allow this buffer zone then we could interrupt haplotype construction with the locus of interest!
+
+To undertake the pre-phasing we use a software package called SHAPEIT2 (https://mathgen.stats.ox.ac.uk/genetics_software/shapeit/shapeit.htm).
+
+The causal SNP we found before had base pair position 64803579 and so a sensible region to pre-phase might be from 63Mb to 68Mb, which will include the immediate region surrounding the causal SNP, plus a buffer region at either end. 
+
+To pre-phase the "genstudy_pp" dataset, we can run the following SHAPEIT2 command:
+
+```{bash, eval=FALSE}
+shapeit --input-ped genstudy_pp.ped genstudy_pp.map --input-map chr10.map --output-max genstudy.ph --thread 2 --input-from 63000000 --input-to 68000000
+```
+
+Once we have pre-phased our data, we can undertake genotype imputation and to do this we will use a software package called "IMPUTE2" (https://mathgen.stats.ox.ac.uk/impute/impute_v2.html).
+
+After running SHAPEIT2 on the "genstudy_pp" dataset, we obtained a "genstudy.ph.haps" datafile which contained phased haplotypes for our specified region. We can now run IMPUTE2 on this .haps datafile to impute genotypes at SNPs not originally genotyped, but included on our chosen reference panel. For the purpose of this practical, we will use the reference panel from the 1000 Genomes Project (http://www.1000genomes.org). To do this, we can use the following IMPUTE2 command:
+
+```{bash, eval=FALSE}
+impute2 -use_prephased_g -known_haps_g genstudy.ph.haps -m chr10.map -h chr10.haps.gz -l chr10.leg.gz -int 64300000 65300000 -Ne 20000 -buffer 500 -o genstudy_imp.gen
+```
+
+Please note that the interval we specify under the option "-int" (64300000 to 65300000) is narrower than the one we specified in the SHAPEIT2 command. This is because the imputation process will produce genotypes rather than haplotypes. Therefore we can narrow down to a 1Mb region of interest.
+
+After the Imputation has run, in the screen output there is a section called "Imputation accuracy assessment". The interval here denotes the probability range at which a SNP genotype has been called and the concordance with the patient genotypes. These figures can be improved by increasing the number of patients in the study or with better match reference haplotypes.
+
+### Re-running our univariate analyses of association
+
+Previously, when we were dealing only with actually genotyped SNPs, our .gen file ("genstudy_qc.gen") included the first five compulsory columns, followed by three columns for each genotyped SNP. The three columns represented an individual's probability of having the "AA", "AB" and "BB" genotypes respectively. As we did not have any imputed SNPs, the probability for each genotype was either 0 or 1. However, now that we are dealing with imputed SNPs, the probability for each genotype can be any number between 0 and 1, representing our genotype uncertainty.
+
+```{bash, eval=FALSE}
+head -n 1 genstudy_imp.gen
+```
+
+Please, notice that there are number others than 0 and 1 in the columns representing genotype probabilities for the SNPs.
+
+To run univariate analyses of association on a dataset which includes imputed genotypes, we can again use the SNPTest programme. However, the element "method" within the SNPTest command needs to be specified differently. The "method" element controls the way in which genotype uncertainty is accounted for in the analyses of association, bearing in mind that imputation can only provide a ‘best estimate’ of what the true genotype at a SNP would be.
+
+* threshold: Assumes a particular genotype at a SNP only if accuracy of the genotype call is above a given threshold. The calling threshold is controlled by the flag -call_thresh and the default calling threshold is 0.9.
+* expected: Uses expected genotype counts, also known as genotype dosages, in the analyses of association.
+* score: Uses a missing data likelihood score test in the analyses of association.
+* ml: Again uses missing data likelihood approach, but with multiple Newton-Raphson iterations to estimate the parameters in the missing data likelihood.
+* em: Again uses missing data likelihood approach, but with an EM algorithm to estimate the parameters in the missing data likelihood.
+
+So, to run a univariate analysis of association on our imputed dataset, assuming the threshold method we would use the following command:
+
+```{bash, eval=FALSE}
+snptest -data genstudy_imp.gen genstudy_qc.sample -o genstudy_qc_univariate_add.imp.out -pheno diseased -frequentist 1 -method threshold
+```
+
+The SNPtest output file "genstudy_qc_univariate_add.imp.out" can now be scrutinised in much the same way as we did for the output file initially – i.e. we can produce Manhattan and QQ plots of the resulting p-values – except for one additional and important QC step which needs to occur post-imputation. This QC step involves filtering out SNPs with poor imputation accuracy. The SNPtest output file has a column labelled "INFO", which contains, for each SNP, a number indicating how accurately it has been imputed. The value of INFO will range from 0 (no certainty in imputation) to 1 (perfect accuracy in imputation/actually genotyped SNP). Poorly imputed SNPs are likely to contribute to false positive results whilst removing a large number of imputed SNPs will distort the overall results. Therefore, as a QC step we need to identify an appropriate, yet not too stringent, threshold for the level of accuracy that is allowed. Unfortunately, there is no exact science to choosing the threshold; the SNPtest website (https://mathgen.stats.ox.ac.uk/impute/impute_v2.html) views INFO thresholds between 0.3 and 0.5 as reasonable. For this analysis we will utilise an INFO threshold of 0.4.
+
+This additional QC step can be implemented very easily by:
+
+```{bash, eval=FALSE}
+awk 'NR>11&&$9>0.4{$1=10;print}' genstudy_qc_univariate_add.imp.out >genstudy_qc_new.imp.out
+```

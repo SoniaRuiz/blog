@@ -227,7 +227,9 @@ sudo rstudio-server restart
 
 ```
 
-### Access RStudio through your browser
+### Access RStudio using your browser
+
+RStudio should now be running on the newly generated AWS EC2 instance. To access RStudio from your local computer, please follow the next steps:
 
 * From your AWS Console, click on "Services --> EC2 --> Instances".
 * Click on the checkbox located next to the EC2 instance to select it.

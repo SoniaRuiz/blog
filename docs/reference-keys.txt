@@ -1,4 +1,4 @@
-tab:unnamed-chunk-83
+tab:unnamed-chunk-84
 analysis-of-genetic-association-studies
 useful-linux-commands
 useful-r-commands
@@ -45,7 +45,12 @@ upload-multiple-files-to-aws
 download-multiple-files-from-aws
 checking-aws-file-integrity
 creating-a-new-aws-bucket
-aws-cloud-services
+aws-ec2
+generating-an-ec2-instance
+connecting-to-an-ec2-instance
+installingrunning-rstudio-on-an-ec2
+access-rstudio-through-your-browser
+aws-list-of-cloud-services
 docker
 introduction
 what-is-docker

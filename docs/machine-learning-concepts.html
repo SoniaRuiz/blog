@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Machine Learning Concepts | Knowledge Book</title>
   <meta name="description" content="This book contains some knowledge I have adquired during my PhD studies." />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Machine Learning Concepts | Knowledge Book" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Sonia García-Ruiz (s.ruiz@ucl.ac.uk)" />
 
 
-<meta name="date" content="2021-08-20" />
+<meta name="date" content="2022-01-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -34,6 +34,7 @@
 <link rel="prev" href="github.html"/>
 <link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -41,7 +42,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -144,7 +144,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.1.2" data-path="aws.html"><a href="aws.html#checking-aws-file-integrity"><i class="fa fa-check"></i><b>2.1.2</b> Checking AWS file integrity</a></li>
 <li class="chapter" data-level="2.1.3" data-path="aws.html"><a href="aws.html#creating-a-new-aws-bucket"><i class="fa fa-check"></i><b>2.1.3</b> Creating a new AWS bucket</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="aws.html"><a href="aws.html#aws-cloud-services"><i class="fa fa-check"></i><b>2.2</b> AWS cloud services</a></li>
+<li class="chapter" data-level="2.2" data-path="aws.html"><a href="aws.html#aws-ec2"><i class="fa fa-check"></i><b>2.2</b> AWS EC2</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="aws.html"><a href="aws.html#generating-an-ec2-instance"><i class="fa fa-check"></i><b>2.2.1</b> Generating an EC2 instance</a></li>
+<li class="chapter" data-level="2.2.2" data-path="aws.html"><a href="aws.html#connecting-to-an-ec2-instance"><i class="fa fa-check"></i><b>2.2.2</b> Connecting to an EC2 instance</a></li>
+<li class="chapter" data-level="2.2.3" data-path="aws.html"><a href="aws.html#installingrunning-rstudio-on-an-ec2"><i class="fa fa-check"></i><b>2.2.3</b> Installing/Running RStudio on an EC2</a></li>
+<li class="chapter" data-level="2.2.4" data-path="aws.html"><a href="aws.html#access-rstudio-through-your-browser"><i class="fa fa-check"></i><b>2.2.4</b> Access RStudio through your browser</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="aws.html"><a href="aws.html#aws-list-of-cloud-services"><i class="fa fa-check"></i><b>2.3</b> AWS List of Cloud Services</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="docker.html"><a href="docker.html"><i class="fa fa-check"></i><b>3</b> Docker</a><ul>
 <li class="chapter" data-level="3.1" data-path="docker.html"><a href="docker.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
@@ -281,7 +287,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -322,7 +327,7 @@ gitbook.start({
 },
 "download": ["knowledge-book.pdf", "knowledge-book.epub"],
 "search": {
-"engine": "lunr",
+"engine": "fuse",
 "options": null
 },
 "toc": {

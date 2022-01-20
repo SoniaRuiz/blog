@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/Debian) (preloaded format=xelatex 2019.9.21)  17 AUG 2021 22:15
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/Debian) (preloaded format=xelatex 2019.9.21)  20 JAN 2022 16:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -895,138 +895,156 @@ Underfull \hbox (badness 10000) in paragraph at lines 396--398
  []
 
 [8] [9] [10] [11] [12] [13] [14]
-Underfull \hbox (badness 1097) in paragraph at lines 860--864
+Underfull \hbox (badness 1097) in paragraph at lines 891--895
 []\EU1/lmr/m/n/10 Similar to what we did for sample QC, we can investigate how 
 many
  []
 
-[15] [16]
+[15] [16] [17]
+Overfull \hbox (6.21pt too wide) in paragraph at lines 1066--1073
+[]\EU1/lmr/m/n/10 Due to the large number of output columns in ‘genstudy_qc_uni
+variate_dom.out’
+ []
+
+
+Overfull \vbox (1.6649pt too high) detected at line 1148
+ []
+
+[18] [19] [20] [21] [22] [23] [24]
 Chapter 2.
-[17
+[25
 
 ]
-Overfull \hbox (1.5pt too wide) in paragraph at lines 1046--1046
+Overfull \hbox (1.5pt too wide) in paragraph at lines 1634--1634
 []\EU1/lmtt/m/n/10 $ git clone https://github.com/SoniaRuiz/aws-s3-integrity-ch
 eck.git[] 
  []
 
-[18]
-Underfull \hbox (badness 10000) in paragraph at lines 1105--1108
+[26]
+Underfull \hbox (badness 10000) in paragraph at lines 1693--1696
 \EU1/lmr/m/n/10 ture: \EU1/lmr/bx/n/10 aws_check_integrity.sh ‘local_path’ ‘buc
 ket_name’
  []
 
 
-Overfull \hbox (10.25pt too wide) in paragraph at lines 1112--1112
+Overfull \hbox (10.25pt too wide) in paragraph at lines 1700--1700
 []\EU1/lmtt/m/n/10 $ aws_check_integrity.sh ./my_local_folder my-bucket my_loca
 l_folder/[] 
  []
 
+[27] [28]
+Underfull \vbox (badness 10000) detected at line 1893
+ []
 
-Overfull \hbox (1484.93011pt too wide) in paragraph at lines 1161--1231
+
+Underfull \vbox (badness 10000) detected at line 1893
+ []
+
+[29]
+Overfull \hbox (1484.93011pt too wide) in paragraph at lines 1924--1994
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 200.31094pt on input line 1231.
+LaTeX Warning: Float too large for page by 200.31094pt on input line 1994.
 
-[19] [20]
+[30] [31] [32
+
+]
 Chapter 3.
-[21
-
-] [22] [23]
-Overfull \hbox (391.75pt too wide) in paragraph at lines 1421--1421
+[33] [34] [35]
+Overfull \hbox (391.75pt too wide) in paragraph at lines 2184--2184
 []\EU1/lmtt/m/n/10 $ sudo curl -L https://github.com/docker/compose/releases/do
 wnload/1.21.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-com
 pose[] 
  []
 
-[24] [25] [26]
+[36] [37] [38]
 Chapter 4.
 
-Overfull \hbox (286.75pt too wide) in paragraph at lines 1607--1607
+Overfull \hbox (286.75pt too wide) in paragraph at lines 2370--2370
 []\EU1/lmtt/m/n/10 warning: Cannot merge binary files: obj/Debug/netcoreapp2.1/
 CoExp_Web.csprojAssemblyReference.cache (HEAD vs. testchanges2)[] 
  []
 
 
-Overfull \hbox (181.75pt too wide) in paragraph at lines 1607--1607
+Overfull \hbox (181.75pt too wide) in paragraph at lines 2370--2370
 []\EU1/lmtt/m/n/10 warning: Cannot merge binary files: obj/Debug/netcoreapp2.1/
 CoExp_Web.Views.pdb (HEAD vs. testchanges2)[] 
  []
 
 
-Overfull \hbox (181.75pt too wide) in paragraph at lines 1607--1607
+Overfull \hbox (181.75pt too wide) in paragraph at lines 2370--2370
 []\EU1/lmtt/m/n/10 warning: Cannot merge binary files: obj/Debug/netcoreapp2.1/
 CoExp_Web.Views.dll (HEAD vs. testchanges2)[] 
  []
 
 
-Overfull \hbox (71.5pt too wide) in paragraph at lines 1607--1607
+Overfull \hbox (71.5pt too wide) in paragraph at lines 2370--2370
 []\EU1/lmtt/m/n/10 warning: Cannot merge binary files: .vs/CoExp_Web/v16/.suo (
 HEAD vs. testchanges2)[] 
  []
 
 
-Overfull \hbox (52.25pt too wide) in paragraph at lines 1607--1607
+Overfull \hbox (52.25pt too wide) in paragraph at lines 2370--2370
 []\EU1/lmtt/m/n/10 Auto-merging obj/Debug/netcoreapp2.1/CoExp_Web.csprojAssembl
 yReference.cache[] 
  []
 
 
-Overfull \hbox (176.5pt too wide) in paragraph at lines 1607--1607
+Overfull \hbox (176.5pt too wide) in paragraph at lines 2370--2370
 []\EU1/lmtt/m/n/10 CONFLICT (content): Merge conflict in obj/Debug/netcoreapp2.
 1/CoExp_Web.csprojAssemblyReference.cache[] 
  []
 
 
-Overfull \hbox (71.5pt too wide) in paragraph at lines 1607--1607
+Overfull \hbox (71.5pt too wide) in paragraph at lines 2370--2370
 []\EU1/lmtt/m/n/10 CONFLICT (content): Merge conflict in obj/Debug/netcoreapp2.
 1/CoExp_Web.Views.pdb[] 
  []
 
 
-Overfull \hbox (71.5pt too wide) in paragraph at lines 1607--1607
+Overfull \hbox (71.5pt too wide) in paragraph at lines 2370--2370
 []\EU1/lmtt/m/n/10 CONFLICT (content): Merge conflict in obj/Debug/netcoreapp2.
 1/CoExp_Web.Views.dll[] 
  []
 
-[27
+[39
 
 ]
-Overfull \hbox (13.75pt too wide) in paragraph at lines 1649--1649
+Overfull \hbox (13.75pt too wide) in paragraph at lines 2412--2412
 []\EU1/lmtt/m/n/10 commit 7319379b1038dc5415cf035f915d91096c70af2f (origin/test
 changes2)[] 
  []
 
-[28] [29] [30]
+[40] [41] [42]
 Chapter 5.
 
 Underfull \vbox (badness 1320) has occurred while \output is active []
 
-[31
+[43
 
 ]
 Underfull \vbox (badness 1152) has occurred while \output is active []
 
-[32]
+[44]
 
 LaTeX Warning: File `https://datawookie.netlify.com/img/2015/09/xclara-clusters
--colour.png' not found on input line 1870.
+-colour.png' not found on input line 2633.
 
 ! Unable to load picture or PDF file 'https://datawookie.netlify.com/img/2015/0
 9/xclara-clusters-colour.png'.
 <to be read again> 
                    }
-l.1870 .../img/2015/09/xclara-clusters-colour.png}
+l.2633 .../img/2015/09/xclara-clusters-colour.png}
                                                    
 Here is how much of TeX's memory you used:
- 24714 strings out of 493638
- 435374 string characters out of 6146796
- 493327 words of memory out of 5000000
- 27835 multiletter control sequences out of 15000+600000
- 28427 words of font info for 63 fonts, out of 8000000 for 9000
+ 24718 strings out of 493638
+ 435449 string characters out of 6146796
+ 492327 words of memory out of 5000000
+ 27837 multiletter control sequences out of 15000+600000
+ 28435 words of font info for 64 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
  54i,8n,51p,10412b,450s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on knowledge-book.pdf (32 pages).
+Output written on knowledge-book.pdf (44 pages).

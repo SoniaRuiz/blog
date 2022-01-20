@@ -113,7 +113,7 @@
 \title{Knowledge Book}
 \author{Sonia García-Ruiz
 (\href{mailto:s.ruiz@ucl.ac.uk}{\nolinkurl{s.ruiz@ucl.ac.uk}})}
-\date{2021-08-17}
+\date{2022-01-20}
 
 \begin{document}
 \maketitle
@@ -632,13 +632,22 @@ analysis.
 \subsection{Binary PED files}\label{binary-ped-files}
 
 To save space and time, .map and .ped files can be converted to binary
-format. In doing this, we create three new files as follows: * `.bed':
-file This includes all the genotype data from the previous `.ped' file,
-but in binary format. * `.fam': file This includes the first six columns
-from the previous `.ped' file. * `.bim' file This is the same as the
-previous `.map' file, but also includes an additional two columns with
-the alleles names (which are otherwise lost when'converting the genotype
-data from .ped file to .bed file.)
+format. In doing this, we create three new files as follows:
+
+\begin{itemize}
+\tightlist
+\item
+  `.bed': file This includes all the genotype data from the previous
+  `.ped' file, but in binary format.
+\item
+  `.fam': file This includes the first six columns from the previous
+  `.ped' file.
+\item
+  `.bim' file This is the same as the previous `.map' file, but also
+  includes an additional two columns with the alleles names (which are
+  otherwise lost when'converting the genotype data from .ped file to
+  .bed file.)
+\end{itemize}
 
 To create a set of binary format files for the `genstudy' dataset:
 
@@ -678,14 +687,21 @@ Adding the `--out genstudy.CRstats' option ensures that the two output
 files are called `genstudy.CRstats.imiss' and `genstudy.CRstats.lmiss'
 respectively.
 
-This command creates two output files: * a `.imiss' file: summarises the
-proportion of missing genotype data per individual (one row per
-individual and six columns). The most important column for sample QC
-purposes is column 6, which contains the proportion of missing genotypes
-for the individual. * a `.lmiss' file: summarises the proportion of
-missing genotype data per SNP (one row per SNP and five columns). The
-most important column for SNP QC purposes is column 5, which contains
-the proportion of missing genotypes for the SNP.
+This command creates two output files:
+
+\begin{itemize}
+\tightlist
+\item
+  a `.imiss' file: summarises the proportion of missing genotype data
+  per individual (one row per individual and six columns). The most
+  important column for sample QC purposes is column 6, which contains
+  the proportion of missing genotypes for the individual.
+\item
+  a `.lmiss' file: summarises the proportion of missing genotype data
+  per SNP (one row per SNP and five columns). The most important column
+  for SNP QC purposes is column 5, which contains the proportion of
+  missing genotypes for the SNP.
+\end{itemize}
 
 \subsubsection{Gender Checks}\label{gender-checks}
 
@@ -728,14 +744,29 @@ of SNPs is as follows:
 
 The options 1500, 150 and 0.2 in the command above relate to the
 following steps, and of course these options can be changed depending on
-your requirements: * consider a window of 1500 SNPs, * calculate LD
-between each pair of SNPs in the window, remove one of a pair of SNPs if
-the LD is greater than 0.2, * shift the window 150 SNPs forward and
-repeat the procedure
+your requirements:
+
+\begin{itemize}
+\tightlist
+\item
+  consider a window of 1500 SNPs,
+\item
+  calculate LD between each pair of SNPs in the window, remove one of a
+  pair of SNPs if the LD is greater than 0.2,
+\item
+  shift the window 150 SNPs forward and repeat the procedure
+\end{itemize}
 
 Running this command line will create two output files, `plink.prune.in'
-and `plink.prune.out': * plink.prune.in: lists all SNPs remaining after
-pruning * plink.prune.out: lists all SNPs removed during pruning
+and `plink.prune.out':
+
+\begin{itemize}
+\tightlist
+\item
+  plink.prune.in: lists all SNPs remaining after pruning
+\item
+  plink.prune.out: lists all SNPs removed during pruning
+\end{itemize}
 
 Both these files can subsequently be specified as the argument for
 PLINK's `--extract' or `--exclude' command respectively to provide a
@@ -916,16 +947,573 @@ To see how many SNPs have HWE p-value\textless{}0.0001 (in controls
 \end{Highlighting}
 \end{Shaded}
 
-To apply some extra SNP QC filters to our already sample-QC'd dataset: *
-Minor allele frequency (MAF) \textgreater{}0.05 -- option `--maf 0.05' *
-SNP genotyping rate \textgreater{}95\% (i.e. \textless{}5\% missing
-genotypes for the SNP, across all individuals) -- option `-- geno 0.05'
-* Hardy-Weinberg p-value \textgreater{}0.0001 in controls -- option `--
-hwe 0.0001'
+To apply some extra SNP QC filters to our already sample-QC'd dataset:
+
+\begin{itemize}
+\tightlist
+\item
+  Minor allele frequency (MAF) \textgreater{}0.05 -- option `--maf 0.05'
+\item
+  SNP genotyping rate \textgreater{}95\% (i.e. \textless{}5\% missing
+  genotypes for the SNP, across all individuals) -- option `-- geno
+  0.05'
+\item
+  Hardy-Weinberg p-value \textgreater{}0.0001 in controls -- option `--
+  hwe 0.0001'
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \ExtensionTok{plink}\NormalTok{ --bfile genstudy_sampleqc --noweb --maf 0.05 --geno 0.05 --hwe 0.0001 --make-bed --out genstudy_qc}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Testing for Associations}\label{testing-for-associations}
+
+In this section, we will undertake an analysis of association:
+
+\begin{itemize}
+\tightlist
+\item
+  first, with no adjustment made for non-genetic variables (univariate
+  analysis of association)
+\item
+  then, with adjustment made for relevant non-genetic variables
+  (multiple regression analysis)
+\end{itemize}
+
+\subsection{Software and datasets}\label{software-and-datasets-1}
+
+We will use the QC'd PLINK files (generated in the previous section)
+ready to run the analyses of association.
+
+To run the analyses of association, we use a software package called
+`SNPTEST (Version 2)' -- it's free and available for the analysis of
+genome-wide association studies.
+
+To use SNPTEST, input files need to be in a specific format:
+
+\begin{itemize}
+\tightlist
+\item
+  one `.gen' file including genotype data, which includes one row per
+  SNP.
+\item
+  one `.sample' file including phenotypic data. It has three parts (a) a
+  header line detailing the names of the columns in the file, (b) a line
+  detailing the types of variables stored in each column, and (c) a line
+  for each individual including the information for that individual.
+\end{itemize}
+
+A `.gen' file includes one row per SNP. The first five entries on each
+line should be as follows:
+
+\begin{itemize}
+\tightlist
+\item
+  SNP ID: This entry is usually used to denote the chromosome number.
+\item
+  rs number: This entry is a number which uniquely identifies the
+  genotyped SNP. An rs number is an accession number used by researchers
+  and databases to refer to specific SNPs. It stands for `Reference SNP
+  cluster ID'.
+\item
+  Base pair position of the SNP: A value that described the SNP's
+  position on the chromosome.
+\item
+  Allele coded A (see below for further explanation of this): The entry
+  here will be A, C, T or G i.e.~corresponding to the four possible
+  nucleotides.
+\item
+  Allele coded B (see below for further explanation of this): The entry
+  here will be A, C, T or G i.e.~corresponding to the four possible
+  nucleotides.
+\end{itemize}
+
+The remaining entries on each row represent the genotype of each
+individual at the SNP. Each individual will have three entries,
+representing their probability of having the `AA', `AB' and `BB'
+genotypes respectively. As we do not have any imputed SNPs in the
+current dataset, the probability for each genotype will be either 0 or
+1. So, an individual with genotype AA will be coded `1 0 0', with
+genotype AB will be coded `0 1 0', and with genotype BB will be coded `0
+0 1'. If genotype is missing for an individual, all three entries are
+set to `0 0 0'.
+
+It is possible to convert QC'd PLINK files to `.gen' and `.sample'
+format using a program called `GTOOL'. We have also removed all
+chromosome X SNPs from these files, since in terms of association we are
+only interested in SNPs on chromosome 10.
+
+\subsection{Univariate analyses of
+association}\label{univariate-analyses-of-association}
+
+To run univariate analyses of association between all SNPs in our
+`genstudy\_qc' file and our phenotype `diseased', assuming an additive
+mode of inheritance, we would use the following SNPtest command:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{snptest}\NormalTok{ \textbackslash{}}
+\NormalTok{-data genstudy_qc.gen genstudy_qc.sample \textbackslash{}}
+\NormalTok{-o genstudy_qc_univariate_add.out \textbackslash{}}
+\NormalTok{-pheno diseased \textbackslash{}}
+\NormalTok{-frequentist 1 \textbackslash{}}
+\NormalTok{-method threshold}
+\end{Highlighting}
+\end{Shaded}
+
+Due to the large number of output columns in
+`genstudy\_qc\_univariate\_dom.out' and the large number of SNPs
+investigated, it is useful to look at our results in summary format. A
+useful way of doing this is by preparing a Manhattan plot to give a
+graphical representation of our results. Essentially, this is a plot of
+pvalue versus base pair position for each SNP and is a useful way of
+identifying significantly associated SNPs.
+
+First of all, it is necessary to re-format our output file into a format
+which is appropriate for the shell script.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Add chromosome number to each row (also need to delete final row in
+  datafile since includes an additional line of text which is not
+  needed)
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{awk} \StringTok{'NR>11\{$1=10; print\}'}\NormalTok{ genstudy_qc_univariate_add.out }\OperatorTok{>}\NormalTok{genstudy_qc_new.out}
+\FunctionTok{sed} \StringTok{'$d'}\NormalTok{ genstudy_qc_new.out}\OperatorTok{>}\NormalTok{genstudy_qc_new2.out}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Select only columns of interest, and label them:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{echo} \StringTok{"CHR SNP BP P"} \OperatorTok{>}\NormalTok{ genstudy_qc_Manhattan.txt}\KeywordTok{;}
+\FunctionTok{awk} \StringTok{'\{print $1,$2,$4,$42\}'}\NormalTok{ genstudy_qc_new2.out }\OperatorTok{>>}\NormalTok{genstudy_qc_Manhattan.txt}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Create a new file (``genstudy\_qc.unimp.snp'') which lists all
+  actually genotyped SNPs.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{awk} \StringTok{' $9==1\{print $2\}'}\NormalTok{ genstudy_qc_univariate_add.out }\OperatorTok{>}\NormalTok{ genstudy_qc.unimp.snp}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Now, the data is prepared for generating the Manhattan plot.
+\end{enumerate}
+
+To prepare a Q-Q plot of your results to ensure that there is no
+apparent genomic inflation in your results, which would suggest
+population substructure:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pvals <-}\StringTok{ }\KeywordTok{read.table}\NormalTok{(}\StringTok{"genstudy_qc_Manhattan.txt"}\NormalTok{, }\DataTypeTok{header=}\NormalTok{T)}
+\NormalTok{observed <-}\StringTok{ }\KeywordTok{sort}\NormalTok{(pvals}\OperatorTok{$}\NormalTok{P)}
+\NormalTok{lobs <-}\StringTok{ }\OperatorTok{-}\NormalTok{(}\KeywordTok{log10}\NormalTok{(observed))}
+\NormalTok{expected <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(observed))}
+\NormalTok{lexp <-}\StringTok{ }\OperatorTok{-}\NormalTok{(}\KeywordTok{log10}\NormalTok{(expected }\OperatorTok{/}\StringTok{ }\NormalTok{(}\KeywordTok{length}\NormalTok{(expected)}\OperatorTok{+}\DecValTok{1}\NormalTok{)))}
+\KeywordTok{pdf}\NormalTok{(}\StringTok{"qqplot.pdf"}\NormalTok{, }\DataTypeTok{width=}\DecValTok{6}\NormalTok{, }\DataTypeTok{height=}\DecValTok{6}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{7}\NormalTok{), }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{7}\NormalTok{), }\DataTypeTok{col=}\StringTok{"red"}\NormalTok{, }\DataTypeTok{lwd=}\DecValTok{3}\NormalTok{, }\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{xlab=}\StringTok{"Expected (-logP)"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"Observed (-logP)"}\NormalTok{,}
+\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{7}\NormalTok{), }\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{7}\NormalTok{), }\DataTypeTok{las=}\DecValTok{1}\NormalTok{, }\DataTypeTok{xaxs=}\StringTok{"i"}\NormalTok{, }\DataTypeTok{yaxs=}\StringTok{"i"}\NormalTok{, }\DataTypeTok{bty=}\StringTok{"l"}\NormalTok{)}
+\KeywordTok{points}\NormalTok{(lexp, lobs, }\DataTypeTok{pch=}\DecValTok{23}\NormalTok{, }\DataTypeTok{cex=}\NormalTok{.}\DecValTok{4}\NormalTok{, }\DataTypeTok{bg=}\StringTok{"black"}\NormalTok{)}
+\KeywordTok{dev.off}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+To extract a list of the SNPs giving the lowest p-values:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{awk} \StringTok{' $4 <0.0001'}\NormalTok{ genstudy_qc_Manhattan.txt }\OperatorTok{>}\NormalTok{ lowest_ps_univariate}
+\FunctionTok{awk} \StringTok{' $4>0'}\NormalTok{ lowest_ps_univariate }\OperatorTok{>}\NormalTok{ lowest_ps_univariate_new }\CommentTok{#to filter out SNPs were it was not possible to undertake an analysis of association}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Multiple regression
+analyses}\label{multiple-regression-analyses}
+
+In the `genstudy.sample' file you will notice four columns to the right
+of the phenotype column `diseased'. These are labelled `age', `bmi',
+`family' and `sex', and represent four variables believed to be of
+potential interest in terms of being associated with our disease.
+
+To decide whether to adjust for each of these variables, we first of all
+need to test whether they are univariately associated with our phenotype
+`diseased'. As our phenotype is binary, we can use Student's t-test to
+test for association with age and bmi, and the chi-square test to test
+for association with family history and sex.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data=}\KeywordTok{read.table}\NormalTok{(}\StringTok{"genstudy_qc.sample"}\NormalTok{,}\DataTypeTok{header=}\NormalTok{T)}
+\NormalTok{data=data[}\OperatorTok{-}\DecValTok{1}\NormalTok{,]}
+\KeywordTok{attach}\NormalTok{(data)}
+\NormalTok{res_age=}\KeywordTok{t.test}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(age)}\OperatorTok{~}\NormalTok{diseased)}
+\NormalTok{res_bmi=}\KeywordTok{t.test}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(bmi)}\OperatorTok{~}\NormalTok{diseased)}
+\NormalTok{res_family=}\KeywordTok{chisq.test}\NormalTok{(family,diseased)}
+\NormalTok{res_sex=}\KeywordTok{chisq.test}\NormalTok{(sex,diseased)}
+\NormalTok{res_age}\OperatorTok{$}\NormalTok{p.value}
+\NormalTok{res_bmi}\OperatorTok{$}\NormalTok{p.value}
+\NormalTok{res_family}\OperatorTok{$}\NormalTok{p.value}
+\NormalTok{res_sex}\OperatorTok{$}\NormalTok{p.value}
+\end{Highlighting}
+\end{Shaded}
+
+To now run our SNP association analyses using a multiple regression
+approach, we can add the element `-cov\_names' followed by the clinical
+variable names to your command (assuming that we have decided to adjust
+for all clinical variables giving p\textless{}0.05 in our univariate
+analysis, we only have to adjust for age and family history):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{snptest}\NormalTok{ \textbackslash{}}
+\NormalTok{-data genstudy_qc.gen genstudy_qc.sample \textbackslash{}}
+\NormalTok{-o genstudy_qc_adjusted_add.out \textbackslash{}}
+\NormalTok{-pheno diseased \textbackslash{}}
+\NormalTok{-frequentist 1 \textbackslash{}}
+\NormalTok{-method threshold \textbackslash{}}
+\NormalTok{-cov_names age family}
+\end{Highlighting}
+\end{Shaded}
+
+To prepare a Manhattan plot and QQ-plot of the results from your
+multiple regression analysis by adjusting the code used for plotting the
+univariate results:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{awk} \StringTok{'NR>11\{$1=10; print\}'}\NormalTok{ genstudy_qc_adjusted_add.out }\OperatorTok{>}\NormalTok{ genstudy_qc_new.out}
+\FunctionTok{sed} \StringTok{'$d'}\NormalTok{ genstudy_qc_new.out }\OperatorTok{>}\NormalTok{ genstudy_qc_new2.out}
+\FunctionTok{tail}\NormalTok{ -n +2 genstudy_qc_new2.out }\OperatorTok{>}\NormalTok{ genstudy_qc_new3.out}
+\BuiltInTok{echo} \StringTok{"CHR SNP BP P"} \OperatorTok{>}\NormalTok{ genstudy_qc_adj_Manhattan.txt}
+\FunctionTok{awk} \StringTok{'\{print $1,$2,$4,$42\}'}\NormalTok{ genstudy_qc_new3.out }\OperatorTok{>>}\NormalTok{ genstudy_qc_adj_Manhattan.txt}
+\FunctionTok{awk} \StringTok{'$9==1\{print $2\}'}\NormalTok{ genstudy_qc_adjusted_add.out }\OperatorTok{>}\NormalTok{ genstudy_qc.adj.snp}
+\FunctionTok{sh}\NormalTok{ QuickManhattan.sh}
+\end{Highlighting}
+\end{Shaded}
+
+To obtain a list of the lowest p-values from this analysis, and compare
+them with your lowest pvalues from the univariate analysis:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{awk} \StringTok{' $4 <0.0001'}\NormalTok{ genstudy_qc_adj_Manhattan.txt }\OperatorTok{>}\NormalTok{ lowest_ps_adjusted}
+\FunctionTok{awk} \StringTok{'$4>0'}\NormalTok{ lowest_ps_adjusted }\OperatorTok{>}\NormalTok{ lowest_ps_adjusted_new}
+\FunctionTok{cat}\NormalTok{ lowest_ps_adjusted_new}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Population structure in
+GWAS}\label{population-structure-in-gwas}
+
+\subsection{Testing for association under an additive
+model}\label{testing-for-association-under-an-additive-model}
+
+To test for association under an additive model using the PLINK command,
+but without adjustment for any covariates:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{plink}\NormalTok{ --noweb --bfile EGCUT.clean --logistic --ci 0.95 --out plink.additive}
+\end{Highlighting}
+\end{Shaded}
+
+To investigate the impact of population structure by generating a QQ
+plot of observed p-values against those that would be expected under the
+null hypothesis of no association. In the absence of population
+structure, we would expect most points to lie on the y=x line:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{R}\NormalTok{ --vanilla --slave --args plink.additive.assoc.logistic ADD qq_1.pdf }\OperatorTok{<}\NormalTok{ qqPlot.R}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Performing multi-dimensional
+scaling}\label{performing-multi-dimensional-scaling}
+
+Multi-dimensional scaling in PLINK is performed in three steps:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Identifying a subset of ``independent'' common SNPs (minor allele
+  frequency of at least 5\%) that are not in linkage disequilibrium with
+  each other.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{plink}\NormalTok{ --noweb --bfile EGCUT.clean --maf 0.05 --indep-pairwise 50 5 0.05}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Calculating the relatedness between each pair of individuals using the
+  set of independent SNPs which is a measure of genetic similarity.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{plink}\NormalTok{ --noweb --bfile EGCUT.clean --extract plink.prune.in --Z-genome}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Perform multi-dimensional scaling using the relatedness matrix.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{plink}\NormalTok{ --noweb --bfile EGCUT.clean --read-genome plink.genome.gz --cluster --mds-plot 2}
+\end{Highlighting}
+\end{Shaded}
+
+Note that the option --Z-genome produces a compressed genome file and
+saves on storage. The option --mds-plot specifies how many eigenvectors
+from the multi-dimensional scaling to summarise in the output file. The
+eigenvectors are output to the file plink.mds.
+
+The output file has one row per individual, and provides the identifier
+used in the PLINK family file, together with the first two eigenvectors
+(columns C1 and C2). You can plot the first two eigenvectors against
+each other using the command:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{R}\NormalTok{ --vanilla --slave --args plink.mds EGCUT.clean.fam mds.pdf }\OperatorTok{<}\NormalTok{ mds.R}
+\end{Highlighting}
+\end{Shaded}
+
+In the output plot, each point corresponds to an individual.
+
+\subsection{Testing for association under an additive model with
+adjustment for
+confounding}\label{testing-for-association-under-an-additive-model-with-adjustment-for-confounding}
+
+To account for population structure in our analysis, we can repeat our
+test of association under and additive model, but this type adjusting
+for eigenvectors from the multi-dimensional scaling as covariates:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{plink}\NormalTok{ --noweb --bfile EGCUT.clean --logistic --covar plink.mds --covar-name C1,C2 --ci 0.95 --out plink.additive.mds}
+\end{Highlighting}
+\end{Shaded}
+
+To investigate the impact of population structure that is not accounted
+for by the first two eigenvectors from multi-dimensional scaling by
+generating a QQ plot with the command:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{R}\NormalTok{ --vanilla --slave --args plink.additive.mds.assoc.logistic ADD qq_2.pdf }\OperatorTok{<}\NormalTok{ qqPlot.R}
+\end{Highlighting}
+\end{Shaded}
+
+To obtain association summary statistics for the SNP:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{grep}\NormalTok{ SNPID plink.additive.mds.assoc.logistic}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Phasing and Imputation}\label{phasing-and-imputation}
+
+By utilising genotype imputation methods, we can investigate whether
+there are neighbouring SNPs to a particular SNP that generated a
+significant p-value, also sharing evidence of association with the
+phenotype. The focus in this section will be on imputing genotypes
+within close proximity of a significant SNP, and then to re-run the
+association analyses on the imputed dataset.
+
+\subsection{Pre-phasing and
+imputation}\label{pre-phasing-and-imputation}
+
+Prior to undertaking genotype imputation, it is necessary to
+``pre-phase'' the genotype data to convert it into haplotype form.
+
+Doing this affords more efficient imputation as the reference panels on
+which we base our imputation are all in haplotype form as well.
+Haplotypes span across many locus so it is important that when focusing
+in on a certain region of the genome, (for example the region
+surrounding a significant SNP as we are in this practical), that we
+allow a sufficient buffer zone around the region. If we didn't allow
+this buffer zone then we could interrupt haplotype construction with the
+locus of interest!
+
+To undertake the pre-phasing we use a software package called SHAPEIT2
+(\url{https://mathgen.stats.ox.ac.uk/genetics_software/shapeit/shapeit.htm}).
+
+The causal SNP we found before had base pair position 64803579 and so a
+sensible region to pre-phase might be from 63Mb to 68Mb, which will
+include the immediate region surrounding the causal SNP, plus a buffer
+region at either end.
+
+To pre-phase the ``genstudy\_pp'' dataset, we can run the following
+SHAPEIT2 command:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{shapeit}\NormalTok{ --input-ped genstudy_pp.ped genstudy_pp.map --input-map chr10.map --output-max genstudy.ph --thread 2 --input-from 63000000 --input-to 68000000}
+\end{Highlighting}
+\end{Shaded}
+
+Once we have pre-phased our data, we can undertake genotype imputation
+and to do this we will use a software package called ``IMPUTE2''
+(\url{https://mathgen.stats.ox.ac.uk/impute/impute_v2.html}).
+
+After running SHAPEIT2 on the ``genstudy\_pp'' dataset, we obtained a
+``genstudy.ph.haps'' datafile which contained phased haplotypes for our
+specified region. We can now run IMPUTE2 on this .haps datafile to
+impute genotypes at SNPs not originally genotyped, but included on our
+chosen reference panel. For the purpose of this practical, we will use
+the reference panel from the 1000 Genomes Project
+(\url{http://www.1000genomes.org}). To do this, we can use the following
+IMPUTE2 command:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{impute2}\NormalTok{ -use_prephased_g -known_haps_g genstudy.ph.haps -m chr10.map -h chr10.haps.gz -l chr10.leg.gz -int 64300000 65300000 -Ne 20000 -buffer 500 -o genstudy_imp.gen}
+\end{Highlighting}
+\end{Shaded}
+
+Please note that the interval we specify under the option ``-int''
+(64300000 to 65300000) is narrower than the one we specified in the
+SHAPEIT2 command. This is because the imputation process will produce
+genotypes rather than haplotypes. Therefore we can narrow down to a 1Mb
+region of interest.
+
+After the Imputation has run, in the screen output there is a section
+called ``Imputation accuracy assessment''. The interval here denotes the
+probability range at which a SNP genotype has been called and the
+concordance with the patient genotypes. These figures can be improved by
+increasing the number of patients in the study or with better match
+reference haplotypes.
+
+\subsection{Re-running our univariate analyses of
+association}\label{re-running-our-univariate-analyses-of-association}
+
+Previously, when we were dealing only with actually genotyped SNPs, our
+.gen file (``genstudy\_qc.gen'') included the first five compulsory
+columns, followed by three columns for each genotyped SNP. The three
+columns represented an individual's probability of having the ``AA'',
+``AB'' and ``BB'' genotypes respectively. As we did not have any imputed
+SNPs, the probability for each genotype was either 0 or 1. However, now
+that we are dealing with imputed SNPs, the probability for each genotype
+can be any number between 0 and 1, representing our genotype
+uncertainty.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{ -n 1 genstudy_imp.gen}
+\end{Highlighting}
+\end{Shaded}
+
+Please, notice that there are number others than 0 and 1 in the columns
+representing genotype probabilities for the SNPs.
+
+To run univariate analyses of association on a dataset which includes
+imputed genotypes, we can again use the SNPTest programme. However, the
+element ``method'' within the SNPTest command needs to be specified
+differently. The ``method'' element controls the way in which genotype
+uncertainty is accounted for in the analyses of association, bearing in
+mind that imputation can only provide a `best estimate' of what the true
+genotype at a SNP would be.
+
+\begin{itemize}
+\tightlist
+\item
+  threshold: Assumes a particular genotype at a SNP only if accuracy of
+  the genotype call is above a given threshold. The calling threshold is
+  controlled by the flag -call\_thresh and the default calling threshold
+  is 0.9.
+\item
+  expected: Uses expected genotype counts, also known as genotype
+  dosages, in the analyses of association.
+\item
+  score: Uses a missing data likelihood score test in the analyses of
+  association.
+\item
+  ml: Again uses missing data likelihood approach, but with multiple
+  Newton-Raphson iterations to estimate the parameters in the missing
+  data likelihood.
+\item
+  em: Again uses missing data likelihood approach, but with an EM
+  algorithm to estimate the parameters in the missing data likelihood.
+\end{itemize}
+
+So, to run a univariate analysis of association on our imputed dataset,
+assuming the threshold method we would use the following command:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{snptest}\NormalTok{ -data genstudy_imp.gen genstudy_qc.sample -o genstudy_qc_univariate_add.imp.out -pheno diseased -frequentist 1 -method threshold}
+\end{Highlighting}
+\end{Shaded}
+
+The SNPtest output file ``genstudy\_qc\_univariate\_add.imp.out'' can
+now be scrutinised in much the same way as we did for the output file
+initially -- i.e.~we can produce Manhattan and QQ plots of the resulting
+p-values -- except for one additional and important QC step which needs
+to occur post-imputation. This QC step involves filtering out SNPs with
+poor imputation accuracy. The SNPtest output file has a column labelled
+``INFO'', which contains, for each SNP, a number indicating how
+accurately it has been imputed. The value of INFO will range from 0 (no
+certainty in imputation) to 1 (perfect accuracy in imputation/actually
+genotyped SNP). Poorly imputed SNPs are likely to contribute to false
+positive results whilst removing a large number of imputed SNPs will
+distort the overall results. Therefore, as a QC step we need to identify
+an appropriate, yet not too stringent, threshold for the level of
+accuracy that is allowed. Unfortunately, there is no exact science to
+choosing the threshold; the SNPtest website
+(\url{https://mathgen.stats.ox.ac.uk/impute/impute_v2.html}) views INFO
+thresholds between 0.3 and 0.5 as reasonable. For this analysis we will
+utilise an INFO threshold of 0.4.
+
+This additional QC step can be implemented very easily by:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{awk} \StringTok{'NR>11&&$9>0.4\{$1=10;print\}'}\NormalTok{ genstudy_qc_univariate_add.imp.out }\OperatorTok{>}\NormalTok{genstudy_qc_new.imp.out}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1152,11 +1740,186 @@ configuration:
   \end{enumerate}
 \end{enumerate}
 
-\section{AWS cloud services}\label{aws-cloud-services}
+\section{AWS EC2}\label{aws-ec2}
+
+All commands here shown have been used to configure an EC2 virtual
+instance under the AWS free-tier.
+
+\subsection{Generating an EC2
+instance}\label{generating-an-ec2-instance}
+
+To generate an EC2 instance under the free-tier using an Ubuntu 20.04
+LTS image, please follow the next steps:
+
+\begin{itemize}
+\item
+  Log in on the
+  \href{https://eu-west-2.console.aws.amazon.com/console/home?region=eu-west-2}{AWS
+  Console} using your AWS account.
+\item
+  Click on Services --\textgreater{} EC2 --\textgreater{} Instances.
+\item
+  Click on the ``Launch Instances'' button. It is an orange button
+  located on the upper right-hand side of the web page.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Step 1: Choose an Amazon Machine Image (AMI). Click on the ``Free
+    tier only'' checkbox (located on the left-hand side menu) and select
+    an AIM from the list. In this example I am going to use the ``Ubuntu
+    Server 20.04 LTS (HVM), SSD Volume Type'' AMI.
+  \item
+    Step 2: Choose an Instance Type. Select ``t2.micro'' (free tier
+    eligible).
+  \item
+    Step 3: Configure Instance Details. Leave all options by default and
+    click ``Next''.
+  \item
+    Step 4: Add Storage. Change the size of your disk from 8GB to 25GB.
+    Free tier allows to get up to 30 GB of (SSD) disk storage.
+  \item
+    Step 5: Add Tags. Add any tags or just leave it by default and click
+    Next.
+  \item
+    Step 6: Configure Security Group. We will need to add an additional
+    HTTP rule and two custom TCP rules to set the ports to 3838 (for
+    RServer to run) and 8787 (for RStudio to run). See ``Step 5:
+    Configuring the Security Group'' section from this
+    \href{https://jagg19.github.io/2019/08/aws-r/}{post} for more
+    details.
+  \item
+    Step 7: Review and Launch. Review the info and click ``Launch''.
+  \item
+    Step 8: Select or Create Key Pair. From the dropdown, choose
+    ``Create a new key pair''. Name the .pem file and store it securily
+    in your local computer. You will need later to connect to your EC2
+    instance.
+  \end{itemize}
+\end{itemize}
+
+\subsection{Connecting to an EC2
+instance}\label{connecting-to-an-ec2-instance}
+
+SSH login to your EC2 instance:
+
+\begin{itemize}
+\tightlist
+\item
+  From your AWS Console. Click on ``Services --\textgreater{} EC2
+  --\textgreater{} Instances''. Check your newly created instance is
+  running.
+\item
+  Click on the ``Connect'' button and select the ``SSH Client'' tab.
+\item
+  Follow the instructions indicated there to connect to your EC2
+  instance from an SSH client (I normally use MobaXterm).
+\end{itemize}
+
+\subsection{Installing/Running RStudio on an
+EC2}\label{installingrunning-rstudio-on-an-ec2}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{## More info: https://jagg19.github.io/2019/08/aws-r/}
+
+\CommentTok{## Update the Ubuntu repos }
+\CommentTok{# update indices}
+\FunctionTok{sudo}\NormalTok{ apt update -qq}
+\CommentTok{# install two helper packages we need}
+\FunctionTok{sudo}\NormalTok{ apt install --no-install-recommends software-properties-common dirmngr}
+\CommentTok{# add the signing key (by Michael Rutter) for these repos}
+\CommentTok{# To verify key, run gpg --show-keys /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc }
+\CommentTok{# Fingerprint: 298A3A825C0D65DFD57CBB651716619E084DAB9}
+\FunctionTok{sudo}\NormalTok{ wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc }\KeywordTok{|} \FunctionTok{sudo}\NormalTok{ tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc}
+\CommentTok{# add the R 4.0 repo from CRAN -- adjust 'focal' to 'groovy' or 'bionic' as needed}
+\FunctionTok{sudo}\NormalTok{ add-apt-repository }\StringTok{"deb https://cloud.r-project.org/bin/linux/ubuntu }\VariableTok{$(}\ExtensionTok{lsb_release}\NormalTok{ -cs}\VariableTok{)}\StringTok{-cran40/"}
+
+
+\CommentTok{# Update ubuntu package repo, to get latest R}
+\FunctionTok{sudo}\NormalTok{ apt update}
+
+\CommentTok{# Install R}
+\FunctionTok{sudo}\NormalTok{ apt -y install r-base r-base-dev}
+
+\CommentTok{# Install shiny before shiny-server}
+\FunctionTok{sudo}\NormalTok{ R -e }\StringTok{"install.packages('shiny')"}
+
+
+\CommentTok{# Install debian package manager, gdebi}
+\FunctionTok{sudo}\NormalTok{ apt install gdebi-core}
+
+
+\CommentTok{# Install Shiny Server (https://www.rstudio.com/products/shiny/download-server/)}
+\FunctionTok{sudo}\NormalTok{ wget https://download3.rstudio.org/ubuntu-14.04/x86_64/shiny-server-1.5.17.973-amd64.deb}
+\FunctionTok{sudo}\NormalTok{ gdebi shiny-server-1.5.17.973-amd64.deb}
+\FunctionTok{sudo}\NormalTok{ rm shiny-server-1.5.17.973-amd64.deb}
+
+
+\CommentTok{# Dependencies for R packages like RMariaDB, devtools, tidyverse, sparklyr. Please run seperate.}
+\FunctionTok{sudo}\NormalTok{ apt -y install libcurl4-openssl-dev }
+\FunctionTok{sudo}\NormalTok{ apt -y install libssl-dev libxml2-dev libmariadbclient-dev build-essential libcurl4-gnutls-dev}
+
+
+\CommentTok{# Install RStudio (https://www.rstudio.com/products/rstudio/download-server/)}
+\FunctionTok{wget}\NormalTok{ https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2021.09.2-382-amd64.deb}
+\FunctionTok{sudo}\NormalTok{ gdebi rstudio-server-2021.09.2-382-amd64.deb}
+\FunctionTok{sudo}\NormalTok{ rm rstudio-server-2021.09.2-382-amd64.deb}
+
+
+\CommentTok{# Install some useful R Packages }
+\FunctionTok{sudo}\NormalTok{ R -e }\StringTok{"install.packages('RCurl', repos='http://cran.rstudio.com')"}
+\FunctionTok{sudo}\NormalTok{ R -e }\StringTok{"install.packages('devtools', repos='http://cran.rstudio.com')"}
+\FunctionTok{sudo}\NormalTok{ R -e }\StringTok{"install.packages('tidyverse')"}
+\FunctionTok{sudo}\NormalTok{ R -e }\StringTok{"install.packages('RMariaDB')"}
+
+
+\CommentTok{# Add user info to login RStudio}
+\FunctionTok{sudo}\NormalTok{ adduser user_name}
+\CommentTok{#Add rstudio to sudo group}
+\FunctionTok{sudo}\NormalTok{ usermod -aG sudo user_name}
+
+
+\CommentTok{# Install Java and reconfigure in R for RStudio use}
+\FunctionTok{sudo}\NormalTok{ apt -y install default-jdk}
+\FunctionTok{sudo}\NormalTok{ R CMD javareconf}
+\CommentTok{# Change permissions for R library}
+\FunctionTok{sudo}\NormalTok{ chmod 777 -R /usr/local/lib/R/site-library}
+
+
+\CommentTok{#Restart rstudio-server to incorporate changes made in rserver.conf}
+\FunctionTok{sudo}\NormalTok{ rstudio-server restart}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Access RStudio through your
+browser}\label{access-rstudio-through-your-browser}
+
+\begin{itemize}
+\tightlist
+\item
+  From your AWS Console, click on ``Services --\textgreater{} EC2
+  --\textgreater{} Instances''.
+\item
+  Click on the checkbox located next to the EC2 instance to select it.
+\item
+  At the bottom of the web page it should have appeared a section with
+  info from the selected instance.
+\item
+  Copy the URL indicated under the ``Public IPv4 DNS'' section.
+\item
+  Add the port 8787 to the URL
+  (i.e.~\url{http://}\ldots{}\ldots{}:8787),
+\item
+  Paste the URL on your browser. RStudio should now appear on your
+  browser.
+\end{itemize}
+
+\section{AWS List of Cloud Services}\label{aws-list-of-cloud-services}
 
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-59}list of AWS cloud services.}
+\caption{\label{tab:unnamed-chunk-84}list of AWS cloud services.}
 \centering
 \begin{tabular}[t]{ll}
 \toprule

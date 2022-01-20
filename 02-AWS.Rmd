@@ -121,7 +121,123 @@ To create a new AWS bucket, we recommend using the following configuration:
 
 
 
-## AWS cloud services
+
+## AWS EC2
+
+All commands here shown have been used to configure an EC2 virtual instance under the AWS free-tier.
+
+### Generating an EC2 instance
+
+To generate an EC2 instance under the free-tier using an Ubuntu 20.04 LTS image, please follow the next steps:
+
+* Log in on the [AWS Console](https://eu-west-2.console.aws.amazon.com/console/home?region=eu-west-2) using your AWS account.
+* Click on Services --> EC2 --> Instances.
+* Click on the "Launch Instances" button. It is an orange button located on the upper right-hand side of the web page.
+
+    * Step 1: Choose an Amazon Machine Image (AMI). Click on the "Free tier only" checkbox (located on the left-hand side menu) and select an AIM from the list. In this example I am going to use the "Ubuntu Server 20.04 LTS (HVM), SSD Volume Type" AMI.
+    * Step 2: Choose an Instance Type. Select "t2.micro" (free tier eligible).
+    * Step 3: Configure Instance Details. Leave all options by default and click "Next".
+    * Step 4: Add Storage. Change the size of your disk from 8GB to 25GB. Free tier allows to get up to 30 GB of (SSD) disk storage.
+    * Step 5: Add Tags. Add any tags or just leave it by default and click Next.
+    * Step 6: Configure Security Group. We will need to add an additional HTTP rule and two custom TCP rules to set the ports to 3838 (for RServer to run) and 8787 (for RStudio to run). See "Step 5: Configuring the Security Group" section from this [post](https://jagg19.github.io/2019/08/aws-r/) for more details.
+    * Step 7: Review and Launch. Review the info and click "Launch".
+    * Step 8: Select or Create Key Pair. From the dropdown, choose "Create a new key pair". Name the .pem file and store it securily in your local computer. You will need later to connect to your EC2 instance.
+    
+
+### Connecting to an EC2 instance
+
+SSH login to your EC2 instance:
+
+* From your AWS Console. Click on "Services --> EC2 --> Instances". Check your newly created instance is running.
+* Click on the "Connect" button and select the "SSH Client" tab. 
+* Follow the instructions indicated there to connect to your EC2 instance from an SSH client (I normally use MobaXterm).
+
+
+### Installing/Running RStudio on an EC2
+
+```{bash, eval=FALSE}
+## More info: https://jagg19.github.io/2019/08/aws-r/
+
+## Update the Ubuntu repos 
+# update indices
+sudo apt update -qq
+# install two helper packages we need
+sudo apt install --no-install-recommends software-properties-common dirmngr
+# add the signing key (by Michael Rutter) for these repos
+# To verify key, run gpg --show-keys /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc 
+# Fingerprint: 298A3A825C0D65DFD57CBB651716619E084DAB9
+sudo wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+# add the R 4.0 repo from CRAN -- adjust 'focal' to 'groovy' or 'bionic' as needed
+sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
+
+
+# Update ubuntu package repo, to get latest R
+sudo apt update
+
+# Install R
+sudo apt -y install r-base r-base-dev
+
+# Install shiny before shiny-server
+sudo R -e "install.packages('shiny')"
+
+
+# Install debian package manager, gdebi
+sudo apt install gdebi-core
+
+
+# Install Shiny Server (https://www.rstudio.com/products/shiny/download-server/)
+sudo wget https://download3.rstudio.org/ubuntu-14.04/x86_64/shiny-server-1.5.17.973-amd64.deb
+sudo gdebi shiny-server-1.5.17.973-amd64.deb
+sudo rm shiny-server-1.5.17.973-amd64.deb
+
+
+# Dependencies for R packages like RMariaDB, devtools, tidyverse, sparklyr. Please run seperate.
+sudo apt -y install libcurl4-openssl-dev 
+sudo apt -y install libssl-dev libxml2-dev libmariadbclient-dev build-essential libcurl4-gnutls-dev
+
+
+# Install RStudio (https://www.rstudio.com/products/rstudio/download-server/)
+wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2021.09.2-382-amd64.deb
+sudo gdebi rstudio-server-2021.09.2-382-amd64.deb
+sudo rm rstudio-server-2021.09.2-382-amd64.deb
+
+
+# Install some useful R Packages 
+sudo R -e "install.packages('RCurl', repos='http://cran.rstudio.com')"
+sudo R -e "install.packages('devtools', repos='http://cran.rstudio.com')"
+sudo R -e "install.packages('tidyverse')"
+sudo R -e "install.packages('RMariaDB')"
+
+
+# Add user info to login RStudio
+sudo adduser user_name
+#Add rstudio to sudo group
+sudo usermod -aG sudo user_name
+
+
+# Install Java and reconfigure in R for RStudio use
+sudo apt -y install default-jdk
+sudo R CMD javareconf
+# Change permissions for R library
+sudo chmod 777 -R /usr/local/lib/R/site-library
+
+
+#Restart rstudio-server to incorporate changes made in rserver.conf
+sudo rstudio-server restart
+
+```
+
+### Access RStudio through your browser
+
+* From your AWS Console, click on "Services --> EC2 --> Instances".
+* Click on the checkbox located next to the EC2 instance to select it.
+* At the bottom of the web page it should have appeared a section with info from the selected instance.
+* Copy the URL indicated under the "Public IPv4 DNS" section.
+* Add the port 8787 to the URL (i.e. http://......:8787),
+* Paste the URL on your browser. RStudio should now appear on your browser.
+
+
+## AWS List of Cloud Services
 
 ```{r echo=F}
 services <- c("Amazon API Gateway",

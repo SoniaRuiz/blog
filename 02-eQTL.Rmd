@@ -1,0 +1,15 @@
+# eQTL
+
+Adapted from [eQTL_praticals_final.](https://www.um.edu.mt/__data/assets/pdf_file/0011/289487/eQTL_praticals_final.pdf).
+
+## MAF
+
+MAF stands for Minor allele frequency. Every person has approximately 4-5 million bases that differ from the reference genome. Some of those variants are common in a certain population, others not. The MAF measure calculates the rareness of a specific variant (allele).
+
+In one genomic position, there can be up to four different alleles (A, C, G, T). When an allele differs from the reference genome, it is called single nucleotide polymorphism. They can also be homozygous (maternal and paternal alleles are similar) or heterozygous (when the maternal allele is different from the paternal allele at that position).
+
+SNPs in a population are always defined by the genomic position and by two alleles: The allele defined in the reference genome and one allele present in some individuals, but different from the reference sequence.
+
+In eQTL analyses a SNP is defined as a single allele from an individual sample that has been found to differ from the reference genome. In case different samples present multiple different alleles for one position, those alleles will be treated as independent SNPs. In other words, SNPs in eQTL analyses can only have two alleles: the allele from the reference genome and the allele found in the sample.
+
+The MAF measure shows the percentage of alleles within a population. At an individual level, each sample can have 0, 1 or 2 times the alternative (i.e. the one different from the reference) allele.

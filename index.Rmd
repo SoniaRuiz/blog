@@ -9,7 +9,7 @@ bibliography:
 - packages.bib
 biblio-style: apalike
 link-citations: yes
-description: This book contains some knowledge I have adquired during my PhD studies.
+description: This book contains some of the knowledge I have been acquiring during my PhD studies.
 ---
 
 ```{r include=FALSE}

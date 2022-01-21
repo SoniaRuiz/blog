@@ -4,11 +4,9 @@
 
 ## AWS S3
 
-### Accessing AWS using the AWS Command Line Interface
+The AWS Command Line Interface (or AWS CLI) is an open source tool that enables an AWS user to interact with the AWS services from the command-line Shell. Below are described the most commonly used interactions with AWS using AWS CLI.
 
-The AWS Command Line Interface (or AWS CLI) is an open source tool that enables you to interact with the AWS services from your command-line Shell. AWS CLI tool is already installed in our server, and it is very simple to use. Below are described the most commonly used interactions with AWS.
-
-#### Configure the AWS CLI service
+### Configure the AWS CLI service
 
 1. To configure the service, please type "aws configure" on the console. This command is interactive, so the service will prompt you four times to enter some config information. Below an example (all RytenLab members have to ask me to send them their secret AWS credentials): 
 
@@ -27,7 +25,7 @@ Default output format [None]: json
 $ aws s3 ls 
 ```
 
-#### Upload a single file to AWS
+### Upload a single file to AWS using AWS CLI
 
 Let's suppose we have a bucket on AWS called 'my-bucket'. Let's also suppose you have a file called 'myfile.txt' stored in your local that you would like to upload to AWS. To upload the file 'myfile.txt' to the bucket 'my-bucket':
 
@@ -35,15 +33,7 @@ Let's suppose we have a bucket on AWS called 'my-bucket'. Let's also suppose you
 $ aws s3 cp myfile.txt s3://my-bucket/ 
 ```
 
-#### Download a single file from AWS
-
-To download the file 'myfile.txt' from the 's3://my-bucket/' AWS bucket into your local folder:
-
-```console
-$ aws s3 cp s3://my-bucket/myfile.txt ./my_local_folder 
-```
-
-#### Upload multiple files to AWS
+### Upload multiple files to AWS using AWS CLI
 
 To upload multiple files, we can use the sync command. The **sync** command syncs objects under a specified local folder to files in a AWS bucket by uploading them to AWS.
 
@@ -51,7 +41,15 @@ To upload multiple files, we can use the sync command. The **sync** command sync
 $ aws s3 sync my_local_folder/ s3://my-bucket/ 
 ```
 
-#### Download multiple files from AWS
+### Download a single file from AWS using AWS CLI
+
+To download the file 'myfile.txt' from the 's3://my-bucket/' AWS bucket into your local folder:
+
+```console
+$ aws s3 cp s3://my-bucket/myfile.txt ./my_local_folder 
+```
+
+### Download multiple files from AWS using AWS CLI
 
 To download multiple files from an AWS bucket to your local folder, we can also use the **sync** command by changing the order of the parameters.
 
@@ -60,6 +58,55 @@ To download multiple files from an AWS bucket to your local folder, we can also 
 ```console
 $ aws s3 sync s3://my-bucket/my_remote_folder/ ./my_local_folder 
 ```
+
+### Requester payer 
+
+Downloading/transferring data from AWS have associated some standard costs per GB transferred (~$0.09 per GB downloaded). To indicate AWS that those costs should be charged to the person (i.e. AWS account) performing the data downloading, it will be necessary to add the flag *--request-payer requester* to the *sync* command.
+
+```{console}
+## To list the objects stored within the bucket:
+$ aws s3 ls s3://bucket_name/ --request-payer requester
+
+## To download one single file from the bucket to your local folder:
+$ aws s3 cp s3://bucket_name/myfile.txt ./your_local_folder  --request-payer requester
+
+## To download all files from the bucket:
+$ aws s3 sync s3://bucket_name/* ./your_local_folder  --request-payer requester
+
+```
+
+In addition, the S3 bucket containing the data needs to be configured as "Requester pays" (S3 -> Bucket -> Properties -> Requester pays -> Enable).
+
+Finally, the bucket policy needs to be updated to grant permissions to the AWS account that is going to request the data:
+
+```{json}
+{
+    "Version": "2012-10-17",
+    "Id": "id_of_the_policy",
+    "Statement": [
+        {
+            "Sid": "sid_of_the_policy",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": [
+                    "arn:aws:iam::iamcode:root",
+                    "arn:aws:iam::iamcode:root"
+                ]
+            },
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::bucket_name",
+                "arn:aws:s3:::bucket_name/*"
+            ]
+        }
+    ]
+}
+```
+
+
 
 ### Checking AWS file integrity
 

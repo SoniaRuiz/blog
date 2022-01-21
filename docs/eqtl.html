@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Knowledge Book</title>
+  <title>Chapter 2 eQTL | Knowledge Book</title>
   <meta name="description" content="This book contains some of the knowledge I have been acquiring during my PhD studies." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Knowledge Book" />
+  <meta property="og:title" content="Chapter 2 eQTL | Knowledge Book" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Knowledge Book" />
+  <meta name="twitter:title" content="Chapter 2 eQTL | Knowledge Book" />
   
   <meta name="twitter:description" content="This book contains some of the knowledge I have been acquiring during my PhD studies." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-
+<link rel="prev" href="analysis-of-genetic-association-studies.html"/>
+<link rel="next" href="aws.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -213,19 +213,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="eqtl" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> eQTL</h1>
+<p>Adapted from <a href="https://www.um.edu.mt/__data/assets/pdf_file/0011/289487/eQTL_praticals_final.pdf">eQTL_praticals_final.</a>.</p>
+<div id="maf" class="section level2">
+<h2><span class="header-section-number">2.1</span> MAF</h2>
+<p>MAF stands for Minor allele frequency. Every person has approximately 4-5 million bases that differ from the reference genome. Some of those variants are common in a certain population, others not. The MAF measure calculates the rareness of a specific variant (allele).</p>
+<p>In one genomic position, there can be up to four different alleles (A, C, G, T). When an allele differs from the reference genome, it is called single nucleotide polymorphism. They can also be homozygous (maternal and paternal alleles are similar) or heterozygous (when the maternal allele is different from the paternal allele at that position).</p>
+<p>SNPs in a population are always defined by the genomic position and by two alleles: The allele defined in the reference genome and one allele present in some individuals, but different from the reference sequence.</p>
+<p>In eQTL analyses a SNP is defined as a single allele from an individual sample that has been found to differ from the reference genome. In case different samples present multiple different alleles for one position, those alleles will be treated as independent SNPs. In other words, SNPs in eQTL analyses can only have two alleles: the allele from the reference genome and the allele found in the sample.</p>
+<p>The MAF measure shows the percentage of alleles within a population. At an individual level, each sample can have 0, 1 or 2 times the alternative (i.e. the one different from the reference) allele.</p>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-
+<a href="analysis-of-genetic-association-studies.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="aws.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

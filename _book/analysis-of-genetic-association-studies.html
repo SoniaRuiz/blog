@@ -5,26 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Knowledge Book</title>
-  <meta name="description" content="This book contains some knowledge I have adquired during my PhD studies." />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="description" content="This book contains some of the knowledge I have been acquiring during my PhD studies." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Knowledge Book" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This book contains some knowledge I have adquired during my PhD studies." />
+  <meta property="og:description" content="This book contains some of the knowledge I have been acquiring during my PhD studies." />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Knowledge Book" />
   
-  <meta name="twitter:description" content="This book contains some knowledge I have adquired during my PhD studies." />
+  <meta name="twitter:description" content="This book contains some of the knowledge I have been acquiring during my PhD studies." />
   
 
 <meta name="author" content="Sonia García-Ruiz (s.ruiz@ucl.ac.uk)" />
 
 
-<meta name="date" content="2021-08-17" />
+<meta name="date" content="2022-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,8 +32,9 @@
   
   
 
-<link rel="next" href="aws.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link rel="next" href="eqtl.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -41,7 +42,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -123,45 +123,76 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.4.3" data-path="analysis-of-genetic-association-studies.html"><a href="analysis-of-genetic-association-studies.html#binary-ped-files"><i class="fa fa-check"></i><b>1.4.3</b> Binary PED files</a></li>
 <li class="chapter" data-level="1.4.4" data-path="analysis-of-genetic-association-studies.html"><a href="analysis-of-genetic-association-studies.html#sample-qc"><i class="fa fa-check"></i><b>1.4.4</b> Sample QC</a></li>
 </ul></li>
+<li class="chapter" data-level="1.5" data-path="analysis-of-genetic-association-studies.html"><a href="analysis-of-genetic-association-studies.html#testing-for-associations"><i class="fa fa-check"></i><b>1.5</b> Testing for Associations</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="analysis-of-genetic-association-studies.html"><a href="analysis-of-genetic-association-studies.html#software-and-datasets-1"><i class="fa fa-check"></i><b>1.5.1</b> Software and datasets</a></li>
+<li class="chapter" data-level="1.5.2" data-path="analysis-of-genetic-association-studies.html"><a href="analysis-of-genetic-association-studies.html#univariate-analyses-of-association"><i class="fa fa-check"></i><b>1.5.2</b> Univariate analyses of association</a></li>
+<li class="chapter" data-level="1.5.3" data-path="analysis-of-genetic-association-studies.html"><a href="analysis-of-genetic-association-studies.html#multiple-regression-analyses"><i class="fa fa-check"></i><b>1.5.3</b> Multiple regression analyses</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="aws.html"><a href="aws.html"><i class="fa fa-check"></i><b>2</b> AWS</a><ul>
-<li class="chapter" data-level="2.1" data-path="aws.html"><a href="aws.html#aws-s3"><i class="fa fa-check"></i><b>2.1</b> AWS S3</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="aws.html"><a href="aws.html#accessing-aws-using-the-aws-command-line-interface"><i class="fa fa-check"></i><b>2.1.1</b> Accessing AWS using the AWS Command Line Interface</a></li>
-<li class="chapter" data-level="2.1.2" data-path="aws.html"><a href="aws.html#checking-aws-file-integrity"><i class="fa fa-check"></i><b>2.1.2</b> Checking AWS file integrity</a></li>
-<li class="chapter" data-level="2.1.3" data-path="aws.html"><a href="aws.html#creating-a-new-aws-bucket"><i class="fa fa-check"></i><b>2.1.3</b> Creating a new AWS bucket</a></li>
+<li class="chapter" data-level="1.6" data-path="analysis-of-genetic-association-studies.html"><a href="analysis-of-genetic-association-studies.html#population-structure-in-gwas"><i class="fa fa-check"></i><b>1.6</b> Population structure in GWAS</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="analysis-of-genetic-association-studies.html"><a href="analysis-of-genetic-association-studies.html#testing-for-association-under-an-additive-model"><i class="fa fa-check"></i><b>1.6.1</b> Testing for association under an additive model</a></li>
+<li class="chapter" data-level="1.6.2" data-path="analysis-of-genetic-association-studies.html"><a href="analysis-of-genetic-association-studies.html#performing-multi-dimensional-scaling"><i class="fa fa-check"></i><b>1.6.2</b> Performing multi-dimensional scaling</a></li>
+<li class="chapter" data-level="1.6.3" data-path="analysis-of-genetic-association-studies.html"><a href="analysis-of-genetic-association-studies.html#testing-for-association-under-an-additive-model-with-adjustment-for-confounding"><i class="fa fa-check"></i><b>1.6.3</b> Testing for association under an additive model with adjustment for confounding</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="aws.html"><a href="aws.html#aws-cloud-services"><i class="fa fa-check"></i><b>2.2</b> AWS cloud services</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="docker.html"><a href="docker.html"><i class="fa fa-check"></i><b>3</b> Docker</a><ul>
-<li class="chapter" data-level="3.1" data-path="docker.html"><a href="docker.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
-<li class="chapter" data-level="3.2" data-path="docker.html"><a href="docker.html#what-is-docker"><i class="fa fa-check"></i><b>3.2</b> What is docker?</a></li>
-<li class="chapter" data-level="3.3" data-path="docker.html"><a href="docker.html#images-and-containers"><i class="fa fa-check"></i><b>3.3</b> Images and containers</a></li>
-<li class="chapter" data-level="3.4" data-path="docker.html"><a href="docker.html#docker-hub"><i class="fa fa-check"></i><b>3.4</b> Docker Hub</a></li>
-<li class="chapter" data-level="3.5" data-path="docker.html"><a href="docker.html#useful-commands"><i class="fa fa-check"></i><b>3.5</b> Useful Commands</a></li>
-<li class="chapter" data-level="3.6" data-path="docker.html"><a href="docker.html#docker-coexp-web-application"><i class="fa fa-check"></i><b>3.6</b> Docker &amp; CoExp Web Application</a><ul>
-<li class="chapter" data-level="3.6.1" data-path="docker.html"><a href="docker.html#software-requirements"><i class="fa fa-check"></i><b>3.6.1</b> Software requirements</a></li>
-<li class="chapter" data-level="3.6.2" data-path="docker.html"><a href="docker.html#download-docker-images-of-coexp"><i class="fa fa-check"></i><b>3.6.2</b> Download Docker images of CoExp</a></li>
-<li class="chapter" data-level="3.6.3" data-path="docker.html"><a href="docker.html#use-docker-composer-to-build-the-images"><i class="fa fa-check"></i><b>3.6.3</b> Use Docker-Composer to build the images</a></li>
-<li class="chapter" data-level="3.6.4" data-path="docker.html"><a href="docker.html#juans-tutorial"><i class="fa fa-check"></i><b>3.6.4</b> Juan's tutorial</a></li>
+<li class="chapter" data-level="1.7" data-path="analysis-of-genetic-association-studies.html"><a href="analysis-of-genetic-association-studies.html#phasing-and-imputation"><i class="fa fa-check"></i><b>1.7</b> Phasing and Imputation</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="analysis-of-genetic-association-studies.html"><a href="analysis-of-genetic-association-studies.html#pre-phasing-and-imputation"><i class="fa fa-check"></i><b>1.7.1</b> Pre-phasing and imputation</a></li>
+<li class="chapter" data-level="1.7.2" data-path="analysis-of-genetic-association-studies.html"><a href="analysis-of-genetic-association-studies.html#re-running-our-univariate-analyses-of-association"><i class="fa fa-check"></i><b>1.7.2</b> Re-running our univariate analyses of association</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="github.html"><a href="github.html"><i class="fa fa-check"></i><b>4</b> GitHub</a><ul>
-<li class="chapter" data-level="4.1" data-path="github.html"><a href="github.html#merge"><i class="fa fa-check"></i><b>4.1</b> Merge</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="github.html"><a href="github.html#troubleshooting-pages-of-interest"><i class="fa fa-check"></i><b>4.1.1</b> Troubleshooting pages of interest</a></li>
+<li class="chapter" data-level="2" data-path="eqtl.html"><a href="eqtl.html"><i class="fa fa-check"></i><b>2</b> eQTL</a><ul>
+<li class="chapter" data-level="2.1" data-path="eqtl.html"><a href="eqtl.html#maf"><i class="fa fa-check"></i><b>2.1</b> MAF</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="github.html"><a href="github.html#stash"><i class="fa fa-check"></i><b>4.2</b> Stash</a></li>
+<li class="chapter" data-level="3" data-path="aws.html"><a href="aws.html"><i class="fa fa-check"></i><b>3</b> AWS</a><ul>
+<li class="chapter" data-level="3.1" data-path="aws.html"><a href="aws.html#aws-s3"><i class="fa fa-check"></i><b>3.1</b> AWS S3</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="aws.html"><a href="aws.html#configure-the-aws-cli-service"><i class="fa fa-check"></i><b>3.1.1</b> Configure the AWS CLI service</a></li>
+<li class="chapter" data-level="3.1.2" data-path="aws.html"><a href="aws.html#upload-a-single-file-to-aws-using-aws-cli"><i class="fa fa-check"></i><b>3.1.2</b> Upload a single file to AWS using AWS CLI</a></li>
+<li class="chapter" data-level="3.1.3" data-path="aws.html"><a href="aws.html#upload-multiple-files-to-aws-using-aws-cli"><i class="fa fa-check"></i><b>3.1.3</b> Upload multiple files to AWS using AWS CLI</a></li>
+<li class="chapter" data-level="3.1.4" data-path="aws.html"><a href="aws.html#download-a-single-file-from-aws-using-aws-cli"><i class="fa fa-check"></i><b>3.1.4</b> Download a single file from AWS using AWS CLI</a></li>
+<li class="chapter" data-level="3.1.5" data-path="aws.html"><a href="aws.html#download-multiple-files-from-aws-using-aws-cli"><i class="fa fa-check"></i><b>3.1.5</b> Download multiple files from AWS using AWS CLI</a></li>
+<li class="chapter" data-level="3.1.6" data-path="aws.html"><a href="aws.html#requester-payer"><i class="fa fa-check"></i><b>3.1.6</b> Requester payer</a></li>
+<li class="chapter" data-level="3.1.7" data-path="aws.html"><a href="aws.html#checking-aws-file-integrity"><i class="fa fa-check"></i><b>3.1.7</b> Checking AWS file integrity</a></li>
+<li class="chapter" data-level="3.1.8" data-path="aws.html"><a href="aws.html#creating-a-new-aws-bucket"><i class="fa fa-check"></i><b>3.1.8</b> Creating a new AWS bucket</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html"><i class="fa fa-check"></i><b>5</b> Machine Learning Concepts</a><ul>
-<li class="chapter" data-level="5.1" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#introduction-1"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
-<li class="chapter" data-level="5.2" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#artificial-intelligence-vs.-machine-learning"><i class="fa fa-check"></i><b>5.2</b> Artificial Intelligence vs. Machine Learning</a></li>
-<li class="chapter" data-level="5.3" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#supervised-learning"><i class="fa fa-check"></i><b>5.3</b> Supervised learning</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#classification"><i class="fa fa-check"></i><b>5.3.1</b> Classification</a></li>
-<li class="chapter" data-level="5.3.2" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#regression"><i class="fa fa-check"></i><b>5.3.2</b> Regression</a></li>
+<li class="chapter" data-level="3.2" data-path="aws.html"><a href="aws.html#aws-ec2"><i class="fa fa-check"></i><b>3.2</b> AWS EC2</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="aws.html"><a href="aws.html#generating-an-ec2-instance"><i class="fa fa-check"></i><b>3.2.1</b> Generating an EC2 instance</a></li>
+<li class="chapter" data-level="3.2.2" data-path="aws.html"><a href="aws.html#connecting-to-an-ec2-instance"><i class="fa fa-check"></i><b>3.2.2</b> Connecting to an EC2 instance</a></li>
+<li class="chapter" data-level="3.2.3" data-path="aws.html"><a href="aws.html#installingrunning-rstudio-on-an-ec2"><i class="fa fa-check"></i><b>3.2.3</b> Installing/Running RStudio on an EC2</a></li>
+<li class="chapter" data-level="3.2.4" data-path="aws.html"><a href="aws.html#access-rstudio-using-your-browser"><i class="fa fa-check"></i><b>3.2.4</b> Access RStudio using your browser</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#unsupervised-learning"><i class="fa fa-check"></i><b>5.4</b> Unsupervised learning</a><ul>
-<li class="chapter" data-level="5.4.1" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#clustering"><i class="fa fa-check"></i><b>5.4.1</b> Clustering</a></li>
-<li class="chapter" data-level="5.4.2" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#density-estimation"><i class="fa fa-check"></i><b>5.4.2</b> Density estimation</a></li>
-<li class="chapter" data-level="5.4.3" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#visualization"><i class="fa fa-check"></i><b>5.4.3</b> Visualization</a></li>
+<li class="chapter" data-level="3.3" data-path="aws.html"><a href="aws.html#aws-list-of-cloud-services"><i class="fa fa-check"></i><b>3.3</b> AWS List of Cloud Services</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="docker.html"><a href="docker.html"><i class="fa fa-check"></i><b>4</b> Docker</a><ul>
+<li class="chapter" data-level="4.1" data-path="docker.html"><a href="docker.html#introduction"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="docker.html"><a href="docker.html#what-is-docker"><i class="fa fa-check"></i><b>4.2</b> What is docker?</a></li>
+<li class="chapter" data-level="4.3" data-path="docker.html"><a href="docker.html#images-and-containers"><i class="fa fa-check"></i><b>4.3</b> Images and containers</a></li>
+<li class="chapter" data-level="4.4" data-path="docker.html"><a href="docker.html#docker-hub"><i class="fa fa-check"></i><b>4.4</b> Docker Hub</a></li>
+<li class="chapter" data-level="4.5" data-path="docker.html"><a href="docker.html#useful-commands"><i class="fa fa-check"></i><b>4.5</b> Useful Commands</a></li>
+<li class="chapter" data-level="4.6" data-path="docker.html"><a href="docker.html#docker-coexp-web-application"><i class="fa fa-check"></i><b>4.6</b> Docker &amp; CoExp Web Application</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="docker.html"><a href="docker.html#software-requirements"><i class="fa fa-check"></i><b>4.6.1</b> Software requirements</a></li>
+<li class="chapter" data-level="4.6.2" data-path="docker.html"><a href="docker.html#download-docker-images-of-coexp"><i class="fa fa-check"></i><b>4.6.2</b> Download Docker images of CoExp</a></li>
+<li class="chapter" data-level="4.6.3" data-path="docker.html"><a href="docker.html#use-docker-composer-to-build-the-images"><i class="fa fa-check"></i><b>4.6.3</b> Use Docker-Composer to build the images</a></li>
+<li class="chapter" data-level="4.6.4" data-path="docker.html"><a href="docker.html#juans-tutorial"><i class="fa fa-check"></i><b>4.6.4</b> Juan's tutorial</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="github.html"><a href="github.html"><i class="fa fa-check"></i><b>5</b> GitHub</a><ul>
+<li class="chapter" data-level="5.1" data-path="github.html"><a href="github.html#merge"><i class="fa fa-check"></i><b>5.1</b> Merge</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="github.html"><a href="github.html#troubleshooting-pages-of-interest"><i class="fa fa-check"></i><b>5.1.1</b> Troubleshooting pages of interest</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="github.html"><a href="github.html#stash"><i class="fa fa-check"></i><b>5.2</b> Stash</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="globus.html"><a href="globus.html"><i class="fa fa-check"></i><b>6</b> Globus</a><ul>
+<li class="chapter" data-level="6.1" data-path="globus.html"><a href="globus.html#useful-commands-1"><i class="fa fa-check"></i><b>6.1</b> Useful Commands</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html"><i class="fa fa-check"></i><b>7</b> Machine Learning Concepts</a><ul>
+<li class="chapter" data-level="7.1" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#introduction-1"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.2" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#artificial-intelligence-vs.-machine-learning"><i class="fa fa-check"></i><b>7.2</b> Artificial Intelligence vs. Machine Learning</a></li>
+<li class="chapter" data-level="7.3" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#supervised-learning"><i class="fa fa-check"></i><b>7.3</b> Supervised learning</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#classification"><i class="fa fa-check"></i><b>7.3.1</b> Classification</a></li>
+<li class="chapter" data-level="7.3.2" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#regression"><i class="fa fa-check"></i><b>7.3.2</b> Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#unsupervised-learning"><i class="fa fa-check"></i><b>7.4</b> Unsupervised learning</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#clustering"><i class="fa fa-check"></i><b>7.4.1</b> Clustering</a></li>
+<li class="chapter" data-level="7.4.2" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#density-estimation"><i class="fa fa-check"></i><b>7.4.2</b> Density estimation</a></li>
+<li class="chapter" data-level="7.4.3" data-path="machine-learning-concepts.html"><a href="machine-learning-concepts.html#visualization"><i class="fa fa-check"></i><b>7.4.3</b> Visualization</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -188,7 +219,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="header">
 <h1 class="title">Knowledge Book</h1>
 <p class="author"><em>Sonia García-Ruiz (<a href="mailto:s.ruiz@ucl.ac.uk">s.ruiz@ucl.ac.uk</a>)</em></p>
-<p class="date" style="margin-top: 1.5em;"><em>2021-08-17</em></p>
+<p class="date"><em>2022-02-02</em></p>
 </div>
 <div id="analysis-of-genetic-association-studies" class="section level1">
 <h1><span class="header-section-number">Chapter 1</span> Analysis of Genetic Association Studies</h1>
@@ -197,38 +228,38 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="useful-linux-commands" class="section level2">
 <h2><span class="header-section-number">1.1</span> Useful Linux commands</h2>
 <p>First, I'll show you some useful Linux commands for working with GWASs files. Linux is an operating system very well suited to dealing with large datasets.</p>
-<p>Create a shell script:</p>
-<pre class="shell"><code>touch script.sh</code></pre>
+<p>Create a bash script:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">touch</span> script.sh</code></pre></div>
 <p>Run the script:</p>
-<pre class="shell"><code>sh script.sh</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sh</span> script.sh</code></pre></div>
 <p>Return the number of lines of a file:</p>
-<pre class="shell"><code>wc -l ./file.map</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">wc</span> -l ./file.map</code></pre></div>
 <p>Print only the first 15 lines of &quot;./file.map&quot; file:</p>
-<pre class="shell"><code>head -15 ./file.map</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">head</span> -15 ./file.map</code></pre></div>
 <p>Print the bottom of the file:</p>
-<pre class="shell"><code>tail -15 ./file.map</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">tail</span> -15 ./file.map</code></pre></div>
 <p>Find the SNP &quot;rs1234&quot;:</p>
-<pre class="shell"><code>grep &quot;rs1234&quot; ./file.map</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">grep</span> <span class="st">&quot;rs1234&quot;</span> ./file.map</code></pre></div>
 <p>Find the SNP &quot;rs1234&quot; and print the line number of the match:</p>
-<pre class="shell"><code>grep -n &quot;rs1234&quot; ./file.map</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">grep</span> -n <span class="st">&quot;rs1234&quot;</span> ./file.map</code></pre></div>
 <p>Search the file ./file.map, for &quot;1234&quot; in the SNP name (column 2, specified by $2) and print the whole line:</p>
-<pre class="shell"><code>awk &#39;$2~/1234/{print}&#39; ./file.map</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">awk</span> <span class="st">&#39;$2~/1234/{print}&#39;</span> ./file.map</code></pre></div>
 <p>Search the file ./file.map, for &quot;1234&quot; in the SNP position (column 4, specified by $4) and print only the SNP name (column 2):</p>
-<pre class="shell"><code>awk &#39;$4~/1234/{print $2}&#39; ./file.map</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">awk</span> <span class="st">&#39;$4~/1234/{print $2}&#39;</span> ./file.map</code></pre></div>
 <p>Search for an exact match of &quot;rs1234676&quot; in the SNP name (column 2) and print the whole line:</p>
-<pre class="shell"><code>awk &#39;$2==&quot;rs1234676&quot;/{print}&#39; ./file.map</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">awk</span> <span class="st">&#39;$2==&quot;rs1234676&quot;/{print}&#39;</span> ./file.map</code></pre></div>
 <p>Search for all SNPs with a position between 90680000 up to and including 90690000 in the SNP position column (column 4) and count the lines in that output:</p>
-<pre class="shell"><code>awk &#39;$4&gt;90680000&amp;&amp;$4&lt;=90690000{print}&#39; ./file.map | wc -l</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">awk</span> <span class="st">&#39;$4&gt;90680000&amp;&amp;$4&lt;=90690000{print}&#39;</span> ./file.map <span class="kw">|</span> <span class="fu">wc</span> -l</code></pre></div>
 <p>Remove the chromosome 10 from the output above:</p>
-<pre class="shell"><code>awk &#39;$4&gt;90680000&amp;&amp;$4&lt;=90690000{print}&#39; ./file.map | awk &#39;$1!=10{print}&#39;</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">awk</span> <span class="st">&#39;$4&gt;90680000&amp;&amp;$4&lt;=90690000{print}&#39;</span> ./file.map <span class="kw">|</span> <span class="fu">awk</span> <span class="st">&#39;$1!=10{print}&#39;</span></code></pre></div>
 <p>Count the SNPs from chromosome 10 and chromosome 23:</p>
-<pre class="shell"><code>awk &#39;$1==10{print}&#39; ./file.map| wc -l
-awk &#39;$1==23{print}&#39; ./file.map| wc -l</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">awk</span> <span class="st">&#39;$1==10{print}&#39;</span> ./file.map<span class="kw">|</span> <span class="fu">wc</span> -l
+<span class="fu">awk</span> <span class="st">&#39;$1==23{print}&#39;</span> ./file.map<span class="kw">|</span> <span class="fu">wc</span> -l</code></pre></div>
 <p>Print the SNP position of the first SNP on chromosome 23:</p>
-<pre class="shell"><code>awk &#39;$1==23{print $4}&#39; ./file.map | head -1</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">awk</span> <span class="st">&#39;$1==23{print $4}&#39;</span> ./file.map <span class="kw">|</span> <span class="fu">head</span> -1</code></pre></div>
 <p>There are SNPs starting with other characters than &quot;rs&quot;, identify what other starting characters there are.</p>
-<pre class="shell"><code>awk &#39;$2!~/rs/{print $2}&#39; ./file.map
-awk &#39;$2!~/rs/&amp;&amp;$2!~/.../{print $2}&#39; ./file.map</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">awk</span> <span class="st">&#39;$2!~/rs/{print $2}&#39;</span> ./file.map
+<span class="fu">awk</span> <span class="st">&#39;$2!~/rs/&amp;&amp;$2!~/.../{print $2}&#39;</span> ./file.map</code></pre></div>
 </div>
 <div id="useful-r-commands" class="section level2">
 <h2><span class="header-section-number">1.2</span> Useful R commands</h2>
@@ -269,85 +300,85 @@ awk &#39;$2!~/rs/&amp;&amp;$2!~/.../{print $2}&#39; ./file.map</code></pre>
 </ul>
 <p>Usually, each .bam file has an accompanying .bai file. These are index files, which are programs used to navigate the data faster – they must be present for software programs to run.</p>
 <p>Generate genotype calls for the sample NA12878 using GATK:</p>
-<pre class="shell"><code>gatk -T HaplotypeCaller \
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">gatk</span> -T HaplotypeCaller \
 -R human_g1k_b37_20.fasta \
 -I NA12878_wgs_20.bam \
 -o yourfilename.vcf \
--L 20:10,000,000-10,200,000</code></pre>
+-L 20:10,000,000-10,200,000</code></pre></div>
 <p>Variant calling on a whole genome can take a long time, we're only looking at a very small region: Chromosome 20, positions 10,000,000 – 10,200,000, specified by the –L option.</p>
 <p>(*) Details of the different options used: <a href="https://software.broadinstitute.org/gatk/documentation/tooldocs/current/org_broadinstitute_gatk_tools_walkers_haplotypecaller_HaplotypeCaller.php" class="uri">https://software.broadinstitute.org/gatk/documentation/tooldocs/current/org_broadinstitute_gatk_tools_walkers_haplotypecaller_HaplotypeCaller.php</a></p>
 <p>To have a look at the first 5 variant calls using:</p>
-<pre class="shell"><code>head -34 yourfilename.vcf | tail -6</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">head</span> -34 yourfilename.vcf <span class="kw">|</span> <span class="fu">tail</span> -6</code></pre></div>
 <p>Filter the vcf file and see only the variants called in the region 20:10,002,371-10,002,546:</p>
-<pre class="shell"><code>vcftools --vcf yourfilename.vcf \
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">vcftools</span> --vcf yourfilename.vcf \
 --chr 20 \
 --from-bp 10002371 \
 --to-bp 10002546 \
 --out yournewfilename \
---recode</code></pre>
+--recode</code></pre></div>
 <p>The code above will generate the files: yournewfilename.recode.vcf and yournewfilename.log.</p>
 <p>To know how many variants were identified in this region:</p>
-<pre class="shell"><code>cat yournewfilename.log</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">cat</span> yournewfilename.log</code></pre></div>
 <p>What are those variants?</p>
-<pre class="shell"><code>cat yournewfilename.recode.vcf</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">cat</span> yournewfilename.recode.vcf</code></pre></div>
 </div>
 <div id="generating-genotypes-from-multiple-.bam-files" class="section level3">
 <h3><span class="header-section-number">1.3.2</span> Generating genotypes from multiple .bam files</h3>
 <p>To generate genotypes for multiple samples, one option is to run the same command than above but give multiple -I options:</p>
-<pre class="shell"><code>gatk -T HaplotypeCaller \
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">gatk</span> -T HaplotypeCaller \
 -R human_g1k_b37_20.fasta \
 -I NA12878_wgs_20.bam \
 -I NA12882_wgs_20.bam \
 -I NA12877_wgs_20.bam \
 -o differentfilename.vcf \
--L 20:10,000,000-10,200,000</code></pre>
+-L 20:10,000,000-10,200,000</code></pre></div>
 <p>Another option is to run each sample independently, but generate a .g.vcf file and then merge the .g.vcf files to get a single call set.</p>
 <p>Generate a .g.vcf file for sample NA12878 (then run the same command on the bam files for samples NA12877 and NA12882):</p>
-<pre class="shell"><code>gatk -T HaplotypeCaller \
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">gatk</span> -T HaplotypeCaller \
 -R human_g1k_b37_20.fasta \
 -I NA12878_wgs_20.bam \
 -o yourchoice_NA12878.g.vcf \
 -ERC GVCF \
--L 20:10,000,000-10,200,000</code></pre>
+-L 20:10,000,000-10,200,000</code></pre></div>
 <p>The main difference between the .g.vcf and the .vcf file is that the gvcf file contains a line per base or region if the region contains no variants. The gvcf also includes <NON_REF> as a symbolic allele, this allows for complex variants at the site and to makes it possible to give a confidence measure in the reference allele (more info: <a href="http://gatkforums.broadinstitute.org/gatk/discussion/4017/what-is-a-gvcf-and-how-is-it-differentfrom-a-regular-vcf" class="uri">http://gatkforums.broadinstitute.org/gatk/discussion/4017/what-is-a-gvcf-and-how-is-it-differentfrom-a-regular-vcf</a>)</p>
 <p>Merge the individual .g.vcf files and get a .vcf file containing the calls for all samples:</p>
-<pre class="shell"><code>gatk -T GenotypeGVCFs \
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">gatk</span> -T GenotypeGVCFs \
 -R human_g1k_b37_20.fasta \
 -V yourchoice_NA12878.g.vcf \
 -V yourchoice_NA12882.g.vcf \
 -V yourchoice_NA12877.g.vcf \
 -o yourchoice_gvcf_jointcalls.vcf \
--L 20:10,000,000-10,200,000</code></pre>
+-L 20:10,000,000-10,200,000</code></pre></div>
 </div>
 <div id="performing-initial-qc" class="section level3">
 <h3><span class="header-section-number">1.3.3</span> Performing initial QC</h3>
 <p>GWAS studies often focus only on SNPS, whereas variant callers identify more variants, such as indels. To create a file containing just SNPs (no indels or other variants) the --remove-indels option from vcftools can be used:</p>
-<pre class="shell"><code>vcftools --vcf yourchoice_gvcf_jointcalls.vcf \
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">vcftools</span> --vcf yourchoice_gvcf_jointcalls.vcf \
 --remove-indels \
 --out yourchoice_snps \
---recode</code></pre>
+--recode</code></pre></div>
 <p>Calculate the Ts/Tv ratio:</p>
-<pre class="shell"><code>vcftools --vcf yourchoice_gvcf_jointcalls.vcf \
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">vcftools</span> --vcf yourchoice_gvcf_jointcalls.vcf \
 --TsTv-summary \
---out yourchoice_tstv</code></pre>
+--out yourchoice_tstv</code></pre></div>
 <p>The QualByDepth (QD) score is the variant quality (QUAL field) divided by the unfiltered depth of nonreference samples. Variants with a low QD may be unreliable and have a high false positive rate. To add a filter to the .vcf file which flags variants which have a quality-by-depth less than 2.0:</p>
-<pre class="shell"><code>gatk -T VariantFiltration \
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">gatk</span> -T VariantFiltration \
 -R human_g1k_b37_20.fasta \
 -V yourchoice_gvcf_jointcalls.vcf \
---filterExpression &#39;QD&lt;2.0&#39; \
---filterName &#39;QualityDepth&#39; \
--o yourchoice_flagged.vcf</code></pre>
+--filterExpression <span class="st">&#39;QD&lt;2.0&#39;</span> \
+--filterName <span class="st">&#39;QualityDepth&#39;</span> \
+-o yourchoice_flagged.vcf</code></pre></div>
 <p>NOTE: SNPs and Indels may need to be treated differently – to do this, the file can be first splitted into 2 vcfs, one containing SNPs and one containing indels, then add the flags should be added.</p>
 <p>The new .vcf is now different from the original as the FILTER column is now filled in, usually with PASS.</p>
 <p>Remove all SNPs with a filter flag other than PASS:</p>
-<pre class="shell"><code>vcftools --vcf yourchoice_flagged.vcf \
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">vcftools</span> --vcf yourchoice_flagged.vcf \
 --remove-filtered-all \
 --recode \
---out yourchoice_filtered</code></pre>
+--out yourchoice_filtered</code></pre></div>
 <p>To convert the SNP filtered .vcf file to PLINK .ped and .map files:</p>
-<pre class="shell"><code>vcftools --vcf yourchoice_gvcf_jointcalls.vcf \
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">vcftools</span> --vcf yourchoice_gvcf_jointcalls.vcf \
 --remove-indels \
---out yourchoice_plink</code></pre>
+--out yourchoice_plink</code></pre></div>
 </div>
 </div>
 <div id="quality-control-for-gwas" class="section level2">
@@ -361,23 +392,28 @@ awk &#39;$2!~/rs/&amp;&amp;$2!~/.../{print $2}&#39; ./file.map</code></pre>
 </ul>
 <p>In this example, we will be working on analysing the GWAS dataset 'genstudy' (a .map and .ped file for 'genstudy'). The study is a case-control study with 252 diseased (cases) and 252 non-diseased (controls) individuals. All individuals have been genotyped for 198,684 SNPs on chromosome 10 and 22,379 SNPs on chromosome X. The purpose of the study is to try and identify SNPs on chromosome 10 associated with disease.</p>
 <p>To view the first row and first eight columns of the 'genstudy.ped' file:</p>
-<pre class="shell"><code>awk &#39;FNR == 1 { print $1,$2,$3,$4,$5,$6,$7,$8} &#39; genstudy.ped</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">awk</span> <span class="st">&#39;FNR == 1 { print $1,$2,$3,$4,$5,$6,$7,$8} &#39;</span> genstudy.ped</code></pre></div>
 <p>The eight columns correspond to the first six mandatory columns plus two columns representing the first SNP genotyped.</p>
 </div>
 <div id="checking-the-input-datasets" class="section level3">
 <h3><span class="header-section-number">1.4.2</span> Checking the input datasets</h3>
 <p>Before starting a genotype QC or GWAS association analysis, it is important to check that the input files are in good order, and contain the individuals and SNPs that we think they should. Do this by focussing on the SNPs on chromosome 10:</p>
-<pre class="shell"><code>plink --file genstudy --chr 10 --noweb</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">plink</span> --file genstudy --chr 10 --noweb</code></pre></div>
 <p>The output will also be saved in a log file called 'plink.log'.</p>
 <p>Note: the '-noweb' option is included to make PLINK run faster – otherwise it connects to the web to check for updates before running the analysis.</p>
 </div>
 <div id="binary-ped-files" class="section level3">
 <h3><span class="header-section-number">1.4.3</span> Binary PED files</h3>
-<p>To save space and time, .map and .ped files can be converted to binary format. In doing this, we create three new files as follows: * '.bed': file This includes all the genotype data from the previous '.ped' file, but in binary format. * '.fam': file This includes the first six columns from the previous '.ped' file. * '.bim' file This is the same as the previous '.map' file, but also includes an additional two columns with the alleles names (which are otherwise lost when'converting the genotype data from .ped file to .bed file.)</p>
+<p>To save space and time, .map and .ped files can be converted to binary format. In doing this, we create three new files as follows:</p>
+<ul>
+<li>'.bed': file This includes all the genotype data from the previous '.ped' file, but in binary format.</li>
+<li>'.fam': file This includes the first six columns from the previous '.ped' file.</li>
+<li>'.bim' file This is the same as the previous '.map' file, but also includes an additional two columns with the alleles names (which are otherwise lost when'converting the genotype data from .ped file to .bed file.)</li>
+</ul>
 <p>To create a set of binary format files for the 'genstudy' dataset:</p>
-<pre class="shell"><code>plink --file genstudy --make-bed --out genstudy --noweb</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">plink</span> --file genstudy --make-bed --out genstudy --noweb</code></pre></div>
 <p>To use the binary format files instead of the .ped and .map files, we just substitute the option --file with --bfile in the PLINK command line:</p>
-<pre class="shell"><code>plink --bfile genstudy --chr 10 --noweb</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">plink</span> --bfile genstudy --chr 10 --noweb</code></pre></div>
 </div>
 <div id="sample-qc" class="section level3">
 <h3><span class="header-section-number">1.4.4</span> Sample QC</h3>
@@ -385,34 +421,47 @@ awk &#39;$2!~/rs/&amp;&amp;$2!~/.../{print $2}&#39; ./file.map</code></pre>
 <div id="checks-for-missing-data" class="section level4">
 <h4><span class="header-section-number">1.4.4.1</span> Checks for missing data</h4>
 <p>To obtain a summary of the amount of missing genotype data per sample and per SNP, use the option '- -missing' in the PLINK command line.</p>
-<pre class="shell"><code>plink --bfile genstudy --missing --out genstudy.CRstats --noweb</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">plink</span> --bfile genstudy --missing --out genstudy.CRstats --noweb</code></pre></div>
 <p>Adding the '--out genstudy.CRstats' option ensures that the two output files are called 'genstudy.CRstats.imiss' and 'genstudy.CRstats.lmiss' respectively.</p>
-<p>This command creates two output files: * a '.imiss' file: summarises the proportion of missing genotype data per individual (one row per individual and six columns). The most important column for sample QC purposes is column 6, which contains the proportion of missing genotypes for the individual. * a '.lmiss' file: summarises the proportion of missing genotype data per SNP (one row per SNP and five columns). The most important column for SNP QC purposes is column 5, which contains the proportion of missing genotypes for the SNP.</p>
+<p>This command creates two output files:</p>
+<ul>
+<li>a '.imiss' file: summarises the proportion of missing genotype data per individual (one row per individual and six columns). The most important column for sample QC purposes is column 6, which contains the proportion of missing genotypes for the individual.</li>
+<li>a '.lmiss' file: summarises the proportion of missing genotype data per SNP (one row per SNP and five columns). The most important column for SNP QC purposes is column 5, which contains the proportion of missing genotypes for the SNP.</li>
+</ul>
 </div>
 <div id="gender-checks" class="section level4">
 <h4><span class="header-section-number">1.4.4.2</span> Gender Checks</h4>
 <p>PLINK allows to use genotype data from the X chromosome to determine gender (i.e. based on heterozygosity rates), and compares this to reported gender as per the .ped/.fam file. PLINK then flags any discrepancies i.e. individuals for whom reported gender does not match the gender estimated based on genotype data. To undertake this comparison, we can use the option '- - check-sex' in PLINK.</p>
 <p>To undertake the gender comparison and save results in an output file called 'genstudy.sexcheck':</p>
-<pre class="shell"><code>plink --bfile genstudy --check-sex --out genstudy --noweb</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">plink</span> --bfile genstudy --check-sex --out genstudy --noweb</code></pre></div>
 <p>The output file has six columns, being the most important one (for the purpose of sample QC) column 5, which indicates whether there is a gender discordance or not.</p>
 </div>
 <div id="duplicaterelated-samples" class="section level4">
 <h4><span class="header-section-number">1.4.4.3</span> Duplicate/related samples</h4>
 <p>PLINK will also calculated identity-by-state (IBS) and identity-by-descent (IBD) statistics for our individuals to help us identify duplicated and/or related samples. Before we ask PLINK to do this, however, we need to generate a pruned subset of SNPs using the option '--indep-pairwise' in PLINK, which is based on pairwise genotypic correlation. An example of a command line for generating a pruned subset of SNPs is as follows:</p>
-<pre class="shell"><code>plink --bfile genstudy --indep-pairwise 1500 150 0.2 --noweb</code></pre>
-<p>The options 1500, 150 and 0.2 in the command above relate to the following steps, and of course these options can be changed depending on your requirements: * consider a window of 1500 SNPs, * calculate LD between each pair of SNPs in the window, remove one of a pair of SNPs if the LD is greater than 0.2, * shift the window 150 SNPs forward and repeat the procedure</p>
-<p>Running this command line will create two output files, 'plink.prune.in' and 'plink.prune.out': * plink.prune.in: lists all SNPs remaining after pruning * plink.prune.out: lists all SNPs removed during pruning</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">plink</span> --bfile genstudy --indep-pairwise 1500 150 0.2 --noweb</code></pre></div>
+<p>The options 1500, 150 and 0.2 in the command above relate to the following steps, and of course these options can be changed depending on your requirements:</p>
+<ul>
+<li>consider a window of 1500 SNPs,</li>
+<li>calculate LD between each pair of SNPs in the window, remove one of a pair of SNPs if the LD is greater than 0.2,</li>
+<li>shift the window 150 SNPs forward and repeat the procedure</li>
+</ul>
+<p>Running this command line will create two output files, 'plink.prune.in' and 'plink.prune.out':</p>
+<ul>
+<li>plink.prune.in: lists all SNPs remaining after pruning</li>
+<li>plink.prune.out: lists all SNPs removed during pruning</li>
+</ul>
 <p>Both these files can subsequently be specified as the argument for PLINK’s '--extract' or '--exclude' command respectively to provide a pruned set of SNPs.</p>
 <p>To create a pruned version of the 'genstudy' dataset and call it 'p.genstudy':</p>
-<pre class="shell"><code>plink --bfile genstudy --extract plink.prune.in --make-bed --out p.genstudy --noweb</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">plink</span> --bfile genstudy --extract plink.prune.in --make-bed --out p.genstudy --noweb</code></pre></div>
 <p>To generate IBS and IBD estimates for all pairs of individuals, use the PLINK option '—genome':</p>
-<pre class="shell"><code>plink --bfile p.genstudy --genome --out genstudy --noweb</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">plink</span> --bfile p.genstudy --genome --out genstudy --noweb</code></pre></div>
 <p>Running this command creates an output file called &quot;genstudy.genome&quot;. This includes a row per each unique pair of individuals, and fourteen columns, being the most important for the purpose of sample QC column 10, as it includes an estimate of the IBD proportion between individuals.</p>
 </div>
 <div id="heterozygosity" class="section level4">
 <h4><span class="header-section-number">1.4.4.4</span> Heterozygosity</h4>
 <p>To run heterozygosity checks in PLINK, we can use the option '- -het':</p>
-<pre class="shell"><code>plink --bfile genstudy --het --out genstudy</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">plink</span> --bfile genstudy --het --out genstudy</code></pre></div>
 <p>This command produces the output file &quot;genstudy.het&quot;, which contains one row per individual and six columns. Column 6 includes the estimate of the inbreeding coefficient, F.</p>
 </div>
 <div id="removing-individuals-who-fail-sample-qc" class="section level4">
@@ -421,26 +470,26 @@ awk &#39;$2!~/rs/&amp;&amp;$2!~/.../{print $2}&#39; ./file.map</code></pre>
 <div id="removing-due-to-missingness" class="section level5">
 <h5><span class="header-section-number">1.4.4.5.1</span> Removing due to missingness</h5>
 <p>To investigate how many individuals are excluded at difference threshold levels (e.g. 1%, 5%, and 10%):</p>
-<pre class="shell"><code>awk &#39;NR&gt;1 &amp;&amp; $6 &gt;= 0.01 {print}&#39; genstudy.CRstats.imiss | wc -l
-awk &#39;NR&gt;1 &amp;&amp; $6 &gt;= 0.05 {print}&#39; genstudy.CRstats.imiss | wc -l
-awk &#39;NR&gt;1 &amp;&amp; $6 &gt;= 0.1 {print}&#39; genstudy.CRstats.imiss | wc -l</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">awk</span> <span class="st">&#39;NR&gt;1 &amp;&amp; $6 &gt;= 0.01 {print}&#39;</span> genstudy.CRstats.imiss <span class="kw">|</span> <span class="fu">wc</span> -l
+<span class="fu">awk</span> <span class="st">&#39;NR&gt;1 &amp;&amp; $6 &gt;= 0.05 {print}&#39;</span> genstudy.CRstats.imiss <span class="kw">|</span> <span class="fu">wc</span> -l
+<span class="fu">awk</span> <span class="st">&#39;NR&gt;1 &amp;&amp; $6 &gt;= 0.1 {print}&#39;</span> genstudy.CRstats.imiss <span class="kw">|</span> <span class="fu">wc</span> -l</code></pre></div>
 <p>To exclude all individuals with more than 5% missing data:</p>
-<pre class="shell"><code>awk &#39;$6 &gt;= 0.05 {print}&#39; genstudy.CRstats.imiss &gt; genstudy.CRremove
-plink --bfile genstudy --noweb --remove genstudy.CRremove --make-bed --out genstudy.CR</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">awk</span> <span class="st">&#39;$6 &gt;= 0.05 {print}&#39;</span> genstudy.CRstats.imiss <span class="op">&gt;</span> genstudy.CRremove
+<span class="ex">plink</span> --bfile genstudy --noweb --remove genstudy.CRremove --make-bed --out genstudy.CR</code></pre></div>
 </div>
 <div id="removing-due-to-gender-discordance" class="section level5">
 <h5><span class="header-section-number">1.4.4.5.2</span> Removing due to gender discordance</h5>
 <p>To select only those individuals with an entry of 'PROBLEM' in column 5:</p>
-<pre class="shell"><code>awk &#39;$5==&quot;PROBLEM&quot;{print}&#39; genstudy.sexcheck&gt;genstudy.sexremove</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">awk</span> <span class="st">&#39;$5==&quot;PROBLEM&quot;{print}&#39;</span> genstudy.sexcheck<span class="op">&gt;</span>genstudy.sexremove</code></pre></div>
 <p>To remove these individuals from the 'genstudy.CR' dataset, and create a new dataset named 'genstudy.sex':</p>
-<pre class="shell"><code>plink --bfile genstudy.CR --noweb --remove genstudy.sexremove --make-bed --out genstudy.sex</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">plink</span> --bfile genstudy.CR --noweb --remove genstudy.sexremove --make-bed --out genstudy.sex</code></pre></div>
 </div>
 <div id="remove-duplicates-and-related-samples" class="section level5">
 <h5><span class="header-section-number">1.4.4.5.3</span> Remove duplicates and related samples</h5>
 <p>We use an IBD threshold of 0.1875 to filter out either duplicated or closely related samples (column 10).</p>
-<pre class="shell"><code>awk &#39;$10 &gt;= 0.1875 {print}&#39; genstudy.genome &gt; genstudy.PIremove</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">awk</span> <span class="st">&#39;$10 &gt;= 0.1875 {print}&#39;</span> genstudy.genome <span class="op">&gt;</span> genstudy.PIremove</code></pre></div>
 <p>To remove this list of individuals from the 'genstudy.sex' dataset and create a new dataset 'genstudy_sampleqc':</p>
-<pre class="shell"><code>plink --bfile genstudy.sex --noweb --remove genstudy.PIremove.list --make-bed --out genstudy_sampleqc</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">plink</span> --bfile genstudy.sex --noweb --remove genstudy.PIremove.list --make-bed --out genstudy_sampleqc</code></pre></div>
 </div>
 <div id="heterozygosity-1" class="section level5">
 <h5><span class="header-section-number">1.4.4.5.4</span> Heterozygosity</h5>
@@ -452,29 +501,217 @@ plink --bfile genstudy --noweb --remove genstudy.CRremove --make-bed --out genst
 <div id="checks-for-missing-data-1" class="section level5">
 <h5><span class="header-section-number">1.4.4.6.1</span> Checks for missing data</h5>
 <p>Similar to what we did for sample QC, we can investigate how many SNPs fail different missingness thresholds by filtering column 5 in 'genstudy_sampleqc.CRstats.lmiss' using different threshold values. We can do this using the following command (e.g. for threshold of 1%):</p>
-<pre class="shell"><code>plink --bfile genstudy_sampleqc --missing --out genstudy_sampleqc.CRstats --noweb
-awk &#39;NR&gt;1 &amp;&amp; $5 &gt;= 0.01 {print}&#39; genstudy_sampleqc.CRstats.lmiss | wc -l</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">plink</span> --bfile genstudy_sampleqc --missing --out genstudy_sampleqc.CRstats --noweb
+<span class="fu">awk</span> <span class="st">&#39;NR&gt;1 &amp;&amp; $5 &gt;= 0.01 {print}&#39;</span> genstudy_sampleqc.CRstats.lmiss <span class="kw">|</span> <span class="fu">wc</span> -l</code></pre></div>
 </div>
 <div id="checks-for-minor-allele-frequency-maf" class="section level5">
 <h5><span class="header-section-number">1.4.4.6.2</span> Checks for minor allele frequency (MAF)</h5>
 <p>To investigate how many SNPs have MAF&lt;1% by first of all running the '--freq' option in PLINK:</p>
-<pre class="shell"><code>plink --bfile genstudy_sampleqc --noweb --freq --out genstudy_sampleqc
-awk &#39;$5&lt;0.01&#39; genstudy_sampleqc.frq | wc -l</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">plink</span> --bfile genstudy_sampleqc --noweb --freq --out genstudy_sampleqc
+<span class="fu">awk</span> <span class="st">&#39;$5&lt;0.01&#39;</span> genstudy_sampleqc.frq <span class="kw">|</span> <span class="fu">wc</span> -l</code></pre></div>
 <p>NOTE: Data quality tends to decrease with decreasing MAF. A low MAF implies rare genotypes which will be seen only a few times in your GWAS dataset. This in turn implies that there is less information that a genotype calling algorithm can use to call this genotype, and so calls are less certain. And the power to detect an association signal decreases with decreasing MAF. However, if a large MAF threshold is selected, this implies more SNPs are removed from study which possibly includes the true causal SNPs. A moderate MAF such as 0.05 is suggested.</p>
 </div>
 <div id="checks-for-adherence-to-hardy-weinberg-equilibrium" class="section level5">
 <h5><span class="header-section-number">1.4.4.6.3</span> Checks for adherence to Hardy-Weinberg Equilibrium</h5>
 <p>To generate a list of genotype counts and Hardy-Weinberg test statistics for each SNP:</p>
-<pre class="shell"><code>plink --bfile genstudy_sampleqc --noweb --hardy --out genstudy_sampleqc</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">plink</span> --bfile genstudy_sampleqc --noweb --hardy --out genstudy_sampleqc</code></pre></div>
 <p>This provides and output file 'genstudy.hwe' and the p-value for the test for Hardy-Weindberg Equilibrium is in column 9 of this file.</p>
 <p>To see how many SNPs have HWE p-value&lt;0.0001 (in controls &quot;UNAFF&quot;) and pvalue&lt;0.00001:</p>
-<pre class="shell"><code>awk &#39;$3==&quot;UNAFF&quot; &amp;&amp; $9&lt;0.0001&#39; genstudy_sampleqc.hwe | wc -l
-awk &#39;$3==&quot;UNAFF&quot; &amp;&amp; $9&lt;0.00001&#39; genstudy_sampleqc.hwe | wc -l</code></pre>
-<p>To apply some extra SNP QC filters to our already sample-QC'd dataset: * Minor allele frequency (MAF) &gt;0.05 – option '--maf 0.05' * SNP genotyping rate &gt;95% (i.e. &lt;5% missing genotypes for the SNP, across all individuals) – option '-- geno 0.05' * Hardy-Weinberg p-value &gt;0.0001 in controls – option '-- hwe 0.0001'</p>
-<pre class="shell"><code>plink --bfile genstudy_sampleqc --noweb --maf 0.05 --geno 0.05 --hwe 0.0001 --make-bed --out genstudy_qc</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">awk</span> <span class="st">&#39;$3==&quot;UNAFF&quot; &amp;&amp; $9&lt;0.0001&#39;</span> genstudy_sampleqc.hwe <span class="kw">|</span> <span class="fu">wc</span> -l
+<span class="fu">awk</span> <span class="st">&#39;$3==&quot;UNAFF&quot; &amp;&amp; $9&lt;0.00001&#39;</span> genstudy_sampleqc.hwe <span class="kw">|</span> <span class="fu">wc</span> -l</code></pre></div>
+<p>To apply some extra SNP QC filters to our already sample-QC'd dataset:</p>
+<ul>
+<li>Minor allele frequency (MAF) &gt;0.05 – option '--maf 0.05'</li>
+<li>SNP genotyping rate &gt;95% (i.e. &lt;5% missing genotypes for the SNP, across all individuals) – option '-- geno 0.05'</li>
+<li>Hardy-Weinberg p-value &gt;0.0001 in controls – option '-- hwe 0.0001'</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">plink</span> --bfile genstudy_sampleqc --noweb --maf 0.05 --geno 0.05 --hwe 0.0001 --make-bed --out genstudy_qc</code></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div id="testing-for-associations" class="section level2">
+<h2><span class="header-section-number">1.5</span> Testing for Associations</h2>
+<p>In this section, we will undertake an analysis of association:</p>
+<ul>
+<li>first, with no adjustment made for non-genetic variables (univariate analysis of association)</li>
+<li>then, with adjustment made for relevant non-genetic variables (multiple regression analysis)</li>
+</ul>
+<div id="software-and-datasets-1" class="section level3">
+<h3><span class="header-section-number">1.5.1</span> Software and datasets</h3>
+<p>We will use the QC'd PLINK files (generated in the previous section) ready to run the analyses of association.</p>
+<p>To run the analyses of association, we use a software package called 'SNPTEST (Version 2)' – it's free and available for the analysis of genome-wide association studies.</p>
+<p>To use SNPTEST, input files need to be in a specific format:</p>
+<ul>
+<li>one '.gen' file including genotype data, which includes one row per SNP.</li>
+<li>one '.sample' file including phenotypic data. It has three parts (a) a header line detailing the names of the columns in the file, (b) a line detailing the types of variables stored in each column, and (c) a line for each individual including the information for that individual.</li>
+</ul>
+<p>A '.gen' file includes one row per SNP. The first five entries on each line should be as follows:</p>
+<ul>
+<li>SNP ID: This entry is usually used to denote the chromosome number.</li>
+<li>rs number: This entry is a number which uniquely identifies the genotyped SNP. An rs number is an accession number used by researchers and databases to refer to specific SNPs. It stands for 'Reference SNP cluster ID'.</li>
+<li>Base pair position of the SNP: A value that described the SNP’s position on the chromosome.</li>
+<li>Allele coded A (see below for further explanation of this): The entry here will be A, C, T or G i.e. corresponding to the four possible nucleotides.</li>
+<li>Allele coded B (see below for further explanation of this): The entry here will be A, C, T or G i.e. corresponding to the four possible nucleotides.</li>
+</ul>
+<p>The remaining entries on each row represent the genotype of each individual at the SNP. Each individual will have three entries, representing their probability of having the 'AA', 'AB' and 'BB' genotypes respectively. As we do not have any imputed SNPs in the current dataset, the probability for each genotype will be either 0 or 1. So, an individual with genotype AA will be coded '1 0 0', with genotype AB will be coded '0 1 0', and with genotype BB will be coded '0 0 1'. If genotype is missing for an individual, all three entries are set to '0 0 0'.</p>
+<p>It is possible to convert QC'd PLINK files to '.gen' and '.sample' format using a program called 'GTOOL'. We have also removed all chromosome X SNPs from these files, since in terms of association we are only interested in SNPs on chromosome 10.</p>
+</div>
+<div id="univariate-analyses-of-association" class="section level3">
+<h3><span class="header-section-number">1.5.2</span> Univariate analyses of association</h3>
+<p>To run univariate analyses of association between all SNPs in our 'genstudy_qc' file and our phenotype 'diseased', assuming an additive mode of inheritance, we would use the following SNPtest command:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">snptest</span> \
+-data genstudy_qc.gen genstudy_qc.sample \
+-o genstudy_qc_univariate_add.out \
+-pheno diseased \
+-frequentist 1 \
+-method threshold</code></pre></div>
+<p>Due to the large number of output columns in 'genstudy_qc_univariate_dom.out' and the large number of SNPs investigated, it is useful to look at our results in summary format. A useful way of doing this is by preparing a Manhattan plot to give a graphical representation of our results. Essentially, this is a plot of pvalue versus base pair position for each SNP and is a useful way of identifying significantly associated SNPs.</p>
+<p>First of all, it is necessary to re-format our output file into a format which is appropriate for the shell script.</p>
+<ol style="list-style-type: decimal">
+<li>Add chromosome number to each row (also need to delete final row in datafile since includes an additional line of text which is not needed)</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">awk</span> <span class="st">&#39;NR&gt;11{$1=10; print}&#39;</span> genstudy_qc_univariate_add.out <span class="op">&gt;</span>genstudy_qc_new.out
+<span class="fu">sed</span> <span class="st">&#39;$d&#39;</span> genstudy_qc_new.out<span class="op">&gt;</span>genstudy_qc_new2.out</code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Select only columns of interest, and label them:</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="bu">echo</span> <span class="st">&quot;CHR SNP BP P&quot;</span> <span class="op">&gt;</span> genstudy_qc_Manhattan.txt<span class="kw">;</span>
+<span class="fu">awk</span> <span class="st">&#39;{print $1,$2,$4,$42}&#39;</span> genstudy_qc_new2.out <span class="op">&gt;&gt;</span>genstudy_qc_Manhattan.txt</code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>Create a new file (“genstudy_qc.unimp.snp”) which lists all actually genotyped SNPs.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">awk</span> <span class="st">&#39; $9==1{print $2}&#39;</span> genstudy_qc_univariate_add.out <span class="op">&gt;</span> genstudy_qc.unimp.snp</code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>Now, the data is prepared for generating the Manhattan plot.</li>
+</ol>
+<p>To prepare a Q-Q plot of your results to ensure that there is no apparent genomic inflation in your results, which would suggest population substructure:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pvals &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;genstudy_qc_Manhattan.txt&quot;</span>, <span class="dt">header=</span>T)
+observed &lt;-<span class="st"> </span><span class="kw">sort</span>(pvals<span class="op">$</span>P)
+lobs &lt;-<span class="st"> </span><span class="op">-</span>(<span class="kw">log10</span>(observed))
+expected &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(observed))
+lexp &lt;-<span class="st"> </span><span class="op">-</span>(<span class="kw">log10</span>(expected <span class="op">/</span><span class="st"> </span>(<span class="kw">length</span>(expected)<span class="op">+</span><span class="dv">1</span>)))
+<span class="kw">pdf</span>(<span class="st">&quot;qqplot.pdf&quot;</span>, <span class="dt">width=</span><span class="dv">6</span>, <span class="dt">height=</span><span class="dv">6</span>)
+<span class="kw">plot</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">7</span>), <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">7</span>), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">lwd=</span><span class="dv">3</span>, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Expected (-logP)&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Observed (-logP)&quot;</span>,
+<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">7</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">7</span>), <span class="dt">las=</span><span class="dv">1</span>, <span class="dt">xaxs=</span><span class="st">&quot;i&quot;</span>, <span class="dt">yaxs=</span><span class="st">&quot;i&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;l&quot;</span>)
+<span class="kw">points</span>(lexp, lobs, <span class="dt">pch=</span><span class="dv">23</span>, <span class="dt">cex=</span>.<span class="dv">4</span>, <span class="dt">bg=</span><span class="st">&quot;black&quot;</span>)
+<span class="kw">dev.off</span>()</code></pre></div>
+<p>To extract a list of the SNPs giving the lowest p-values:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">awk</span> <span class="st">&#39; $4 &lt;0.0001&#39;</span> genstudy_qc_Manhattan.txt <span class="op">&gt;</span> lowest_ps_univariate
+<span class="fu">awk</span> <span class="st">&#39; $4&gt;0&#39;</span> lowest_ps_univariate <span class="op">&gt;</span> lowest_ps_univariate_new <span class="co">#to filter out SNPs were it was not possible to undertake an analysis of association</span></code></pre></div>
+</div>
+<div id="multiple-regression-analyses" class="section level3">
+<h3><span class="header-section-number">1.5.3</span> Multiple regression analyses</h3>
+<p>In the 'genstudy.sample' file you will notice four columns to the right of the phenotype column 'diseased'. These are labelled 'age', 'bmi', 'family' and 'sex', and represent four variables believed to be of potential interest in terms of being associated with our disease.</p>
+<p>To decide whether to adjust for each of these variables, we first of all need to test whether they are univariately associated with our phenotype ‘diseased’. As our phenotype is binary, we can use Student’s t-test to test for association with age and bmi, and the chi-square test to test for association with family history and sex.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data=<span class="kw">read.table</span>(<span class="st">&quot;genstudy_qc.sample&quot;</span>,<span class="dt">header=</span>T)
+data=data[<span class="op">-</span><span class="dv">1</span>,]
+<span class="kw">attach</span>(data)
+res_age=<span class="kw">t.test</span>(<span class="kw">as.numeric</span>(age)<span class="op">~</span>diseased)
+res_bmi=<span class="kw">t.test</span>(<span class="kw">as.numeric</span>(bmi)<span class="op">~</span>diseased)
+res_family=<span class="kw">chisq.test</span>(family,diseased)
+res_sex=<span class="kw">chisq.test</span>(sex,diseased)
+res_age<span class="op">$</span>p.value
+res_bmi<span class="op">$</span>p.value
+res_family<span class="op">$</span>p.value
+res_sex<span class="op">$</span>p.value</code></pre></div>
+<p>To now run our SNP association analyses using a multiple regression approach, we can add the element '-cov_names' followed by the clinical variable names to your command (assuming that we have decided to adjust for all clinical variables giving p&lt;0.05 in our univariate analysis, we only have to adjust for age and family history):</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">snptest</span> \
+-data genstudy_qc.gen genstudy_qc.sample \
+-o genstudy_qc_adjusted_add.out \
+-pheno diseased \
+-frequentist 1 \
+-method threshold \
+-cov_names age family</code></pre></div>
+<p>To prepare a Manhattan plot and QQ-plot of the results from your multiple regression analysis by adjusting the code used for plotting the univariate results:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">awk</span> <span class="st">&#39;NR&gt;11{$1=10; print}&#39;</span> genstudy_qc_adjusted_add.out <span class="op">&gt;</span> genstudy_qc_new.out
+<span class="fu">sed</span> <span class="st">&#39;$d&#39;</span> genstudy_qc_new.out <span class="op">&gt;</span> genstudy_qc_new2.out
+<span class="fu">tail</span> -n +2 genstudy_qc_new2.out <span class="op">&gt;</span> genstudy_qc_new3.out
+<span class="bu">echo</span> <span class="st">&quot;CHR SNP BP P&quot;</span> <span class="op">&gt;</span> genstudy_qc_adj_Manhattan.txt
+<span class="fu">awk</span> <span class="st">&#39;{print $1,$2,$4,$42}&#39;</span> genstudy_qc_new3.out <span class="op">&gt;&gt;</span> genstudy_qc_adj_Manhattan.txt
+<span class="fu">awk</span> <span class="st">&#39;$9==1{print $2}&#39;</span> genstudy_qc_adjusted_add.out <span class="op">&gt;</span> genstudy_qc.adj.snp
+<span class="fu">sh</span> QuickManhattan.sh</code></pre></div>
+<p>To obtain a list of the lowest p-values from this analysis, and compare them with your lowest pvalues from the univariate analysis:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">awk</span> <span class="st">&#39; $4 &lt;0.0001&#39;</span> genstudy_qc_adj_Manhattan.txt <span class="op">&gt;</span> lowest_ps_adjusted
+<span class="fu">awk</span> <span class="st">&#39;$4&gt;0&#39;</span> lowest_ps_adjusted <span class="op">&gt;</span> lowest_ps_adjusted_new
+<span class="fu">cat</span> lowest_ps_adjusted_new</code></pre></div>
+</div>
+</div>
+<div id="population-structure-in-gwas" class="section level2">
+<h2><span class="header-section-number">1.6</span> Population structure in GWAS</h2>
+<div id="testing-for-association-under-an-additive-model" class="section level3">
+<h3><span class="header-section-number">1.6.1</span> Testing for association under an additive model</h3>
+<p>To test for association under an additive model using the PLINK command, but without adjustment for any covariates:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">plink</span> --noweb --bfile EGCUT.clean --logistic --ci 0.95 --out plink.additive</code></pre></div>
+<p>To investigate the impact of population structure by generating a QQ plot of observed p-values against those that would be expected under the null hypothesis of no association. In the absence of population structure, we would expect most points to lie on the y=x line:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">R</span> --vanilla --slave --args plink.additive.assoc.logistic ADD qq_1.pdf <span class="op">&lt;</span> qqPlot.R</code></pre></div>
+</div>
+<div id="performing-multi-dimensional-scaling" class="section level3">
+<h3><span class="header-section-number">1.6.2</span> Performing multi-dimensional scaling</h3>
+<p>Multi-dimensional scaling in PLINK is performed in three steps:</p>
+<ol style="list-style-type: decimal">
+<li>Identifying a subset of &quot;independent&quot; common SNPs (minor allele frequency of at least 5%) that are not in linkage disequilibrium with each other.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">plink</span> --noweb --bfile EGCUT.clean --maf 0.05 --indep-pairwise 50 5 0.05</code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Calculating the relatedness between each pair of individuals using the set of independent SNPs which is a measure of genetic similarity.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">plink</span> --noweb --bfile EGCUT.clean --extract plink.prune.in --Z-genome</code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>Perform multi-dimensional scaling using the relatedness matrix.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">plink</span> --noweb --bfile EGCUT.clean --read-genome plink.genome.gz --cluster --mds-plot 2</code></pre></div>
+<p>Note that the option --Z-genome produces a compressed genome file and saves on storage. The option --mds-plot specifies how many eigenvectors from the multi-dimensional scaling to summarise in the output file. The eigenvectors are output to the file plink.mds.</p>
+<p>The output file has one row per individual, and provides the identifier used in the PLINK family file, together with the first two eigenvectors (columns C1 and C2). You can plot the first two eigenvectors against each other using the command:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">R</span> --vanilla --slave --args plink.mds EGCUT.clean.fam mds.pdf <span class="op">&lt;</span> mds.R</code></pre></div>
+<p>In the output plot, each point corresponds to an individual.</p>
+</div>
+<div id="testing-for-association-under-an-additive-model-with-adjustment-for-confounding" class="section level3">
+<h3><span class="header-section-number">1.6.3</span> Testing for association under an additive model with adjustment for confounding</h3>
+<p>To account for population structure in our analysis, we can repeat our test of association under and additive model, but this type adjusting for eigenvectors from the multi-dimensional scaling as covariates:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">plink</span> --noweb --bfile EGCUT.clean --logistic --covar plink.mds --covar-name C1,C2 --ci 0.95 --out plink.additive.mds</code></pre></div>
+<p>To investigate the impact of population structure that is not accounted for by the first two eigenvectors from multi-dimensional scaling by generating a QQ plot with the command:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">R</span> --vanilla --slave --args plink.additive.mds.assoc.logistic ADD qq_2.pdf <span class="op">&lt;</span> qqPlot.R</code></pre></div>
+<p>To obtain association summary statistics for the SNP:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">grep</span> SNPID plink.additive.mds.assoc.logistic</code></pre></div>
+</div>
+</div>
+<div id="phasing-and-imputation" class="section level2">
+<h2><span class="header-section-number">1.7</span> Phasing and Imputation</h2>
+<p>By utilising genotype imputation methods, we can investigate whether there are neighbouring SNPs to a particular SNP that generated a significant p-value, also sharing evidence of association with the phenotype. The focus in this section will be on imputing genotypes within close proximity of a significant SNP, and then to re-run the association analyses on the imputed dataset.</p>
+<div id="pre-phasing-and-imputation" class="section level3">
+<h3><span class="header-section-number">1.7.1</span> Pre-phasing and imputation</h3>
+<p>Prior to undertaking genotype imputation, it is necessary to &quot;pre-phase&quot; the genotype data to convert it into haplotype form.</p>
+<p>Doing this affords more efficient imputation as the reference panels on which we base our imputation are all in haplotype form as well. Haplotypes span across many locus so it is important that when focusing in on a certain region of the genome, (for example the region surrounding a significant SNP as we are in this practical), that we allow a sufficient buffer zone around the region. If we didn’t allow this buffer zone then we could interrupt haplotype construction with the locus of interest!</p>
+<p>To undertake the pre-phasing we use a software package called SHAPEIT2 (<a href="https://mathgen.stats.ox.ac.uk/genetics_software/shapeit/shapeit.htm" class="uri">https://mathgen.stats.ox.ac.uk/genetics_software/shapeit/shapeit.htm</a>).</p>
+<p>The causal SNP we found before had base pair position 64803579 and so a sensible region to pre-phase might be from 63Mb to 68Mb, which will include the immediate region surrounding the causal SNP, plus a buffer region at either end.</p>
+<p>To pre-phase the &quot;genstudy_pp&quot; dataset, we can run the following SHAPEIT2 command:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">shapeit</span> --input-ped genstudy_pp.ped genstudy_pp.map --input-map chr10.map --output-max genstudy.ph --thread 2 --input-from 63000000 --input-to 68000000</code></pre></div>
+<p>Once we have pre-phased our data, we can undertake genotype imputation and to do this we will use a software package called &quot;IMPUTE2&quot; (<a href="https://mathgen.stats.ox.ac.uk/impute/impute_v2.html" class="uri">https://mathgen.stats.ox.ac.uk/impute/impute_v2.html</a>).</p>
+<p>After running SHAPEIT2 on the &quot;genstudy_pp&quot; dataset, we obtained a &quot;genstudy.ph.haps&quot; datafile which contained phased haplotypes for our specified region. We can now run IMPUTE2 on this .haps datafile to impute genotypes at SNPs not originally genotyped, but included on our chosen reference panel. For the purpose of this practical, we will use the reference panel from the 1000 Genomes Project (<a href="http://www.1000genomes.org" class="uri">http://www.1000genomes.org</a>). To do this, we can use the following IMPUTE2 command:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">impute2</span> -use_prephased_g -known_haps_g genstudy.ph.haps -m chr10.map -h chr10.haps.gz -l chr10.leg.gz -int 64300000 65300000 -Ne 20000 -buffer 500 -o genstudy_imp.gen</code></pre></div>
+<p>Please note that the interval we specify under the option &quot;-int&quot; (64300000 to 65300000) is narrower than the one we specified in the SHAPEIT2 command. This is because the imputation process will produce genotypes rather than haplotypes. Therefore we can narrow down to a 1Mb region of interest.</p>
+<p>After the Imputation has run, in the screen output there is a section called &quot;Imputation accuracy assessment&quot;. The interval here denotes the probability range at which a SNP genotype has been called and the concordance with the patient genotypes. These figures can be improved by increasing the number of patients in the study or with better match reference haplotypes.</p>
+</div>
+<div id="re-running-our-univariate-analyses-of-association" class="section level3">
+<h3><span class="header-section-number">1.7.2</span> Re-running our univariate analyses of association</h3>
+<p>Previously, when we were dealing only with actually genotyped SNPs, our .gen file (&quot;genstudy_qc.gen&quot;) included the first five compulsory columns, followed by three columns for each genotyped SNP. The three columns represented an individual's probability of having the &quot;AA&quot;, &quot;AB&quot; and &quot;BB&quot; genotypes respectively. As we did not have any imputed SNPs, the probability for each genotype was either 0 or 1. However, now that we are dealing with imputed SNPs, the probability for each genotype can be any number between 0 and 1, representing our genotype uncertainty.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">head</span> -n 1 genstudy_imp.gen</code></pre></div>
+<p>Please, notice that there are number others than 0 and 1 in the columns representing genotype probabilities for the SNPs.</p>
+<p>To run univariate analyses of association on a dataset which includes imputed genotypes, we can again use the SNPTest programme. However, the element &quot;method&quot; within the SNPTest command needs to be specified differently. The &quot;method&quot; element controls the way in which genotype uncertainty is accounted for in the analyses of association, bearing in mind that imputation can only provide a ‘best estimate’ of what the true genotype at a SNP would be.</p>
+<ul>
+<li>threshold: Assumes a particular genotype at a SNP only if accuracy of the genotype call is above a given threshold. The calling threshold is controlled by the flag -call_thresh and the default calling threshold is 0.9.</li>
+<li>expected: Uses expected genotype counts, also known as genotype dosages, in the analyses of association.</li>
+<li>score: Uses a missing data likelihood score test in the analyses of association.</li>
+<li>ml: Again uses missing data likelihood approach, but with multiple Newton-Raphson iterations to estimate the parameters in the missing data likelihood.</li>
+<li>em: Again uses missing data likelihood approach, but with an EM algorithm to estimate the parameters in the missing data likelihood.</li>
+</ul>
+<p>So, to run a univariate analysis of association on our imputed dataset, assuming the threshold method we would use the following command:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">snptest</span> -data genstudy_imp.gen genstudy_qc.sample -o genstudy_qc_univariate_add.imp.out -pheno diseased -frequentist 1 -method threshold</code></pre></div>
+<p>The SNPtest output file &quot;genstudy_qc_univariate_add.imp.out&quot; can now be scrutinised in much the same way as we did for the output file initially – i.e. we can produce Manhattan and QQ plots of the resulting p-values – except for one additional and important QC step which needs to occur post-imputation. This QC step involves filtering out SNPs with poor imputation accuracy. The SNPtest output file has a column labelled &quot;INFO&quot;, which contains, for each SNP, a number indicating how accurately it has been imputed. The value of INFO will range from 0 (no certainty in imputation) to 1 (perfect accuracy in imputation/actually genotyped SNP). Poorly imputed SNPs are likely to contribute to false positive results whilst removing a large number of imputed SNPs will distort the overall results. Therefore, as a QC step we need to identify an appropriate, yet not too stringent, threshold for the level of accuracy that is allowed. Unfortunately, there is no exact science to choosing the threshold; the SNPtest website (<a href="https://mathgen.stats.ox.ac.uk/impute/impute_v2.html" class="uri">https://mathgen.stats.ox.ac.uk/impute/impute_v2.html</a>) views INFO thresholds between 0.3 and 0.5 as reasonable. For this analysis we will utilise an INFO threshold of 0.4.</p>
+<p>This additional QC step can be implemented very easily by:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">awk</span> <span class="st">&#39;NR&gt;11&amp;&amp;$9&gt;0.4{$1=10;print}&#39;</span> genstudy_qc_univariate_add.imp.out <span class="op">&gt;</span>genstudy_qc_new.imp.out</code></pre></div>
 
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -484,11 +721,10 @@ awk &#39;$3==&quot;UNAFF&quot; &amp;&amp; $9&lt;0.00001&#39; genstudy_sampleqc.h
         </div>
       </div>
 
-<a href="aws.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="eqtl.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -528,6 +764,10 @@ gitbook.start({
 "text": null
 },
 "download": ["knowledge-book.pdf", "knowledge-book.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

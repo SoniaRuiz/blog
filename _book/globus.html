@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | Knowledge Book</title>
+  <title>Chapter 6 Globus | Knowledge Book</title>
   <meta name="description" content="This book contains some of the knowledge I have been acquiring during my PhD studies." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | Knowledge Book" />
+  <meta property="og:title" content="Chapter 6 Globus | Knowledge Book" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | Knowledge Book" />
+  <meta name="twitter:title" content="Chapter 6 Globus | Knowledge Book" />
   
   <meta name="twitter:description" content="This book contains some of the knowledge I have been acquiring during my PhD studies." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="machine-learning-concepts.html"/>
-
+<link rel="prev" href="github.html"/>
+<link rel="next" href="machine-learning-concepts.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -216,17 +216,39 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered">
-<h1>References</h1>
+<div id="globus" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Globus</h1>
+<div id="useful-commands-1" class="section level2">
+<h2><span class="header-section-number">6.1</span> Useful Commands</h2>
+<ol style="list-style-type: decimal">
+<li><p>Login on your Globus account using your university access.</p></li>
+<li><p>Install and mount Globus on your Linux machine:</p></li>
+</ol>
+<pre class="console"><code>wget https://downloads.globus.org/globus-connect-personal/linux/stable/globusconnectpersonal-latest.tgz
+tar xzf globusconnectpersonal-latest.tgz
+cd globusconnectpersonal-X.X.X/
+./globusconnectpersonal</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li><p>Start Globus:</p>
+<pre class="console"><code>./globusconnectpersonal -start &amp;
+./globusconnectpersonal -status
+./globusconnectpersonal -trace</code></pre></li>
+<li><p>Configure a folder to be shared (more info <a href="https://docs.globus.org/how-to/globus-connect-personal-linux/#config-paths">here</a>):</p></li>
+</ol>
+<pre class="console"><code>nano ~/.globusonline/lta/config-paths
+./globusconnectpersonal -stop
+./globusconnectpersonal -start &amp;
+./globusconnectpersonal -status</code></pre>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="machine-learning-concepts.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="github.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="machine-learning-concepts.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

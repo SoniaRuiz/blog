@@ -80,6 +80,16 @@ To enter inside a container in execution:
 $ sudo docker exec -it name_container /bin/sh
 ```
 
+To add a user to the docker group (required to avoid using sudo):
+```{console}
+sudo usermod -a -G docker username
+```
+
+To check the user has been correctly added to the docker group:
+```{console}
+grep '^docker:' /etc/group
+```
+
 ## Docker & CoExp Web Application
 
 This tutorial contains the instructions to install a local version of the CoExp Webpage by making use of the Docker technology.

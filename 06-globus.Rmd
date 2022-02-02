@@ -1,0 +1,30 @@
+# Globus
+
+## Useful Commands
+
+1. Login on your Globus account using your university access.
+
+2. Install and mount Globus on your Linux machine:
+
+```console
+wget https://downloads.globus.org/globus-connect-personal/linux/stable/globusconnectpersonal-latest.tgz
+tar xzf globusconnectpersonal-latest.tgz
+cd globusconnectpersonal-X.X.X/
+./globusconnectpersonal
+```
+
+3. Start Globus:
+```console
+./globusconnectpersonal -start &
+./globusconnectpersonal -status
+./globusconnectpersonal -trace
+```
+
+4. Configure a folder to be shared (more info [here](https://docs.globus.org/how-to/globus-connect-personal-linux/#config-paths)):
+
+```console
+nano ~/.globusonline/lta/config-paths
+./globusconnectpersonal -stop
+./globusconnectpersonal -start &
+./globusconnectpersonal -status
+```

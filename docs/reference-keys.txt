@@ -52,6 +52,7 @@ generating-an-ec2-instance
 connecting-to-an-ec2-instance
 installingrunning-rstudio-on-an-ec2
 access-rstudio-using-your-browser
+configuring-https-with-rstudio-using-aws-ec2
 aws-list-of-cloud-services
 docker
 introduction

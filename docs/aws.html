@@ -24,7 +24,7 @@
 <meta name="author" content="Sonia García-Ruiz (s.ruiz@ucl.ac.uk)" />
 
 
-<meta name="date" content="2022-02-02" />
+<meta name="date" content="2022-03-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -157,6 +157,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.2.2" data-path="aws.html"><a href="aws.html#connecting-to-an-ec2-instance"><i class="fa fa-check"></i><b>3.2.2</b> Connecting to an EC2 instance</a></li>
 <li class="chapter" data-level="3.2.3" data-path="aws.html"><a href="aws.html#installingrunning-rstudio-on-an-ec2"><i class="fa fa-check"></i><b>3.2.3</b> Installing/Running RStudio on an EC2</a></li>
 <li class="chapter" data-level="3.2.4" data-path="aws.html"><a href="aws.html#access-rstudio-using-your-browser"><i class="fa fa-check"></i><b>3.2.4</b> Access RStudio using your browser</a></li>
+<li class="chapter" data-level="3.2.5" data-path="aws.html"><a href="aws.html#configuring-https-with-rstudio-using-aws-ec2"><i class="fa fa-check"></i><b>3.2.5</b> Configuring HTTPS with RStudio using AWS EC2</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="aws.html"><a href="aws.html#aws-list-of-cloud-services"><i class="fa fa-check"></i><b>3.3</b> AWS List of Cloud Services</a></li>
 </ul></li>
@@ -461,6 +462,64 @@ drwxr-xr-x 2 your_user your_group 4096 date s3md5</code></pre>
 <li>Add the port 8787 to the URL (i.e. <a href="http://" class="uri">http://</a>......:8787),</li>
 <li>Paste the URL on your browser. RStudio should now appear on your browser.</li>
 </ul>
+</div>
+<div id="configuring-https-with-rstudio-using-aws-ec2" class="section level3">
+<h3><span class="header-section-number">3.2.5</span> Configuring HTTPS with RStudio using AWS EC2</h3>
+<p><strong>1. Create a new inbound rule to accept HTTPS traffic.</strong></p>
+<ul>
+<li>On the EC2 Management Console, navigate to 'Instances'.</li>
+<li>Select your instance of interest and click o the tab &quot;Security&quot; on the bottom panel.</li>
+<li>Click on the link located under the 'Security group' section.</li>
+<li>Click the button &quot;Edit inbound rules&quot;.</li>
+<li>Add a two new rules with the following characteristics:
+<ul>
+<li>Type: &quot;HTTPs&quot; - Source: &quot;Custom&quot; - value &quot;::/0&quot;.</li>
+<li>Type: &quot;HTTPs&quot; - Source: &quot;Custom&quot; - value &quot;0.0.0.0/0&quot;.</li>
+</ul></li>
+</ul>
+<p><strong>2. Configure the 'nginx' webserver to reverse proxy RStudio to use SSL</strong></p>
+<ul>
+<li>Install 'nginx' server:</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">sudo</span> apt-get install nginx</code></pre></div>
+<ul>
+<li>Create the SSL certificates:</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">sudo</span> mkdir /etc/nginx/ssl
+<span class="fu">sudo</span> openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt</code></pre></div>
+<ul>
+<li>Add the following configuration to the file 'sudo nano /etc/nginx/conf.d/rstudio.conf':</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="ex">server</span> {
+  <span class="ex">listen</span> 80<span class="kw">;</span>
+  <span class="ex">listen</span> [::]:80<span class="kw">;</span>
+
+  <span class="ex">listen</span> 443 ssl<span class="kw">;</span>
+  <span class="ex">ssl_certificate</span> /etc/nginx/ssl/nginx.crt<span class="kw">;</span>
+  <span class="ex">ssl_certificate_key</span> /etc/nginx/ssl/nginx.key<span class="kw">;</span>
+
+  <span class="ex">server_name</span> public_DNS_IP_of_your_AWS_instance<span class="kw">;</span>
+
+  <span class="ex">location</span> / {
+       <span class="ex">proxy_pass</span> http://localhost:8787/<span class="kw">;</span>
+       <span class="ex">proxy_redirect</span> http://localhost:8787/ <span class="va">$scheme</span>://<span class="va">$host</span>/<span class="kw">;</span>
+       <span class="ex">proxy_http_version</span> 1.1<span class="kw">;</span>
+       <span class="ex">proxy_set_header</span> Upgrade <span class="va">$http_upgrade</span><span class="kw">;</span>
+       <span class="ex">proxy_set_header</span> Connection <span class="va">$connection_upgrade</span><span class="kw">;</span>
+       <span class="ex">proxy_read_timeout</span> 20d<span class="kw">;</span>
+  }
+}</code></pre></div>
+<ul>
+<li>Edit the '/etc/nginx/nginx.conf' file and add the following lines to the 'http' block: ```sh server_names_hash_bucket_size 128;</li>
+</ul>
+<p>map $http_upgrade $connection_upgrade { default upgrade; '' close; } ```</p>
+<ul>
+<li><p>Restart RStudio and nginx servers:</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">sudo</span> rstudio-server restart
+<span class="fu">sudo</span> systemctl restart nginx</code></pre></div></li>
+</ul>
+<p><strong>3.RStudio should be now running on port 443:</strong></p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="ex">https</span>://public_DNS_IP_of_your_AWS_instance</code></pre></div>
 </div>
 </div>
 <div id="aws-list-of-cloud-services" class="section level2">

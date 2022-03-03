@@ -10,7 +10,7 @@ The AWS Command Line Interface (or AWS CLI) is an open source tool that enables 
 
 1. To configure the service, please type "aws configure" on the console. This command is interactive, so the service will prompt you four times to enter some config information. Below an example (all RytenLab members have to ask me to send them their secret AWS credentials): 
 
-```console
+```sh
 $ aws configure 
 
 AWS Access Key ID [None]: your_access_key 
@@ -21,15 +21,22 @@ Default output format [None]: json
 
 2. To check whether the connection with AWS has been correctly stablished, we can type the following command to list all our current buckets. 
 
-```console
+```sh
 $ aws s3 ls 
+```
+
+### Log out of AWS CLI
+
+```sh
+$ rm ~/.aws/config
+$ rm ~/.aws/credentials
 ```
 
 ### Upload a single file to AWS using AWS CLI
 
 Let's suppose we have a bucket on AWS called 'my-bucket'. Let's also suppose you have a file called 'myfile.txt' stored in your local that you would like to upload to AWS. To upload the file 'myfile.txt' to the bucket 'my-bucket':
 
-```console
+```sh
 $ aws s3 cp myfile.txt s3://my-bucket/ 
 ```
 
@@ -37,7 +44,7 @@ $ aws s3 cp myfile.txt s3://my-bucket/
 
 To upload multiple files, we can use the sync command. The **sync** command syncs objects under a specified local folder to files in a AWS bucket by uploading them to AWS.
 
-```console
+```sh
 $ aws s3 sync my_local_folder/ s3://my-bucket/ 
 ```
 
@@ -45,7 +52,7 @@ $ aws s3 sync my_local_folder/ s3://my-bucket/
 
 To download the file 'myfile.txt' from the 's3://my-bucket/' AWS bucket into your local folder:
 
-```console
+```sh
 $ aws s3 cp s3://my-bucket/myfile.txt ./my_local_folder 
 ```
 
@@ -55,7 +62,7 @@ To download multiple files from an AWS bucket to your local folder, we can also 
 
 ***Please, be aware the costs associated with downloading files correspond to $0.090 per GB - first 10 TB / month data transfer out beyond the global free tier.***
 
-```console
+```sh
 $ aws s3 sync s3://my-bucket/my_remote_folder/ ./my_local_folder 
 ```
 

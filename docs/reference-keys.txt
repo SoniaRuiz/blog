@@ -40,6 +40,7 @@ maf
 aws
 aws-s3
 configure-the-aws-cli-service
+log-out-of-aws-cli
 upload-a-single-file-to-aws-using-aws-cli
 upload-multiple-files-to-aws-using-aws-cli
 download-a-single-file-from-aws-using-aws-cli

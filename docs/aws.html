@@ -144,13 +144,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3" data-path="aws.html"><a href="aws.html"><i class="fa fa-check"></i><b>3</b> AWS</a><ul>
 <li class="chapter" data-level="3.1" data-path="aws.html"><a href="aws.html#aws-s3"><i class="fa fa-check"></i><b>3.1</b> AWS S3</a><ul>
 <li class="chapter" data-level="3.1.1" data-path="aws.html"><a href="aws.html#configure-the-aws-cli-service"><i class="fa fa-check"></i><b>3.1.1</b> Configure the AWS CLI service</a></li>
-<li class="chapter" data-level="3.1.2" data-path="aws.html"><a href="aws.html#upload-a-single-file-to-aws-using-aws-cli"><i class="fa fa-check"></i><b>3.1.2</b> Upload a single file to AWS using AWS CLI</a></li>
-<li class="chapter" data-level="3.1.3" data-path="aws.html"><a href="aws.html#upload-multiple-files-to-aws-using-aws-cli"><i class="fa fa-check"></i><b>3.1.3</b> Upload multiple files to AWS using AWS CLI</a></li>
-<li class="chapter" data-level="3.1.4" data-path="aws.html"><a href="aws.html#download-a-single-file-from-aws-using-aws-cli"><i class="fa fa-check"></i><b>3.1.4</b> Download a single file from AWS using AWS CLI</a></li>
-<li class="chapter" data-level="3.1.5" data-path="aws.html"><a href="aws.html#download-multiple-files-from-aws-using-aws-cli"><i class="fa fa-check"></i><b>3.1.5</b> Download multiple files from AWS using AWS CLI</a></li>
-<li class="chapter" data-level="3.1.6" data-path="aws.html"><a href="aws.html#requester-payer"><i class="fa fa-check"></i><b>3.1.6</b> Requester payer</a></li>
-<li class="chapter" data-level="3.1.7" data-path="aws.html"><a href="aws.html#checking-aws-file-integrity"><i class="fa fa-check"></i><b>3.1.7</b> Checking AWS file integrity</a></li>
-<li class="chapter" data-level="3.1.8" data-path="aws.html"><a href="aws.html#creating-a-new-aws-bucket"><i class="fa fa-check"></i><b>3.1.8</b> Creating a new AWS bucket</a></li>
+<li class="chapter" data-level="3.1.2" data-path="aws.html"><a href="aws.html#log-out-of-aws-cli"><i class="fa fa-check"></i><b>3.1.2</b> Log out of AWS CLI</a></li>
+<li class="chapter" data-level="3.1.3" data-path="aws.html"><a href="aws.html#upload-a-single-file-to-aws-using-aws-cli"><i class="fa fa-check"></i><b>3.1.3</b> Upload a single file to AWS using AWS CLI</a></li>
+<li class="chapter" data-level="3.1.4" data-path="aws.html"><a href="aws.html#upload-multiple-files-to-aws-using-aws-cli"><i class="fa fa-check"></i><b>3.1.4</b> Upload multiple files to AWS using AWS CLI</a></li>
+<li class="chapter" data-level="3.1.5" data-path="aws.html"><a href="aws.html#download-a-single-file-from-aws-using-aws-cli"><i class="fa fa-check"></i><b>3.1.5</b> Download a single file from AWS using AWS CLI</a></li>
+<li class="chapter" data-level="3.1.6" data-path="aws.html"><a href="aws.html#download-multiple-files-from-aws-using-aws-cli"><i class="fa fa-check"></i><b>3.1.6</b> Download multiple files from AWS using AWS CLI</a></li>
+<li class="chapter" data-level="3.1.7" data-path="aws.html"><a href="aws.html#requester-payer"><i class="fa fa-check"></i><b>3.1.7</b> Requester payer</a></li>
+<li class="chapter" data-level="3.1.8" data-path="aws.html"><a href="aws.html#checking-aws-file-integrity"><i class="fa fa-check"></i><b>3.1.8</b> Checking AWS file integrity</a></li>
+<li class="chapter" data-level="3.1.9" data-path="aws.html"><a href="aws.html#creating-a-new-aws-bucket"><i class="fa fa-check"></i><b>3.1.9</b> Creating a new AWS bucket</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="aws.html"><a href="aws.html#aws-ec2"><i class="fa fa-check"></i><b>3.2</b> AWS EC2</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="aws.html"><a href="aws.html#generating-an-ec2-instance"><i class="fa fa-check"></i><b>3.2.1</b> Generating an EC2 instance</a></li>
@@ -228,40 +229,45 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ol style="list-style-type: decimal">
 <li>To configure the service, please type &quot;aws configure&quot; on the console. This command is interactive, so the service will prompt you four times to enter some config information. Below an example (all RytenLab members have to ask me to send them their secret AWS credentials):</li>
 </ol>
-<pre class="console"><code>$ aws configure 
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="ex">aws</span> configure 
 
-AWS Access Key ID [None]: your_access_key 
-AWS Secret Access Key [None]: your_secret_key 
-Default region name [None]: eu-west-2 
-Default output format [None]: json </code></pre>
+<span class="ex">AWS</span> Access Key ID [None]: your_access_key 
+<span class="ex">AWS</span> Secret Access Key [None]: your_secret_key 
+<span class="ex">Default</span> region name [None]: eu-west-2 
+<span class="ex">Default</span> output format [None]: json </code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>To check whether the connection with AWS has been correctly stablished, we can type the following command to list all our current buckets.</li>
 </ol>
-<pre class="console"><code>$ aws s3 ls </code></pre>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="ex">aws</span> s3 ls </code></pre></div>
+</div>
+<div id="log-out-of-aws-cli" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> Log out of AWS CLI</h3>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="fu">rm</span> ~/.aws/config
+$ <span class="fu">rm</span> ~/.aws/credentials</code></pre></div>
 </div>
 <div id="upload-a-single-file-to-aws-using-aws-cli" class="section level3">
-<h3><span class="header-section-number">3.1.2</span> Upload a single file to AWS using AWS CLI</h3>
+<h3><span class="header-section-number">3.1.3</span> Upload a single file to AWS using AWS CLI</h3>
 <p>Let's suppose we have a bucket on AWS called 'my-bucket'. Let's also suppose you have a file called 'myfile.txt' stored in your local that you would like to upload to AWS. To upload the file 'myfile.txt' to the bucket 'my-bucket':</p>
-<pre class="console"><code>$ aws s3 cp myfile.txt s3://my-bucket/ </code></pre>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="ex">aws</span> s3 cp myfile.txt s3://my-bucket/ </code></pre></div>
 </div>
 <div id="upload-multiple-files-to-aws-using-aws-cli" class="section level3">
-<h3><span class="header-section-number">3.1.3</span> Upload multiple files to AWS using AWS CLI</h3>
+<h3><span class="header-section-number">3.1.4</span> Upload multiple files to AWS using AWS CLI</h3>
 <p>To upload multiple files, we can use the sync command. The <strong>sync</strong> command syncs objects under a specified local folder to files in a AWS bucket by uploading them to AWS.</p>
-<pre class="console"><code>$ aws s3 sync my_local_folder/ s3://my-bucket/ </code></pre>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="ex">aws</span> s3 sync my_local_folder/ s3://my-bucket/ </code></pre></div>
 </div>
 <div id="download-a-single-file-from-aws-using-aws-cli" class="section level3">
-<h3><span class="header-section-number">3.1.4</span> Download a single file from AWS using AWS CLI</h3>
+<h3><span class="header-section-number">3.1.5</span> Download a single file from AWS using AWS CLI</h3>
 <p>To download the file 'myfile.txt' from the 's3://my-bucket/' AWS bucket into your local folder:</p>
-<pre class="console"><code>$ aws s3 cp s3://my-bucket/myfile.txt ./my_local_folder </code></pre>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="ex">aws</span> s3 cp s3://my-bucket/myfile.txt ./my_local_folder </code></pre></div>
 </div>
 <div id="download-multiple-files-from-aws-using-aws-cli" class="section level3">
-<h3><span class="header-section-number">3.1.5</span> Download multiple files from AWS using AWS CLI</h3>
+<h3><span class="header-section-number">3.1.6</span> Download multiple files from AWS using AWS CLI</h3>
 <p>To download multiple files from an AWS bucket to your local folder, we can also use the <strong>sync</strong> command by changing the order of the parameters.</p>
 <p><strong><em>Please, be aware the costs associated with downloading files correspond to $0.090 per GB - first 10 TB / month data transfer out beyond the global free tier.</em></strong></p>
-<pre class="console"><code>$ aws s3 sync s3://my-bucket/my_remote_folder/ ./my_local_folder </code></pre>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="ex">aws</span> s3 sync s3://my-bucket/my_remote_folder/ ./my_local_folder </code></pre></div>
 </div>
 <div id="requester-payer" class="section level3">
-<h3><span class="header-section-number">3.1.6</span> Requester payer</h3>
+<h3><span class="header-section-number">3.1.7</span> Requester payer</h3>
 <p>Downloading/transferring data from AWS have associated some standard costs per GB transferred (~$0.09 per GB downloaded). To indicate AWS that those costs should be charged to the person (i.e. AWS account) performing the data downloading, it will be necessary to add the flag <em>--request-payer requester</em> to the <em>sync</em> command.</p>
 <pre class="console"><code>## To list the objects stored within the bucket:
 $ aws s3 ls s3://bucket_name/ --request-payer requester
@@ -300,7 +306,7 @@ $ aws s3 sync s3://bucket_name/* ./your_local_folder  --request-payer requester
 <span class="fu">}</span></code></pre></div>
 </div>
 <div id="checking-aws-file-integrity" class="section level3">
-<h3><span class="header-section-number">3.1.7</span> Checking AWS file integrity</h3>
+<h3><span class="header-section-number">3.1.8</span> Checking AWS file integrity</h3>
 <p>Considering the example used in the previous section, let's check the integrity of the local folder './my_local_folder' matches with the integrity of the remote AWS folder 's3://my-bucket/my_local_folder/'.</p>
 <ol style="list-style-type: decimal">
 <li>First, clone the 'aws-s3-integrity-check' repo.</li>
@@ -331,7 +337,7 @@ drwxr-xr-x 2 your_user your_group 4096 date s3md5</code></pre>
 <pre class="console"><code>$ aws_check_integrity.sh ./my_local_folder my-bucket my_local_folder/</code></pre>
 </div>
 <div id="creating-a-new-aws-bucket" class="section level3">
-<h3><span class="header-section-number">3.1.8</span> Creating a new AWS bucket</h3>
+<h3><span class="header-section-number">3.1.9</span> Creating a new AWS bucket</h3>
 <p>To create a new AWS bucket, we recommend using the following configuration:</p>
 <ol style="list-style-type: decimal">
 <li>Region: EU London</li>

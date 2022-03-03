@@ -24,7 +24,7 @@
 <meta name="author" content="Sonia García-Ruiz (s.ruiz@ucl.ac.uk)" />
 
 
-<meta name="date" content="2022-03-02" />
+<meta name="date" content="2022-03-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -158,6 +158,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.2.3" data-path="aws.html"><a href="aws.html#installingrunning-rstudio-on-an-ec2"><i class="fa fa-check"></i><b>3.2.3</b> Installing/Running RStudio on an EC2</a></li>
 <li class="chapter" data-level="3.2.4" data-path="aws.html"><a href="aws.html#access-rstudio-using-your-browser"><i class="fa fa-check"></i><b>3.2.4</b> Access RStudio using your browser</a></li>
 <li class="chapter" data-level="3.2.5" data-path="aws.html"><a href="aws.html#configuring-https-with-rstudio-using-aws-ec2"><i class="fa fa-check"></i><b>3.2.5</b> Configuring HTTPS with RStudio using AWS EC2</a></li>
+<li class="chapter" data-level="3.2.6" data-path="aws.html"><a href="aws.html#how-to-transfer-files-from-ec2-to-s3"><i class="fa fa-check"></i><b>3.2.6</b> How to transfer files from EC2 to S3</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="aws.html"><a href="aws.html#aws-list-of-cloud-services"><i class="fa fa-check"></i><b>3.3</b> AWS List of Cloud Services</a></li>
 </ul></li>
@@ -465,6 +466,7 @@ drwxr-xr-x 2 your_user your_group 4096 date s3md5</code></pre>
 </div>
 <div id="configuring-https-with-rstudio-using-aws-ec2" class="section level3">
 <h3><span class="header-section-number">3.2.5</span> Configuring HTTPS with RStudio using AWS EC2</h3>
+<p>Info extracted from <a href="https://stackoverflow.com/questions/53102584/how-can-i-set-up-an-rstudio-server-to-run-with-ssl-on-aws">here</a> and <a href="https://medium.com/@rachel_95942/configure-rstudio-server-with-ssl-on-aws-ec2-arm-e10fa2c36ef8">here</a>.</p>
 <p><strong>1. Create a new inbound rule to accept HTTPS traffic.</strong></p>
 <ul>
 <li>On the EC2 Management Console, navigate to 'Instances'.</li>
@@ -520,6 +522,10 @@ drwxr-xr-x 2 your_user your_group 4096 date s3md5</code></pre>
 </ul>
 <p><strong>3.RStudio should be now running on port 443:</strong></p>
 <div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="ex">https</span>://public_DNS_IP_of_your_AWS_instance</code></pre></div>
+</div>
+<div id="how-to-transfer-files-from-ec2-to-s3" class="section level3">
+<h3><span class="header-section-number">3.2.6</span> How to transfer files from EC2 to S3</h3>
+<p><a href="https://linuxhint.com/transfer-files-ec2-s3/">This</a> is a very good tutorial that explains how to transfer files from EC2 to S3 using AWS IAM Roles.</p>
 </div>
 </div>
 <div id="aws-list-of-cloud-services" class="section level2">

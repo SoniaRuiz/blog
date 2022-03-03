@@ -287,6 +287,8 @@ RStudio should now be running on the newly generated AWS EC2 instance. To access
 
 ### Configuring HTTPS with RStudio using AWS EC2
 
+Info extracted from [here](https://stackoverflow.com/questions/53102584/how-can-i-set-up-an-rstudio-server-to-run-with-ssl-on-aws) and [here](https://medium.com/@rachel_95942/configure-rstudio-server-with-ssl-on-aws-ec2-arm-e10fa2c36ef8).
+
 **1. Create a new inbound rule to accept HTTPS traffic.**
 
 * On the EC2 Management Console, navigate to 'Instances'.
@@ -356,6 +358,9 @@ sudo systemctl restart nginx
 ```sh
 https://public_DNS_IP_of_your_AWS_instance
 ``` 
+### How to transfer files from EC2 to S3
+
+[This](https://linuxhint.com/transfer-files-ec2-s3/) is a very good tutorial that explains how to transfer files from EC2 to S3 using AWS IAM Roles.
 
 ## AWS List of Cloud Services
 

@@ -72,7 +72,7 @@ merge
 troubleshooting-pages-of-interest
 stash
 globus
-useful-commands-1
+installation-and-configuration
 machine-learning-concepts
 introduction-1
 artificial-intelligence-vs.-machine-learning

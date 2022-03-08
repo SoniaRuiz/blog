@@ -1,8 +1,8 @@
 # Globus
 
-## Useful Commands
+## Installation and configuration
 
-1. Login on your Globus account using your university access.
+1. [Login](https://app.globus.org/) on your Globus account using your SSO university access.
 
 2. Install and mount Globus on your Linux machine:
 

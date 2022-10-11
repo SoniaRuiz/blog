@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Alignment is a common step in many bioinformatics workflows involving nucleic acid sequencing, which requires the alignment of the reads sequenced to a reference genome annotation. The reference file may differ depending on the organism studied, eg. human, mouse, zebra fish, etc. 
+Alignment is a common step in many bioinformatics workflows involving nucleic acid sequencing, which requires the alignment of the reads sequenced to a reference genome annotation. The reference file may differ depending on the organism studied (eg. human, mouse, zebra fish, etc). 
 
 
 There are many different aligners available (e.g. STAR) but, at their essence, they are expected to take as input sequence data in raw format (FASTQ files along with a reference genome, often in the form of a FASTA file) and generate a new file as output containing the reads as well as the genomic location from which they originated. Generally, this output is a file form in BAM format.
@@ -10,23 +10,23 @@ There are many different aligners available (e.g. STAR) but, at their essence, t
 
 ## SAM files
 
-SAM files contain the reads aligned to the reference sequences and that are exited by the aligner software used. SAM files are in file format, so they are human readable. Consequently, they occupy larger amount of disk space and BAM files are generally preferred for storing information.
+SAM files contain the reads aligned to the reference sequences exited by the aligner software used (e.g. STAR). SAM files are in file format, so they are human readable and, consequently, they occupy larger amount of disk space. Thus, BAM files are generally preferred for storing information.
 
 ## BAM files
 
-Contain the same information than SAM files, but in a binary format. Therefore, they are not human readable, but occupy less disk space, more efficient and, consequently, more generally used compare to the SAM format. [More info](https://www.encodeproject.org/help/file-formats/#bam) about the BAM format - ENCODE.
+Contain the same information as SAM files, but BAM files are in a binary format. Therefore, they are not human readable, but occupy less disk space and are more efficient. For all these reasons, BAM files are more generally used compared to the SAM format. [More info](https://www.encodeproject.org/help/file-formats/#bam) about the BAM format - ENCODE.
 
 ### Why BAM files need to be sorted and indexed?
 
-After the generation of a BAM file, it needs to be sorted and then indexed. This is because the reads sequenced and used to generate a BAM file do not follow the precise order of their positions in the reference chromosomes. Therefore, BAM files need to be sorted as a first step, which can be achieved using different software tools (e.g. Samtools and Picard).
+After a BAM file is generated, it needs to be sorted and indexed. This is because the reads sequenced and used to generate a BAM file do not follow the precise order of their positions in the reference chromosomes. Therefore, BAM files need to be sorted as a first step, which can be achieved using different software tools (e.g. Samtools and Picard).
 
-After sorting the BAM file, the two choices for sorting methods will be by sequence identifier, or by genomic coordinates (often referred to as location or position). Generally, sorting by coordinate is the correct choice for genomic data. The following command from Samtools will sort the .bam file by lefmost coordinates [more info](http://www.htslib.org/doc/samtools-sort.html).
+The two choices for sorting methods will be by sequence identifier, or by genomic coordinates (often referred to as location or position). Generally, sorting by coordinate is the correct choice for genomic data. The following command from Samtools sorts the .bam file by lefmost coordinates [more info](http://www.htslib.org/doc/samtools-sort.html).
 
 ```sh
 samtools sort – sorts SAM/BAM/CRAM files
 ```
 
-A BAM index file, also known as a BAI file, acts as a "table of contents" for the BAM file, indicating where in the BAM file a specific read or set of reads can be found. It is likely that the location of the reads change with sorting, so it is important to generate an index file after the BAM file is sorted. The creation of the BAM index file can again be done using Samtools or Picard. [More info](http://www.htslib.org/doc/samtools-index.html).
+A BAM index file, also known as a BAI file, acts as a "table of contents" for the BAM file, indicating where, in the BAM file, a specific read or set of reads can be found. It is likely that the location of the reads change with sorting, so it is important to generate a new index file everytime a BAM file is sorted. The creation of the BAM index file can again be done using Samtools or Picard. [More info](http://www.htslib.org/doc/samtools-index.html).
 
 ```sh
 samtools index -M [-bc] [-m INT] FILE FILE [FILE...] 

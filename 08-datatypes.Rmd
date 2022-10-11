@@ -1,0 +1,51 @@
+# BAM vs. SAM files
+
+## Introduction
+
+Alignment is a common step in many bioinformatics workflows involving nucleic acid sequencing, which requires the alignment of the reads sequenced to a reference genome annotation. The reference file may differ depending on the organism studied, eg. human, mouse, zebra fish, etc. 
+
+
+There are many different aligners available (e.g. STAR) but, at their essence, they are expected to take as input sequence data in raw format (FASTQ files along with a reference genome, often in the form of a FASTA file) and generate a new file as output containing the reads as well as the genomic location from which they originated. Generally, this output is a file form in BAM format.
+
+
+## SAM files
+
+SAM files contain the reads aligned to the reference sequences and that are exited by the aligner software used. SAM files are in file format, so they are human readable. Consequently, they occupy larger amount of disk space and BAM files are generally preferred for storing information.
+
+## BAM files
+
+Contain the same information than SAM files, but in a binary format. Therefore, they are not human readable, but occupy less disk space, more efficient and, consequently, more generally used compare to the SAM format. [More info](https://www.encodeproject.org/help/file-formats/#bam) about the BAM format - ENCODE.
+
+### Why BAM files need to be sorted and indexed?
+
+After the generation of a BAM file, it needs to be sorted and then indexed. This is because the reads sequenced and used to generate a BAM file do not follow the precise order of their positions in the reference chromosomes. Therefore, BAM files need to be sorted as a first step, which can be achieved using different software tools (e.g. Samtools and Picard).
+
+After sorting the BAM file, the two choices for sorting methods will be by sequence identifier, or by genomic coordinates (often referred to as location or position). Generally, sorting by coordinate is the correct choice for genomic data. The following command from Samtools will sort the .bam file by lefmost coordinates [more info](http://www.htslib.org/doc/samtools-sort.html).
+
+```sh
+samtools sort – sorts SAM/BAM/CRAM files
+```
+
+A BAM index file, also known as a BAI file, acts as a "table of contents" for the BAM file, indicating where in the BAM file a specific read or set of reads can be found. It is likely that the location of the reads change with sorting, so it is important to generate an index file after the BAM file is sorted. The creation of the BAM index file can again be done using Samtools or Picard. [More info](http://www.htslib.org/doc/samtools-index.html).
+
+```sh
+samtools index -M [-bc] [-m INT] FILE FILE [FILE...] 
+```
+
+```sh
+samtools index [-bc] [-m INT] aln.sam|aln.bam|aln.cram [out.index]
+```
+
+
+## Extracting junction data from BAM files
+
+To extract exon-exon junctions from an RNAseq BAM file, we can use the software tool *regtools*: [more info](https://regtools.readthedocs.io/en/latest/commands/junctions-extract/):
+
+```sh
+regtools junctions extract [options] indexed_alignments.bam
+```
+
+The output from the regtool command shown above, will be in the [BED12 format](https://genome.ucsc.edu/FAQ/FAQformat.html#format1), in which every line will represent an exon-exon junction.
+
+Finally, the exon-exon junctions produced by the regtool software and stored in a BED format file, can be aligned to a reference transcriptome ([link](http://ftp.ensembl.org/pub/current_gtf/homo_sapiens/) to the current Ensembl transcriptome version). This alingment will classify the different exon-exon junctions as fully annotated introns, or novel introns (i.e. novel donor. novel acceptor junctions, unknown junction, etc).
+

@@ -83,3 +83,9 @@ unsupervised-learning
 clustering
 density-estimation
 visualization
+bam-vs.-sam-files
+introduction-2
+sam-files
+bam-files
+why-bam-files-need-to-be-sorted-and-indexed
+extracting-junction-data-from-bam-files
